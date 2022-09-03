@@ -1,0 +1,208 @@
+/* Navbar (Home version) */
+.navbar {
+    left: 0;
+    right: 0;
+    background: rgb(243, 242, 239);
+    position: fixed;
+    z-index: 1;
+}
+
+.navbarContainer {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    column-gap: 25px;
+}
+
+.menuItem p {
+    font-size: 16px;
+    position: relative;
+    padding: 5px 0px;
+}
+
+.menuItem a {
+    width: 100%;
+    color: #181818;
+}
+
+.menuItem p::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    opacity: 0;
+    transition: 0.3s;
+    background-color: var(--primary);
+}
+
+.menuItem p:hover::before {
+    opacity: 1;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.headerText {
+    margin-top: 180px;
+    display: grid;
+    justify-items: center;
+    row-gap: 10px;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.headerText h1 {
+    font-size: 60px;
+}
+
+.headerText p {
+    max-width: 500px;
+    font-size: 21px;
+}
+
+.headerContent {
+    width: 100%;
+}
+
+.tripSearch {
+    width: 95%;
+    margin: 0 auto;
+    padding: 50px 25px;
+    border: 1px solid rgb(229, 234, 223);
+    box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px 0px;
+    border-radius: 50px;
+    background: rgb(243, 242, 239);
+}
+
+.headerHero {
+    width: 100%;
+    height: 480px;
+    background-image: url('../../assets/images/header-hero.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    border: 1px solid gray;
+    border-radius: 20px;
+    position: relative;
+    top: -60px;
+    z-index: -1;
+}
+
+/* Why Us */
+
+.whyUs {
+    // margin-bottom: 180px;
+    margin-bottom: 90px;
+    background: red;
+}
+
+.whyUs h1 {
+    margin-bottom: 30px;
+}
+
+.whyUsContent {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 50px;
+    row-gap: 25px;
+}
+
+.whyUsContent h3 {
+    font-size: 19px;
+    margin-bottom: 10px;
+}
+.whyUs-content p {
+    font-size: 16px;
+}
+
+/* Tours */
+.tours {
+    margin-bottom: 90px;
+}
+
+.toursContent {
+    display: grid;
+    grid-template-columns: repeat(3, 31.5%);
+    justify-content: space-between;
+    column-gap: 30px;
+    row-gap: 35px;
+}
+
+.toursMore {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+
+
+/* Contact Us */
+
+.contactUs {
+    margin-bottom: 790px;
+}
+
+.contactContainer {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding: 90px 0;
+    /* http://imagebank.biz/wp-content/uploads/2014/02/88541.jpg */
+    background-image: url('../../assets/images/export.png'); 
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.contactContent {
+    display: grid;
+    grid-template-columns: 60% 30%;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 30px;
+}
+
+.contactText{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.contactText h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.contactText p {
+    font-size: 20px;
+    margin-bottom: 35px;
+}
+
+.contactBrand {
+    width: 160px;
+}
+
+.contactBrand img {
+    width: 100%;
+    transform: scale(1);
+    transition: 0.3s;
+}
+
+.contactBrand img:hover{
+    transform: scale(1.1);
+}

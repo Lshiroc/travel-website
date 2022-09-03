@@ -1,0 +1,84 @@
+/* Card Type 1 */
+
+.ct1Img {
+    height: 300px;
+    background: url('https://campspace.com/media/medium/uploads/space/59/98/88/5998883e90e2df4a5f57379c0f84ef1e.jpg') no-repeat center;
+    background-size: cover;
+    border-radius: 15px;
+    display: grid;
+    align-content: space-between;
+    color: white;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.ct1ImgTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.ct1ImgBottom {
+    display: flex;
+    justify-content: end;
+}
+
+.ct1Info {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    row-gap: 5px;
+    color: #2e2c2c;
+}
+
+.ct1ImgVerified {
+    padding: 4px 8px;
+    color: #6c6c6c;
+    font-weight: 600;
+    background-color: white;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.ct1ImgLiked {
+    padding: 8px 9px;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.ct1ImgLiked svg {
+    width: 30px;
+    height: 30px;
+    fill: white;
+}
+
+.ct1ImgLiked:hover {
+    border: 1px solid white;
+}
+
+.ct1ImgPrice {
+    padding: 6px 14px;
+    font-size: 16px;
+    background: #4f4c4c;
+    font-weight: 600;
+    border-radius: 30px;
+}
+
+.ct1InfoName {
+    font-size: 17px;
+    font-weight: 600;
+    color: #2e2c2c;
+}
+
+.ct1InfoLocation {
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.ct1In  foRating {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    column-gap: 5px;
+}
