@@ -1,0 +1,130 @@
+    .footer {
+        background-color: #252925;
+        color: white;
+    }
+
+    .footerContainer {
+        border-top: 1px solid #fff1;
+        border-bottom: 1px solid #fff1;
+    }
+
+    .footerSub {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        column-gap: 20px;
+        padding: 20px 0;
+    }
+
+    .footer h3 {
+        font-size: 17px;
+        color: white;
+    }
+
+    .footerSub {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        column-gap: 10px;
+        padding: 25px 0 !important;
+    }
+
+    .footerSubInput {
+        width: 360px;
+        flex: 1 1 auto;
+        padding: 12px;
+        background-color: #fff1;
+        border: 1px solid #fff3;
+        border-radius: 5px;
+        font-size: 17px;
+        outline: none;
+        color: #fff;
+    }
+
+    .footerSubBtn {
+        background: #1cbb64;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        padding: 13px 20px;
+        color: white;
+        font-weight: 600;
+        font-size: 17px;
+        transition: 0.3s;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+
+    .footerSubBtn:hover {
+        background: #18a558;
+    }
+
+    .footerMain {
+        display: grid;
+        grid-template-columns: 55% 35%;
+        justify-content: space-between;
+        padding: 60px 0 !important;
+
+        a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        h4 {
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            line-height: 18px;
+            margin-bottom: 15px;
+        }
+    }
+
+    .footerPoweredBy {
+        img {
+            width: 200px;
+        }
+    }
+
+    .footerInfo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0 !important;
+
+        .footerInfoMenu {
+            display: flex;
+            column-gap: 30px;
+            font-size: 13px;
+        }
+
+        .footerInfoMenu *:not(:nth-child(1)) {
+            list-style-type: disc !important;
+            display: list-item;
+            list-style-position: outside;
+            color: rgb(141, 141, 141);
+            color: #dfdfdf;
+
+            a {
+                color: white;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .footerSocial {
+        display: flex;
+        align-items: center;
+        column-gap: 15px;
+
+        img {
+            filter: invert(56%) sepia(0%) saturate(6%) hue-rotate(288deg) brightness(98%) contrast(91%);
+            transition: 0.2s;
+        }
+
+        img:hover {
+            filter: invert(99%) sepia(0%) saturate(0%) hue-rotate(281deg) brightness(90%) contrast(95%);
+        }
+    }
