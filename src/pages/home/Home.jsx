@@ -1,12 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 // import '../assets/style/global.css'
 import style from "./home.module.scss";
 import CardType1 from "../../components/card1/CardType1";
 import CardType2 from "../../components/card2/CardType2";
 import BlogCard from "../../components/blogCard/BlogCard";
 import searchIcon from './../../assets/icons/search.png';
+import calendarIcon from './../../assets/icons/calendar-logo.svg';
+
+// Date Range
+import { addDays } from 'date-fns';
+import { DateRange } from 'react-date-range';
+import 'react-date-range/dist/styles.css'; // main css file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+
 
 function Home() {
+
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: null,
+      key: 'selection'
+    }
+  ]);
+
+  const [openDateRange, setOpenDateRange] = useState(false);
+
   return (
     <>
       <nav className={style.navbar}>
@@ -46,7 +65,7 @@ function Home() {
           </ul>
         </div>
       </nav>
-      <header className={style.header}>
+      <header className={style.header} onClick={() => setOpenDateRange(false)}>
         <div className={`section-x padding-x ${style.headerContent}`}>
           <div className={style.headerText}>
             <h1>Find yourself outside.</h1>
@@ -64,6 +83,23 @@ function Home() {
                     <img src={searchIcon} alt="search" />
                   </div>
                   <input className={style.tripElement} type="text" placeholder="Try California Park..." />
+                </div>
+              </div>
+              <div className={style.datePick}>
+                <p className={style.tripSearchTitle}>Dates</p>
+                <div className={style.searchElementContainer}>
+                  <div className={style.elementIcon}>
+                    <img src={calendarIcon} alt="date" />
+                  </div>
+                  <input className={style.tripElement} type="text" placeholder="Enter dates" onClick={() => setOpenDateRange(!openDateRange)}/>
+                  <div className={`${style.popUpInput} ${openDateRange ? style.openRange : ""} `}>
+                    <DateRange
+                      editableDateInputs={true}
+                      onChange={item => setState([item.selection])}
+                      moveRangeOnFirstSelection={false}
+                      ranges={state}
+                    />
+                  </div>
                 </div>
               </div>
             </form>

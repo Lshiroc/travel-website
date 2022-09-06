@@ -84,6 +84,7 @@
     width: 100%;
 }
 
+
 .tripSearch {
     width: 95%;
     margin: 0 auto;
@@ -92,29 +93,62 @@
     box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px 0px;
     border-radius: 50px;
     background: rgb(243, 242, 239);
+    display: grid;
+    grid-template-columns: 40% 30% auto auto;
+    column-gap: 15px;
+}
+
+.tripSearchTitle {
+    margin-bottom: 10px;
 }
 
 .searchElementContainer {
     display: flex;
     align-items: center;
-    border-radius: 50%;
+    column-gap: 10px;
+    border-radius: 50px;
     border: 1px solid rgb(229, 234, 223);
+    // border: 1px solid red;
+    padding-left: 10px;
+    padding-right: 5px;
     background: rgb(255, 255, 255);
-
+    // overflow: hidden;
+    position: relative;
 }
 
 .elementIcon {
-    width: 15px;
+    width: 17px;
+    height: 17px;
     & img {
         width: 100%;
     }
 }
 
 .tripElement {
+    flex-grow: 1;
+    font-size: 17px;
+    font-weight: 400;
     border: none;
     outline: none;
     padding: 10px 15px;
     background: rgb(255, 255, 255);
+}
+
+.popUpInput {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    display: none;
+}
+
+.openRange {
+    display: block !important;
+}
+
+.datePick {
+    z-index: 3;
 }
 
 
