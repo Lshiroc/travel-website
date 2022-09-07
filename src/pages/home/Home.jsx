@@ -6,15 +6,38 @@ import CardType2 from "../../components/card2/CardType2";
 import BlogCard from "../../components/blogCard/BlogCard";
 import searchIcon from './../../assets/icons/search.png';
 import calendarIcon from './../../assets/icons/calendar-logo.svg';
+import xMark from './../../assets/icons/x-mark.svg';
+import guestsIcon from './../../assets/icons/guests-icon.svg';
+import arrowDownIcon from './../../assets/icons/arrow-down.svg';
 
 // Date Range
+// import { createRoot } from 'react-dom/client';
+// import {
+//   DatePicker,
+//   DatePickerProvider,
+//   useDatePickGetter,
+//   useDatePickReset,
+// } from '@bcad1591/react-date-picker';
+
+// const container = document.getElementById('root');
+// const root = createRoot(container);
 import { addDays } from 'date-fns';
 import { DateRange } from 'react-date-range';
-import 'react-date-range/dist/styles.css'; // main css file
-import 'react-date-range/dist/theme/default.css'; // theme css file
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
+// import { valueToPercent } from "@mui/base";
 
 
 function Home() {
+
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const [input, setInput] = useState({});
+
+  const takeInput = (e) => {
+    setInput(e.selection);
+    console.log(e.selection.startDate.getDate())
+  }
 
   const [state, setState] = useState([
     {
@@ -65,7 +88,7 @@ function Home() {
           </ul>
         </div>
       </nav>
-      <header className={style.header} onClick={() => setOpenDateRange(false)}>
+      <header className={style.header}>
         <div className={`section-x padding-x ${style.headerContent}`}>
           <div className={style.headerText}>
             <h1>Find yourself outside.</h1>
@@ -91,16 +114,42 @@ function Home() {
                   <div className={style.elementIcon}>
                     <img src={calendarIcon} alt="date" />
                   </div>
-                  <input className={style.tripElement} type="text" placeholder="Enter dates" onClick={() => setOpenDateRange(!openDateRange)}/>
+                  <div className={style.tripElement} type="text" onClick={() => setOpenDateRange(!openDateRange)}>{
+                    input.startDate ?
+                      `${months[input.startDate.getMonth()]} ${input.startDate.getDate()}
+                    - ${months[input.endDate.getMonth()]} ${input.endDate.getDate()}`
+                      : "choose smth else"
+                  }</div>
                   <div className={`${style.popUpInput} ${openDateRange ? style.openRange : ""} `}>
+                    <div className={style.popUpClose}>
+                      <p>Date</p>
+                      <div className={style.closeBtn} onClick={() => setOpenDateRange(!openDateRange)}>
+                        <img src={xMark} alt="close" />
+                      </div>
+                    </div>
                     <DateRange
                       editableDateInputs={true}
-                      onChange={item => setState([item.selection])}
+                      onChange={item => { setState([item.selection]); takeInput(item) }}
                       moveRangeOnFirstSelection={false}
                       ranges={state}
                     />
                   </div>
                 </div>
+              </div>
+              <div className={style.whereTo}>
+                <p className={style.tripSearchTitle}>Guests</p>
+                <div className={style.searchElementContainer}>
+                  <div className={style.elementLeft}>
+                    <div className={style.elementIcon}>
+                      <img src={guestsIcon} alt="search" />
+                    </div>
+                    <div className={style.tripElement}>Add Guests</div>
+                  </div>
+                  <img className={style.arrowDown} src={arrowDownIcon} alt="open" />
+                </div>
+              </div>
+              <div className={style.searchBtn}>
+                <img src={searchIcon} alt="search" />
               </div>
             </form>
             <div className={style.headerHero}></div>

@@ -94,7 +94,9 @@
     border-radius: 50px;
     background: rgb(243, 242, 239);
     display: grid;
-    grid-template-columns: 40% 30% auto auto;
+    grid-template-columns: 37% 30% 24% auto;
+    justify-content: space-between;
+    align-items: end;
     column-gap: 15px;
 }
 
@@ -105,15 +107,26 @@
 .searchElementContainer {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     column-gap: 10px;
     border-radius: 50px;
     border: 1px solid rgb(229, 234, 223);
-    // border: 1px solid red;
     padding-left: 10px;
-    padding-right: 5px;
+    padding-right: 15px;
     background: rgb(255, 255, 255);
-    // overflow: hidden;
     position: relative;
+    cursor: pointer; 
+
+    .elementLeft {
+        display: flex;
+        align-items: center;
+    }
+
+    .arrowDown {
+        width: 15px;
+    }
+
+    
 }
 
 .elementIcon {
@@ -132,6 +145,7 @@
     outline: none;
     padding: 10px 15px;
     background: rgb(255, 255, 255);
+    border-radius: 50px;
 }
 
 .popUpInput {
@@ -143,14 +157,66 @@
     display: none;
 }
 
+.popUpClose {
+    width: 100%;
+    background: white;
+    padding: 8px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+
+    .closeBtn {
+        border-radius: 5px;;
+        cursor: pointer;
+        width: 22px;
+        height: 22px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .closeBtn:hover {
+        background:rgb(229, 234, 223);
+    }
+}
+
+.popUpClose img {
+    width: 20px;
+}
+
 .openRange {
     display: block !important;
 }
 
-.datePick {
-    z-index: 3;
-}
+.searchBtn {
+    background: var(--primary);
+    border-radius: 50%;
+    border: 3px solid transparent;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
 
+    &:hover {
+        background-color: white;
+        border: 3px solid var(--primary);
+    }
+
+    &:hover img {
+        filter: invert(0%) sepia(89%) saturate(7500%) hue-rotate(198deg) brightness(87%) contrast(111%);
+    }
+
+    img {
+        width: 20px;
+        filter: invert(100%) sepia(0%) saturate(11%) hue-rotate(221deg) brightness(105%) contrast(101%);
+        transition: 0.3s;
+    }
+}
 
 .headerHero {
     width: 100%;

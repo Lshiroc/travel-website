@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@bcad1591/react-date-picker": "^0.1.1",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@mui/material": "^5.10.3",
