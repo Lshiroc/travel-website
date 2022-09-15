@@ -62,11 +62,97 @@
     opacity: 1;
 }
 
+.cartMenu {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes shake {
+    0% {
+        transfrom: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(10deg);
+    }
+
+    50% {
+        transfrom: rotate(0deg);
+    }
+
+    75% {
+        transform: rotate(-10deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes markerAppear {
+    0% {
+        top: 50px;
+    }
+
+    25% {
+        top: 36px;
+    }
+
+    75% {
+        top: 36px;
+    }
+
+    100% {
+        top: 50px;
+    }
+}
+
+.cartImg {
+    width: 25px;
+    cursor: pointer;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 50px;
+        background-color: #00C585;
+        border-radius: 5px;
+        transition: 0.3s;
+        animation: markerAppear 0.8s infinite;
+    }
+
+    img {
+        width: 100%;
+        transition: 0.3s;
+        display: block;
+        animation: shake 0.3s infinite;
+    }
+}
+
+.cartImg:hover {
+    &::before {
+        top: 0;
+    }
+
+    img {
+        filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(203deg) brightness(103%) contrast(101%);
+    }
+
+}
+
+
 .header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 40px;
+    margin-bottom: 90px;
 }
 
 .headerText {
@@ -75,7 +161,6 @@
     justify-items: center;
     row-gap: 10px;
     text-align: center;
-    margin-bottom: 60px;
 }
 
 .headerText h1 {
@@ -89,13 +174,14 @@
     color: #00C585;
 }
 
-.headerContent {
-    margin-top: 90px;
+.headerSearchContent {
+    position: relative;
+    margin-top: 120px;
     width: 100%;
 }
 
 .tripSearch {
-    width: 90%;
+    width: 95%;
     margin: 0 auto;
     padding: 10px 25px;
     border: 1px solid rgb(229, 234, 223);
@@ -108,8 +194,8 @@
     align-items: end;
     column-gap: 15px;
     position: absolute;
-    top: 330px;
-    left: 5%;
+    top: -50px;
+    left: 2.5%;
     z-index: 9;
 }
 
@@ -378,7 +464,7 @@
 /* Why Us */
 
 .whyUs {
-    margin-bottom: 90px !important;
+    margin-bottom: 120px !important;
 }
 
 .whyUs h1 {
@@ -403,7 +489,7 @@
 
 /* Tours */
 .tours {
-    margin-bottom: 90px !important;
+    margin-bottom: 180px !important;
 }
 
 .toursContent {
@@ -418,7 +504,7 @@
 /* Contact Us */
 
 .contactUs {
-    margin-bottom: 90px;
+    margin-bottom: 180px;
 }
 
 .contactContainer {
@@ -475,7 +561,7 @@
 
 // Products
 .products {
-    margin-bottom: 90px !important;
+    margin-bottom: 180px !important;
 }
 
 .productsContainer {
@@ -497,7 +583,7 @@
     display: grid;
     justify-content: center;
     align-items: center;
-    margin-bottom: 90px !important;
+    margin-bottom: 180px !important;
 }
 
 .quoteContainer {
@@ -544,4 +630,11 @@
     justify-content: space-between;
     align-items: center;
     column-gap: 20px;
+}
+
+
+@media screen and (max-width: 992px) {
+    .menuItem {
+        display: none;
+    }
 }

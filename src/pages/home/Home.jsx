@@ -25,6 +25,7 @@ import arrowDownIcon from "./../../assets/icons/arrow-down.svg";
 import forestIcon from "./../../assets/icons/forest-icon.svg";
 import sliderImg from './../../assets/images/header-hero.jpg';
 import logo from './../../assets/images/logo-monochrome.svg';
+import cartIcon from './../../assets/images/cart2.svg';
 
 // Date Range
 // import { createRoot } from 'react-dom/client';
@@ -155,6 +156,11 @@ function Home() {
             <li className="btn">
               <a href=".">Sign Up</a>
             </li>
+            <li className={style.cartMenu}>
+              <div className={style.cartImg}>
+                <img src={cartIcon} alt="Cart" />
+              </div>
+            </li>
           </ul>
         </div>
       </nav>
@@ -167,7 +173,7 @@ function Home() {
               glamping.
             </p>
           </div>
-          <div className={style.headerContent}>
+          <div className={style.headerSearchContent}>
             <form className={style.tripSearch}>
               <div className={style.whereTo}>
                 <p className={style.tripSearchTitle}>Where To?</p>
