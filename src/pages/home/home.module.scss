@@ -21,18 +21,41 @@
     align-items: center;
 }
 
-.logo {
-    width: 120px;
+.menuLeft {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
 
-    img {
-        width: 140px;
+    .toggleMenuBtn {
+        width: 30px;
+
+        img {
+            width: 100%;
+            display: block;
+        }
     }
+
+    .logo {
+        width: 120px;
+
+        img {
+            width: 140px;
+            display: block;
+        }
+    }
+}
+
+.menuRight {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
 }
 
 .menu {
     display: flex;
     align-items: center;
     column-gap: 25px;
+    transition: 0.3s;
 }
 
 .menuItem p {
@@ -633,8 +656,93 @@
 }
 
 
-@media screen and (max-width: 992px) {
-    .menuItem {
+@media screen and (max-width: 960px) {
+    .menu {
         display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: none;
+        row-gap: 30px;
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        left: 0;
+        right: 0;
+        top: 0;
+        transform: scale(0.95);
+        backdrop-filter: blur(0px);
+
+        .menuItem p {
+            font-size: 22px;
+        }
+    }
+
+    .mobileMenuClose {
+        width: 45px;
+        height: 45px;
+        border: 2px solid black;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.3s;
+
+        img {
+            width: 27px;
+        }
+    }
+
+    .openToggleMenu {
+        display: flex;
+        transition: 0.5s;
+        animation-name: openMenuAnimation;
+        animation-iteration-count: 1;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+    }
+
+    .closeToggleMenu {
+        display: flex;
+        transition: 1s;
+        animation-name: closeMenuAnimation;
+        animation-iteration-count: 1;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+    }
+    @keyframes openMenuAnimation {
+        0% {
+            opacity: 0;
+            transform: scale(0.95);
+            backdrop-filter: blur(0px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+            backdrop-filter: blur(10px);
+        }
+    }
+
+    @keyframes closeMenuAnimation {
+        0% {
+            opacity: 1;
+            transform: translateX(0);
+            backdrop-filter: blur(10px);
+            visibility: visible;
+        }
+
+        90% {
+            opacity: 0;
+            visibility: visible;
+        }
+
+        100% {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+
+    .overflowHidden {
+        overflow: hidden;
     }
 }
