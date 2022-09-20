@@ -28,6 +28,7 @@
 
     .toggleMenuBtn {
         width: 30px;
+        display: none;
 
         img {
             width: 100%;
@@ -49,6 +50,10 @@
     display: flex;
     align-items: center;
     column-gap: 20px;
+}
+
+.mobileMenuClose {
+    display: none;
 }
 
 .menu {
@@ -148,14 +153,14 @@
         background-color: #00C585;
         border-radius: 5px;
         transition: 0.3s;
-        animation: markerAppear 0.8s infinite;
+        animation: 0.8s ease-in 4 markerAppear;
     }
 
     img {
         width: 100%;
         transition: 0.3s;
         display: block;
-        animation: shake 0.3s infinite;
+        animation: shake 0.3s 4;
     }
 }
 
@@ -672,15 +677,24 @@
         transform: scale(0.95);
         backdrop-filter: blur(0px);
 
-        .menuItem p {
-            font-size: 22px;
+        .menuBtn {
+            .menuItem p {
+                font-size: 22px;
+            }
+        }
+    }
+
+    .menuLeft {
+        .toggleMenuBtn {
+            display: block;
         }
     }
 
     .mobileMenuClose {
+        display: block;
         width: 45px;
         height: 45px;
-        border: 2px solid black;
+        border: 1.5px solid black;
         border-radius: 50%;
         display: flex;
         justify-content: center;
@@ -709,6 +723,7 @@
         animation-duration: 1s;
         animation-fill-mode: forwards;
     }
+
     @keyframes openMenuAnimation {
         0% {
             opacity: 0;
