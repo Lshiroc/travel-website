@@ -1,33 +1,78 @@
 .card {
+    max-height: 450px;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    border-radius: 15px;
+    position: relative;
+    cursor: pointer;
+
+    .cardImg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        img {
+            width: 100%;
+            display: block;
+            transition: 0.4s ease-in-out;
+        }
+    }
+
+
+    .cardInfo {
+        overflow: hidden;
+        width: 100%;
+        background: rgba(12, 218, 15, 0.25);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transition: 0.3s;
+        color: white;
+
+        .cardText {
+            position: absolute;
+            bottom: 0;
+            transition: 0.3s;
+            padding: 0 25px 25px 25px;
+
+            h2 {
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+
+            p {
+                font-size: 15px;
+                opacity: 0;
+                transition: 0.3s;
+            }
+        }
+
+    }
 
 }
 
-.cardImg {
-    width: 100%;
-    height: 250px;
-    border-radius: 10px;
-    background-image: url('https://www.campspot.com/assets/img/blog/22-places-to-visit-750x500.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    margin-bottom: 10px;
-}
+.card:hover {
+    .cardImg {
+        img {
+            width: 110%;
+        }
+    }
 
-.cardTitle {
-    font-size: 17px;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
+    .cardInfo {
+        background: rgba(12, 218, 15, 0.479);
+    }
 
-.cardDescription {
-    color: rgb(88, 88, 88);
-    font-size: 13px;
-    line-height: 18px;
-    margin-bottom: 10px;
-}
+    .cardText {
+        margin-bottom: 25px;
+        
+        p {
+            opacity: 1;
+        }
+    }
 
-.readMore {
-    color: rgb(14, 167, 65);
-    font-size: 16px;
-    text-decoration: underline;
 }

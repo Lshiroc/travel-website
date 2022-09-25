@@ -3,14 +3,17 @@ import style from './blogCard.module.scss';
 function blogCard() {
   return (
     <>
-        <div className={style.card}>
-            <div className={style.cardImg}></div>
-            <div className={style.cardInfo}>
-                <div className={style.cardTitle}>22 Camping Destinations for 2022</div>
-                <div className={style.cardDescription}>The restorative power of the great outdoors is only a click away with this list of 22 camping destinations.</div>
-                <div className={style.readMore}>read more</div>
-            </div>
+      <div className={style.card}>
+        <div className={style.cardImg}>
+          <img src="https://tentntrek.com/wp-content/uploads/2016/11/photo-1441716844725-09cedc13a4e7-600x700.jpg" alt="Amazing Wonderful Crazzy Blog Image" />
         </div>
+        <div className={style.cardInfo}>
+          <div className={style.cardText}>
+            <h2>This is a simple title, u better like this</h2>
+            <p>September 25, 2022</p>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

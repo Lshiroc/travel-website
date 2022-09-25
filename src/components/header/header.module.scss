@@ -1,0 +1,169 @@
+/* Navbar (Home version) */
+.navbar {
+    left: 0;
+    right: 0;
+    background: rgb(243, 242, 239);
+    position: fixed;
+    z-index: 10;
+}
+
+.navbarContainer {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menuLeft {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+
+    .toggleMenuBtn {
+        width: 30px;
+        display: none;
+
+        img {
+            width: 100%;
+            display: block;
+        }
+    }
+
+    .logo {
+        width: 120px;
+
+        img {
+            width: 140px;
+            display: block;
+        }
+    }
+}
+
+.menuRight {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.mobileMenuClose {
+    display: none;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    column-gap: 25px;
+    transition: 0.3s;
+}
+
+.menuItem p {
+    font-size: 16px;
+    position: relative;
+    padding: 5px 0px;
+}
+
+.menuItem a {
+    width: 100%;
+    color: #181818;
+}
+
+.menuItem p::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    opacity: 0;
+    transition: 0.3s;
+    background-color: var(--primary);
+}
+
+.menuItem p:hover::before {
+    opacity: 1;
+}
+
+.cartMenu {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes shake {
+    0% {
+        transfrom: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(10deg);
+    }
+
+    50% {
+        transfrom: rotate(0deg);
+    }
+
+    75% {
+        transform: rotate(-10deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes markerAppear {
+    0% {
+        top: 50px;
+    }
+
+    25% {
+        top: 36px;
+    }
+
+    75% {
+        top: 36px;
+    }
+
+    100% {
+        top: 50px;
+    }
+}
+
+.cartImg {
+    width: 25px;
+    cursor: pointer;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 50px;
+        background-color: #00C585;
+        border-radius: 5px;
+        transition: 0.3s;
+        animation: 0.8s ease-in 4 markerAppear;
+    }
+
+    img {
+        width: 100%;
+        transition: 0.3s;
+        display: block;
+        animation: shake 0.3s 4;
+    }
+}
+
+.cartImg:hover {
+    &::before {
+        top: 0;
+    }
+
+    img {
+        filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(203deg) brightness(103%) contrast(101%);
+    }
+
+}

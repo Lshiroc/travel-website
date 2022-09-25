@@ -1,0 +1,118 @@
+.blogMain {
+    padding: 120px 0 90px 0 !important;
+
+    .blogSectionTitle {
+        margin-bottom: 25px;
+
+        h1 {
+            font-size: 38px;
+        }
+    }
+}
+
+.fancyBlogComponent {
+    border-radius: 15px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 2.5fr 1fr 1fr;
+    grid-template-rows: 217.5px 217.5px;
+    gap: 15px;
+    margin-bottom: 90px;
+
+    .fbgElement {
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        max-height: 450px;
+
+        .fbgImg {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s;
+
+            img {
+                width:100%;
+                height:100%;
+                object-fit: cover;
+                user-select: none;
+                display: block;
+            }
+        }
+
+        .fbgInfo {
+            width: 100%;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            color: white;
+
+
+            .fbgText {
+                padding: 0 25px 25px 25px;
+                position: absolute;
+                bottom: -40px;
+                transition: 0.3s;
+
+                h2 {
+                    font-size: 18px;
+                    margin-bottom: 15px;
+                }
+
+                p {
+                    visibility: hidden;
+                    opacity: 0;
+                    margin-bottom: 10px;
+                    transition: 0.3s;
+                }
+            }
+        }
+    }
+
+    .fbgMain {
+        height: 110%;
+        grid-column: 1 / 2;
+        grid-row: 1 / 3;
+
+        .fbgInfo {
+            .fbgText {
+                bottom: -80px;
+            }
+        }
+
+        h2 {
+            font-size: 28px !important;
+        }
+    }
+
+    .fbgElement:hover {
+        .fbgImg {
+            width: 110%;
+            img {
+                width: 110%;
+            }
+        }
+
+        .fbgInfo {
+
+            .fbgText {
+                bottom: 0;
+                p {
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+}
+
+.blogRegularComponent {
+    display: grid;
+    grid-template-columns: repeat(3, 32.3%);
+    gap: 20px;
+}
