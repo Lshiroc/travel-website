@@ -40,18 +40,18 @@ export default function Header() {
                                 </a>
                             </li>
                             <li className={style.menuItem}>
-                                <a href=".">
-                                    <p>Store</p>
-                                </a>
-                            </li>
-                            <li className={style.menuItem}>
                                 <NavLink to="/blog">
                                     <p>Blog</p>
                                 </ NavLink>
                             </li>
                             <li className={style.menuItem}>
-                                <a href=".">
+                                <NavLink to="/contact">
                                     <p>Contact</p>
+                                </NavLink>
+                            </li>
+                            <li className={style.menuItem}>
+                                <a href=".">
+                                    <p>About</p>
                                 </a>
                             </li>
                             {/* <div className={style.mobileMenuClose} onClick={() => setToggleMenu(!toggleMenu)}>

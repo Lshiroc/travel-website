@@ -9,6 +9,7 @@
         background-size: cover;
         background-position: center;
         position: relative;
+        margin-bottom: 60px;
 
         .blogLayer {
             position: absolute;
@@ -19,13 +20,14 @@
             width: 100%;
             background: linear-gradient(to top, rgba(68, 68, 68, 0.641), transparent);
             padding: 10px;
-            padding: 0 25px 40px 25px; 
+            padding: 0 25px 40px 25px;
             // text-shadow: 1px 1px 1px rgba(109, 109, 109, 0.693);
 
             .blogInfoContainer {
                 display: grid;
                 height: 100%;
                 grid-template-columns: 55% 25%;
+                justify-content: space-between;
                 column-gap: 30px;
                 align-items: end;
 
@@ -33,7 +35,7 @@
                     color: white;
 
                     h1 {
-                        font-size: 34px;
+                        font-size: 42px;
                     }
 
                     p {
@@ -41,8 +43,81 @@
                         margin-bottom: 5px;
                     }
                 }
+
+                .blogBtns {
+                    justify-self: end;
+
+                    .blogCopyBtn {
+                        width: 45px;
+                        height: 45px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border: 1.5px solid #d7d7d7;
+                        border-radius: 10px;
+                        transition: 0.3s;
+                        cursor: pointer;
+
+                        img {
+                            width: 35px;
+                            filter: invert(100%) sepia(0%) saturate(2151%) hue-rotate(300deg) brightness(91%) contrast(85%);
+                            transition: 0.3s;
+                        }
+                    }
+                    
+                    .blogCopyBtn:hover {
+                        border-color: white;
+
+                        img {
+                            filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+                        }
+                    }
+                }
+
             }
 
+        }
+    }
+
+    .blogContent {
+        max-width: 990px;
+        margin: 0 auto;
+        display: grid;
+
+        .blogText {
+            text-align: justify;
+            font-family: 'Roboto', sans-serif;
+            margin-bottom: 20px;
+
+            h1  {
+                font-size: 34px;
+                margin-bottom: 20px;
+            }
+
+            h1:not(:first-child) {
+                margin-top: 60px;
+            }
+
+            p {
+                font-size: 18px;
+                line-height: 22px;
+                margin-bottom: 10px;
+            }
+        }
+
+        .blogPostInfo {
+            justify-self: end;
+            p {
+                font-size: 15px;
+                margin-bottom: 5px;
+            }
+
+            a {
+                color: green;
+                text-decoration: underline;
+                font-size: 17px;
+                font-weight: 600;
+            }
         }
     }
 }
