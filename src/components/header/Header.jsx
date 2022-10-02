@@ -49,9 +49,9 @@ export default function Header({ pageNav, setPageNav }) {
                                 </NavLink>
                             </li>
                             <li className={style.menuItem}>
-                                <a href=".">
+                                <NavLink href="/about">
                                     <p className={pageNav === "about" ? style.activatedNav : ''}>About</p>
-                                </a>
+                                </NavLink>
                             </li>
                             {/* <div className={style.mobileMenuClose} onClick={() => setToggleMenu(!toggleMenu)}>
                                 <img src={closeIcon} alt="Menu Close" />
