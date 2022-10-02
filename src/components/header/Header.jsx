@@ -49,7 +49,7 @@ export default function Header({ pageNav, setPageNav }) {
                                 </NavLink>
                             </li>
                             <li className={style.menuItem}>
-                                <NavLink href="/about">
+                                <NavLink to="/about">
                                     <p className={pageNav === "about" ? style.activatedNav : ''}>About</p>
                                 </NavLink>
                             </li>
