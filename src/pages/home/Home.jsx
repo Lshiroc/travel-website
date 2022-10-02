@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, NavLink } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeStateBool } from './../../Store/statesReducer';
 import { motion } from "framer-motion";
@@ -26,6 +26,10 @@ import guestsIcon from "./../../assets/icons/guests-icon.svg";
 import arrowDownIcon from "./../../assets/icons/arrow-down.svg";
 import forestIcon from "./../../assets/icons/forest-icon.svg";
 import sliderImg from './../../assets/images/header-hero.jpg';
+import sliderImg1 from './../../assets/images/header-hero1.jpg';
+import sliderImg2 from './../../assets/images/header-hero2.jpg';
+import brandLogo from './../../assets/images/logoVector/default-monochrome-white.svg'
+import watchIcon from './../../assets/icons/watch-icon.svg';
 
 // Date Range
 // import { createRoot } from 'react-dom/client';
@@ -42,12 +46,16 @@ import { addDays } from "date-fns";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import { useEffect } from "react";
 // import { DateRangePicker, DateRangePickerValue } from '@mantine/dates';
 // import { valueToPercent } from "@mui/base";
 
-function Home() {
+function Home({ setPageNav }) {
+  const navigate = useNavigate();
+
   SwiperCore.use([Autoplay]);
+  useEffect(() => {
+    setPageNav('home');
+  }, [])
 
   const months = [
     "January",
@@ -122,11 +130,24 @@ function Home() {
   })
 
   useEffect(() => {
-    dispatch(changeStateBool({toggleName: "toggleMenu", value: toggleMenu}));
+    dispatch(changeStateBool({ toggleName: "toggleMenu", value: toggleMenu }));
     console.log("done", toggleMenu);
 
     toggleMenu ? document.body.classList.add(style.overflowHidden) : document.body.classList.remove(style.overflowHidden);
   }, [toggleMenu])
+
+
+  // Click Watch Video Button Effect
+
+  const [clickWatch, setClickWatch] = useState(false);
+
+  const goWatch = () => {
+    setClickWatch(!clickWatch);
+
+    console.log("dsds", clickWatch);
+
+      window.location.href = "https://google.com";
+  }
 
   return (
     <main className={toggleMenu ? style.overflowHidden : ''}>
@@ -366,16 +387,20 @@ function Home() {
                 onClick={() => console.log('clicked')}
               >
                 <SwiperSlide>
-                  <img src={sliderImg} alt="just an img" />
+                  <div className={`${style.heroSlider} ${style.heroSlider0}`}>
+                  </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                  <div className={`${style.heroSlider} ${style.heroSlider1}`}>
+                  </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                  <div className={`${style.heroSlider} ${style.heroSlider2}`}>
+                  </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                  <div className={`${style.heroSlider} ${style.heroSlider3}`}>
+                  </div>
                 </SwiperSlide>
               </Swiper>
             </div>
@@ -386,7 +411,10 @@ function Home() {
         <section className={`section-x padding-x ${style.whyUs}`}>
           <h1 className="section-title">Why Campspot?</h1>
           <div className={style.whyUsContent}>
-            <div className={style.whyUsItem}>
+            <div className={`${style.whyUsItem} ${style.whyUsItem0}`}>
+              <div className={`${style.whyUsImg}`}>
+                <div className={`${style.blobBg} ${style.whyUsImg0}`}></div>
+              </div>
               <h3>Your favorite campgrounds</h3>
               <p>
                 Campspot lists top-rated camping destinations available for
@@ -394,7 +422,10 @@ function Home() {
                 small, RV parks, glamping, and more.
               </p>
             </div>
-            <div className={style.whyUsItem}>
+            <div className={`${style.whyUsItem} ${style.whyUsItem1}`}>
+              <div className={`${style.whyUsImg}`}>
+                <div className={`${style.blobBg} ${style.whyUsImg1}`}></div>
+              </div>
               <h3>Your favorite campgrounds</h3>
               <p>
                 Campspot lists top-rated camping destinations available for
@@ -402,7 +433,10 @@ function Home() {
                 small, RV parks, glamping, and more.
               </p>
             </div>
-            <div className={style.whyUsItem}>
+            <div className={`${style.whyUsItem} ${style.whyUsItem2}`}>
+              <div className={`${style.whyUsImg}`}>
+                <div className={`${style.blobBg} ${style.whyUsImg2}`}></div>
+              </div>
               <h3>Your favorite campgrounds</h3>
               <p>
                 Campspot lists top-rated camping destinations available for
@@ -441,14 +475,14 @@ function Home() {
               </div>
               <div className={style.contactBrand}>
                 <img
-                  src="https://tentntrek.com/wp-content/uploads/2021/10/cropped-tentntrek-logo.png"
-                  alt=""
+                  src={brandLogo}
+                  alt="Logo"
                 />
               </div>
             </div>
           </div>
         </section>
-        <section className={`section-x padding-x ${style.products}`}>
+        {/* <section className={`section-x padding-x ${style.products}`}>
           <div className={style.sectionMore}>
             <h1 className="section-title">Recommended items for camping</h1>
             <p>See More</p>
@@ -493,15 +527,7 @@ function Home() {
               <CardType2 />
             </SwiperSlide>
           </Swiper>
-          {/* <div className={style.productsContainer}>
-            <CardType2 />
-            <CardType2 />
-            <CardType2 />
-            <CardType2 />
-            <CardType2 />
-            <CardType2 />
-          </div> */}
-        </section>
+        </section> */}
         <section className={style.quote}>
           <div className={`section-x padding-x ${style.quoteContainer}`}>
             <div className={style.quoteText}>
@@ -519,7 +545,7 @@ function Home() {
             <h1 className="section-title">Memories from our clients</h1>
             <p>See More</p>
           </div>
-          <div className={style.blogContainer}>
+          {/* <div className={style.blogContainer}>
             <motion.div
               initial={{ y: 30, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
@@ -556,6 +582,77 @@ function Home() {
             >
               <BlogCard />
             </motion.div>
+          </div> */}
+          <div className={style.fancyBlogComponent}>
+            <div className={`${style.fbgElement} ${style.fbgMain}`}>
+              {/* <Link to="/blog/read"> */}
+                <div onClick={() => goWatch()} className={style.watchVideo}>
+                  <img className={clickWatch ? style.clickedWatch : ''} src={watchIcon} alt="watch" />
+                </div>
+                <div className={style.fbgImg}>
+                  <img src="https://www.adventuretreks.com/wp-content/uploads/2020/01/LS-IMG_0012-1280x960-home-640x480.jpg" alt="Fancy Image" />
+                </div>
+                <div className={style.fbgInfo}>
+                  <div className={style.fbgText}>
+                    <h2>Just a simple title Lmao :d</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, repudiandae animi? Est nulla fugit nam, nemo cum odio! Alias, vero.</p>
+                    <p className={style.date}>September 25, 2022</p>
+                  </div>
+                </div>
+              {/* </Link > */}
+            </div>
+            <div className={style.fbgElement}>
+              <Link to="/blog/read">
+                <div className={style.fbgImg}>
+                  <img src="https://www.adventuretreks.com/wp-content/uploads/2020/01/LS-IMG_0012-1280x960-home-640x480.jpg" alt="Fancy Image" />
+                </div>
+                <div className={style.fbgInfo}>
+                  <div className={style.fbgText}>
+                    <h2>Just a simple title Lmao :d</h2>
+                    <p className={style.date}>September 25, 2022</p>
+                  </div>
+                </div>
+              </ Link>
+            </div>
+            <div className={style.fbgElement}>
+              <Link to="/blog/read">
+                <div className={style.fbgImg}>
+                  <img src="https://www.adventuretreks.com/wp-content/uploads/2020/01/LS-IMG_0012-1280x960-home-640x480.jpg" alt="Fancy Image" />
+                </div>
+                <div className={style.fbgInfo}>
+                  <div className={style.fbgText}>
+                    <h2>Just a simple title Lmao :d</h2>
+                    <p className={style.date}>September 25, 2022</p>
+                  </div>
+                </div>
+              </ Link>
+            </div>
+            <div className={style.fbgElement}>
+              <Link to="/blog/read">
+                <div className={style.fbgImg}>
+                  <img src="https://www.adventuretreks.com/wp-content/uploads/2020/01/LS-IMG_0012-1280x960-home-640x480.jpg" alt="Fancy Image" />
+                </div>
+                <div className={style.fbgInfo}>
+                  <div className={style.fbgText}>
+                    <h2>Just a simple title Lmao :d</h2>
+                    <p className={style.date}>September 25, 2022</p>
+                  </div>
+                </div>
+              </ Link>
+            </div>
+            <div className={style.fbgElement}>
+              <Link to="/blog/read">
+                <div className={style.fbgImg}>
+                  <img src="https://www.adventuretreks.com/wp-content/uploads/2020/01/LS-IMG_0012-1280x960-home-640x480.jpg" alt="Fancy Image" />
+                </div>
+                <div className={style.fbgInfo}>
+                  <div className={style.fbgText}>
+                    <h2>Just a simple title Lmao :d</h2>
+                    <p className={style.date}>September 25, 2022</p>
+                  </div>
+                </div>
+              </Link >
+            </div>
           </div>
         </section>
       </main>

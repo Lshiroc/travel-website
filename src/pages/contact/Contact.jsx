@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from './contact.module.scss';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Images
 import locationIcon from './../../assets/icons/location-icon.svg';
@@ -10,8 +12,12 @@ import phoneIcon from './../../assets/icons/phone-icon.svg';
 import mailIcon from './../../assets/icons/mail-icon.svg';
 import websiteIcon from './../../assets/icons/website-icon.svg';
 
-export default function Contact() {
+export default function Contact({ setPageNav }) {
     // const [color, setColor] = useState("");
+
+    useEffect(() => {
+        setPageNav("contact");
+    }, [])
 
     const handleInput = (e) => {
         console.log(e.target.name);
@@ -20,6 +26,19 @@ export default function Contact() {
     return (
         <>
             <main className={style.contactMain}>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
+                {/* Same as */}
+                <ToastContainer />
                 <div className={style.contactContainer}>
                     <div className={style.contactLeftPart}>
                         <h1>Send us a message</h1>
@@ -36,12 +55,12 @@ export default function Contact() {
                                 className={style.textArea}
                                 id="standard-multiline-flexible"
                                 label="Message"
-                                rows={8}
-                                maxRows={8}
+                                rows={7}
+                                maxRows={7}
                                 multiline
                                 variant="standard"
                             />
-                            <Button variant="contained">Send</Button>
+                            <Button onClick={() => toast.success("Message sent succesfully!")} variant="contained">Send</Button>
                         </ Box>
 
                     </div>
@@ -77,7 +96,9 @@ export default function Contact() {
                         </div>
                     </div>
                 </div>
+
             </main>
+                <div className={style.locationMap} style={{width: '100%'}}><iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.maps.ie/distance-area-calculator.html">measure distance on map</a></iframe></div>
         </>
     )
 }

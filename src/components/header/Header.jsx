@@ -1,6 +1,5 @@
 import { Link, NavLink } from 'react-router-dom';
-
-
+import { useState } from 'react';
 //Style & images
 import logo from './../../assets/images/logo-monochrome.svg';
 import cartIcon from './../../assets/images/cart2.svg';
@@ -9,7 +8,7 @@ import closeIcon from './../../assets/images/close-icon.svg';
 import style from './header.module.scss';
 
 
-export default function Header() {
+export default function Header({ pageNav, setPageNav }) {
     return (
         <>
 
@@ -30,28 +29,28 @@ export default function Header() {
                         {/* <ul className={`${style.menu} ${toggleMenu ? style.openToggleMenu : style.closeToggleMenu}`}> */}
                         <ul className={style.menu}>
                             <li className={style.menuItem}>
-                                <a href=".">
-                                    <p>Home</p>
-                                </a>
-                            </li>
-                            <li className={style.menuItem}>
-                                <a href=".">
-                                    <p>Events</p>
-                                </a>
-                            </li>
-                            <li className={style.menuItem}>
-                                <NavLink to="/blog">
-                                    <p>Blog</p>
-                                </ NavLink>
-                            </li>
-                            <li className={style.menuItem}>
-                                <NavLink to="/contact">
-                                    <p>Contact</p>
+                                <NavLink to="/">
+                                    <p className={pageNav === "home" ? style.activatedNav : ''}>Home</p>
                                 </NavLink>
                             </li>
                             <li className={style.menuItem}>
                                 <a href=".">
-                                    <p>About</p>
+                                    <p className={pageNav === "events" ? style.activatedNav : ''}>Events</p>
+                                </a>
+                            </li>
+                            <li className={style.menuItem}>
+                                <NavLink to="/blog">
+                                    <p className={pageNav === "blog" ? style.activatedNav : ''}>Blog</p>
+                                </NavLink>
+                            </li>
+                            <li className={style.menuItem}>
+                                <NavLink to="/contact">
+                                    <p className={pageNav === "contact" ? style.activatedNav : ''}>Contact</p>
+                                </NavLink>
+                            </li>
+                            <li className={style.menuItem}>
+                                <a href=".">
+                                    <p className={pageNav === "about" ? style.activatedNav : ''}>About</p>
                                 </a>
                             </li>
                             {/* <div className={style.mobileMenuClose} onClick={() => setToggleMenu(!toggleMenu)}>

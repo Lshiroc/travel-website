@@ -83,6 +83,10 @@
     opacity: 1;
 }
 
+.menuItem a .activatedNav::before {
+    opacity: 1;
+}
+
 .cartMenu {
     width: 40px;
     height: 40px;

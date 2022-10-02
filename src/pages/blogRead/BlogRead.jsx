@@ -7,14 +7,18 @@ import { Link } from 'react-router-dom';
 import linkIcon from './../../assets/images/link-icon.svg';
 import doneIcon from './../../assets/icons/done-icon.svg';
 
-export default function BlogRead() {
-    // const [done, setDone] = useState(false);
+export default function BlogRead({ setPageNav }) {
+    const [done, setDone] = useState(false);
+
+    useEffect(() => {
+        setPageNav("blog");
+    }, []);
 
     const copyLink = () => {
         navigator.clipboard.writeText(window.location.href);
-        // setDone(true);
+        setDone(true);
 
-        // setTimeout(() => setDone(false), 4000);
+        setTimeout(() => setDone(false), 4000);
     }
 
     return (
@@ -29,7 +33,7 @@ export default function BlogRead() {
                             </div>
                             <div className={style.blogBtns}>
                                 <div className={style.blogCopyBtn} onClick={() => copyLink()}>
-                                    <img src={false ? doneIcon : linkIcon} alt="Copy Link" />
+                                    <img src={done ? doneIcon : linkIcon} alt="Copy Link" />
                                 </div>
                             </div>
                         </div>
