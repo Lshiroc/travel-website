@@ -34,9 +34,9 @@ export default function Header({ pageNav, setPageNav }) {
                                 </NavLink>
                             </li>
                             <li className={style.menuItem}>
-                                <a href=".">
+                                <NavLink to="/events">
                                     <p className={pageNav === "events" ? style.activatedNav : ''}>Events</p>
-                                </a>
+                                </NavLink>
                             </li>
                             <li className={style.menuItem}>
                                 <NavLink to="/blog">

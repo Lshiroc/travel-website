@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Routes, Route } from 'react-router-dom';
 import Header from './src/components/header/Header';
 import Home from './src/pages/home/Home';
+import Events from './src/pages/events/Events';
 import Blog from './src/pages/blog/Blog';
 import BlogRead from './src/pages/blogRead/BlogRead';
 import Contact from './src/pages/contact/Contact';
@@ -20,6 +21,7 @@ function App() {
       <div className="whole">
         <Routes>
           <Route path="/" element={<Home setPageNav={setPageNav} />} />
+          <Route path="/events" element={<Events setPageNav={setPageNav}/>} />
           <Route path="/blog" element={<Blog setPageNav={setPageNav} />} />
           <Route path="/blog/read" element={<BlogRead setPageNav={setPageNav} />} />
           <Route path="/contact" element={<Contact setPageNav={setPageNav} />}/>
