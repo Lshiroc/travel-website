@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Slider from '@mui/material/Slider';
+import CardType1 from "../../components/card1/CardType1";
 
 // Images & Styles
 import style from './events.module.scss';
@@ -9,6 +11,7 @@ import arrowDownIcon from "./../../assets/icons/arrow-down.svg";
 import forestIcon from "./../../assets/icons/forest-icon.svg";
 import brandLogo from './../../assets/images/logoVector/default-monochrome-white.svg'
 import watchIcon from './../../assets/icons/watch-icon.svg';
+import closeIcon from './../../assets/icons/x-mark.svg';
 
 
 import { DateRange } from "react-date-range";
@@ -16,6 +19,17 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
 export default function Events({ setPageNav }) {
+
+    function valuetext(value) {
+        return `${value}`;
+    }
+
+    const [value, setValue] = React.useState([0, 120]);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
     useEffect(() => {
         setPageNav('events');
     }, [])
@@ -172,22 +186,14 @@ export default function Events({ setPageNav }) {
                                             } ${input.startDate.getDate()}
                     - ${months[input.endDate.getMonth()]
                                             } ${input.endDate.getDate()}`
-                                            : "choose smth else"}
+                                            : "Choose Date"}
                                     </div>
                                     <div
                                         className={`${style.popUpInput} ${openDateRange ? style.openElement : ""
                                             } `}
                                         onClick={(e) => e.stopPropagation()}
                                     >
-                                        {/* <div className={style.popUpClose}>
-                      <p>Date</p>
-                      <div
-                        className={style.closeBtn}
-                        onClick={() => setOpenDateRange(!openDateRange)}
-                      >
-                        <img src={xMark} alt="close" />
-                      </div>
-                    </div> */}
+
                                         <DateRange
                                             editableDateInputs={true}
                                             onChange={(item) => {
@@ -309,10 +315,98 @@ export default function Events({ setPageNav }) {
                 <div className={style.eventsContent}>
                     <div className={`section-x padding-x ${style.eventsContentWrapper}`}>
                         <div className={style.eventsFilter}>
-                            <h1>fucking Filter</h1>
+                            <div className={style.filterContent}>
+                                <h1 className={style.filterGeneralTitle}>Filter By</h1>
+                                <div className={style.filterElement}>
+                                    <h2 className={style.filterTitle}>Site types</h2>
+                                    <div className={style.filterTypes}>
+                                        <input checked type="radio" name="siteTypes" id="test" />
+                                        <label htmlFor="test">All</label>
+                                        <input type="radio" name="siteTypes" id="test2" />
+                                        <label htmlFor="test2">In the Nature</label>
+                                    </div>
+                                </div>
+                                <div className={style.filterDivider}></div>
+                                <div className={style.filterElement}>
+                                    <h2 className={style.filterTitle}>Price range</h2>
+                                    <div className={style.filterPriceRange}>
+                                        <div className={style.subTitle}>
+                                            <p>Min</p>
+                                            <p>Max</p>
+                                        </div>
+                                        <Slider
+                                            className={style.priceRange}
+                                            getAriaLabel={() => 'Temperature range'}
+                                            value={value}
+                                            onChange={handleChange}
+                                            valueLabelDisplay="auto"
+                                            max={375}
+                                            getAriaValueText={valuetext}
+                                        />
+                                    </div>
+                                </div>
+                                <div className={style.filterDivider}></div>
+                                <div className={style.filterElement}>
+                                    <h2 className={style.filterTitle}>Tour Features</h2>
+                                    <div className={style.filterFeatures}>
+                                        <div className={style.featureItem}>
+                                            <input type="checkbox" name="ftest1" id="ftest1" />
+                                            <label htmlFor="ftest1"><div className={style.custom}></div> Photography</label>
+                                        </div>
+                                        <div className={style.featureItem}>
+                                            <input type="checkbox" name="ftest2" id="ftest2" />
+                                            <label htmlFor="ftest2"><div className={style.custom}></div> Sports</label>
+                                        </div>
+                                        <div className={style.featureItem}>
+                                            <input type="checkbox" name="ftest3" id="ftest3" />
+                                            <label htmlFor="ftest3"><div className={style.custom}></div> Party places</label>
+                                        </div>
+                                        <div className={style.featureItem}>
+                                            <input type="checkbox" name="ftest4" id="ftest4" />
+                                            <label htmlFor="ftest4"><div className={style.custom}></div> Activities for group</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div className={style.eventsResult}>
-                            <h1>Fucking event results</h1>
+                            <div className={style.resultTop}>
+                                <p className={style.found}>3 Campgrounds found</p>
+                                <div className={style.resultExtraFilter}>
+                                    <div className={style.tags}>
+                                        <div className={style.tag}>
+                                            <p>RV Sites</p>
+                                            <div className={style.close}>
+                                                <img src={closeIcon} alt="close" />
+                                            </div>
+                                        </div>
+                                        <div className={style.tag}>
+                                            <p>Camping</p>
+                                            <div className={style.close}>
+                                                <img src={closeIcon} alt="close" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className={style.sorted}>
+                                        <p>Sorted by: </p>
+                                        <select name="sortBy" id="sortBy">
+                                            <option value="popular">Popular</option>
+                                            <option value="lowToHight">Price(Low to High)</option>
+                                            <option value="highToLow">Price(High to Low)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={style.resultContainer}>
+                                <CardType1 />
+                                <CardType1 />
+                                <CardType1 />
+                                <CardType1 />
+                                <CardType1 />
+                                <CardType1 />
+                                <CardType1 />
+                                <CardType1 />
+                            </div>
                         </div>
                     </div>
                 </div>

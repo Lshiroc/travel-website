@@ -1,8 +1,13 @@
+.events {
+    padding-top: 120px !important;
+    // padding-bottom: 90px !important;
+}
+
+
 // Filter section
 
 .eventMainFilter {
-    padding-top: 120px !important;
-    padding-bottom: 90px !important;
+    margin-bottom: 60px !important;
 }
 
 .tripSearch {
@@ -33,7 +38,7 @@
     justify-content: space-between;
     column-gap: 10px;
     border-radius: 10px;
-    border: 1px solid rgb(229, 234, 223);
+    border: 1px solid rgb(192, 193, 191);
     padding-left: 10px;
     padding-right: 15px;
     background: rgb(255, 255, 255);
@@ -73,6 +78,7 @@
         left: 0;
         right: 0;
         top: 60px;
+        z-index: 1;
     }
 
 
@@ -177,6 +183,7 @@
 
 .openElement {
     display: block !important;
+    z-index: 1;
 }
 
 .guestsContainer {
@@ -272,19 +279,222 @@
 
 // Events Content
 
+.eventsContent {
+    border-top: 1px solid rgb(193, 193, 193);
+    background: rgba(0, 0, 0, 0.071);
+    padding: 70px 0 90px 0;
+}
+
+
 // Events Filter
 
 .eventsContentWrapper {
     display: grid;
-    grid-template-columns: 26% 72%;
+    grid-template-columns: 22% 76%;
     justify-content: space-between;
     column-gap: 20px;
 }
 
 .eventsFilter {
-    background: red;
+
+    .filterContent {
+        padding: 10px 5px;
+
+        .filterDivider {
+            width: 100%;
+            height: 1px;
+            background-color: rgb(190, 190, 190);
+            border-radius: 5px;
+            margin: 25px 0;
+        }
+
+        .filterGeneralTitle {
+            font-size: 20px;
+            font-weight: 600;
+            color: #484848;
+            margin-bottom: 20px;
+        }
+
+        .filterElement {
+            .filterTitle {
+                font-size: 17px;
+                color: #393939;
+                margin-bottom: 15px;
+            }
+
+            .filterTypes {
+                display: grid;
+                row-gap: 5px;
+
+                input {
+                    display: none;
+                }
+
+                label {
+                    // background: red;
+                    font-size: 14px;
+                    width: 100%;
+                    cursor: pointer;
+                    border-radius: 5px;
+                    border: 1px solid transparent;
+                    transition: 0.3s;
+                    padding: 3px 8px;
+                }
+
+                input[type="radio"]:checked+label {
+                    background: rgb(226, 226, 226);
+                    border: 1px solid rgb(118, 118, 118);
+                    font-weight: 600;
+                }
+
+                label:hover {
+                    border: 1px solid rgb(118, 118, 118);
+                }
+            }
+
+            .filterPriceRange {
+                display: grid;
+                grid-template-columns: 100%;
+
+                .subTitle {
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 14px;
+                    margin-bottom: 5px;
+                    color: rgb(101, 101, 101);
+                }
+
+                .priceRange {
+                    width: 94%;
+                    justify-self: center;
+                    color: rgb(206, 206, 206) !important;
+                }
+            }
+
+            .filterFeatures {
+                display: grid;
+                row-gap: 10px;
+
+                .featureItem {
+                    font-family: 'Roboto', sans-serif;
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+
+                    label {
+                        font-size: 16px;
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        cursor: pointer;
+
+
+                        .custom {
+                            width: 20px;
+                            height: 20px;
+                            background: white;
+                            border: 1px solid gray;
+                            border-radius: 3px;
+                            position: relative;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            transition: 0.15s;
+                            cursor: pointer;
+                        }
+
+                        .custom::after {
+                            content: '';
+                            left: 9px;
+                            top: 5px;
+                            width: 4px;
+                            height: 7px;
+                            border: solid white;
+                            border-width: 0 3px 3px 0;
+                            -webkit-transform: rotate(45deg);
+                            -ms-transform: rotate(45deg);
+                            transform: rotate(45deg);
+                        }
+                    }
+
+                    input {
+                        display: none;
+                    }
+
+                    input:checked+label .custom {
+                        background: rgb(72, 212, 86);
+                    }
+                }
+
+            }
+
+        }
+    }
 }
 
+
 .eventsResult {
-    background: blue;
+    .resultTop {
+        margin-bottom: 30px;
+
+        .found {
+            color: gray;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .resultExtraFilter {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .tags {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+
+                .tag {
+                    border: 1px solid rgb(30, 231, 30);
+                    border-radius: 50px;
+                    padding: 10px;
+                    font-size: 16px;
+                    display: flex;
+                    align-items: center;
+                    column-gap: 10px;
+                    background: white;
+
+                    .close {
+                        width: 20px;
+                        height: 20px;
+
+                        img {
+                            width: 100%;
+                            display: block;
+                        }
+                    }
+                }
+            }
+
+            .sorted {
+                display: flex;
+                align-items: center;
+                column-gap: 5px;
+
+                select {
+                    border-radius: 5px;
+                    outline: none;
+                    padding: 4px 2px;
+                }
+            }
+        }
+    }
+
+    .resultContainer {
+        display: grid;
+        grid-template-columns: repeat(3, 32%);
+        column-gap: 15px;
+        row-gap: 20px;
+        justify-content: space-between;
+    }
 }
