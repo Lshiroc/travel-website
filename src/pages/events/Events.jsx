@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import Slider from '@mui/material/Slider';
+import React, { useEffect, useState, useRef } from 'react';
 import CardType1 from "../../components/card1/CardType1";
+import { useSelector } from 'react-redux';
+
 
 // Images & Styles
 import style from './events.module.scss';
@@ -13,12 +14,22 @@ import brandLogo from './../../assets/images/logoVector/default-monochrome-white
 import watchIcon from './../../assets/icons/watch-icon.svg';
 import closeIcon from './../../assets/icons/x-mark.svg';
 
-
+// External Components
+import Slider from '@mui/material/Slider';
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
 export default function Events({ setPageNav }) {
+
+    const data = useSelector(state => state.eventsReducer.products);
+    useEffect(() => {
+        setResult(data);
+        console.log("Data successfully copied to the state!");
+        console.log("abc", result)
+        console.log("cdf", data);
+    }, [data]);
+    console.log(data);
 
     function valuetext(value) {
         return `${value}`;
@@ -102,6 +113,108 @@ export default function Events({ setPageNav }) {
         setOpenGuests(false);
         setOpenSearch(false);
     })
+
+    // Function for Filtering 
+
+    // Here we go.. right into the hell
+    // God bless me and give luck to me
+
+    // const sortFilter = (sort) => {
+    //     switch (sort) {
+    //         case "popular":
+    //             setResult([...result].filter(event => event[sort] === true));
+    //             break;
+    //         case "lowToHigh":
+    //             setResult([...result].sort((a, b) => a.price - b.price));
+    //             break;
+    //         case "highToLow":
+    //             setResult([...result].sort((a, b) => b.price - a.price));
+    //             break;
+    //     }
+    // };
+
+    const typeFilter = (type) => {
+
+    }
+
+    const [result, setResult] = useState([]);
+
+    const [filterSettings, setFilterSettings] = useState({});
+
+    const rangeInput = useRef();
+
+    const [tourType, setTourType] = useState('');
+
+    const [features, setFeatures] = useState([]);
+    const feature1 = useRef();
+    const feature2 = useRef();
+    const feature3 = useRef();
+    const feature4 = useRef();
+    // const getFeatures = (e) => {
+
+    //     if(!features.includes(e.target.value)) {
+    //         setFeatures([...features, e.target.value]);
+    //     }
+
+    //     console.log("Features pulled: ", features);
+    // }
+
+    const filterAll = () => {
+        // setResult([]);
+        // Getting Tour Types: 
+
+        // Getting Features:
+
+        setFeatures([]);
+        if (!features.includes(feature1.current.value) && feature1.current.checked) {
+            setFeatures([...features, feature1.current.value]);
+        }
+        if (!features.includes(feature2.current.value) && feature2.current.checked) {
+            setFeatures([...features, feature2.current.value]);
+        }
+        if (!features.includes(feature3.current.value) && feature3.current.checked) {
+            setFeatures([...features, feature3.current.value]);
+        }
+        if (!features.includes(feature4.current.value) && feature4.current.checked) {
+            setFeatures([...features, feature4.current.value]);
+        }
+
+        console.log("pulled features: ", features);
+        console.log("got the types: ", tourType);
+
+        // Filtering
+
+        /// Filtering the types
+        setResult(data.filter(a => a.type === tourType));
+        if (features[0] !== undefined) {
+            setResult([...result].filter(a => a.features === features));
+
+        }
+        console.log("****DONE****");
+    }
+
+
+    // rangeInput.current.addEventListener('change', (e) => {
+    //     console.log("changed mffffs")
+    // })
+
+
+    // useEffect(() => {
+    //     rangeInput.current.addEventListener("click", (e) => {
+    //         console.log("clicked to slider mffff2",e.target);
+    //     })
+    // }, [rangeInput.current])
+
+
+    // const getRangeValue = (e) => {
+    //     setFilterSettings({...filterSettings, priceRange: e});
+    // }
+
+
+    // useEffect(() => {
+    //     console.log(filterSettings);
+    // }, [filterSettings]);
+
 
     return (
         <>
@@ -320,10 +433,12 @@ export default function Events({ setPageNav }) {
                                 <div className={style.filterElement}>
                                     <h2 className={style.filterTitle}>Site types</h2>
                                     <div className={style.filterTypes}>
-                                        <input checked type="radio" name="siteTypes" id="test" />
+                                        <input type="radio" name="siteTypes" id="test" value="all" onChange={(e) => setTourType(e.target.value)} />
                                         <label htmlFor="test">All</label>
-                                        <input type="radio" name="siteTypes" id="test2" />
+                                        <input type="radio" name="siteTypes" id="test2" value="In the Nature" onChange={(e) => setTourType(e.target.value)} />
                                         <label htmlFor="test2">In the Nature</label>
+                                        <input type="radio" name="siteTypes" id="test3" value="City" onChange={(e) => setTourType(e.target.value)} />
+                                        <label htmlFor="test3">City</label>
                                     </div>
                                 </div>
                                 <div className={style.filterDivider}></div>
@@ -334,15 +449,17 @@ export default function Events({ setPageNav }) {
                                             <p>Min</p>
                                             <p>Max</p>
                                         </div>
-                                        <Slider
+                                        {/* <Slider
                                             className={style.priceRange}
-                                            getAriaLabel={() => 'Temperature range'}
+                                            getAriaLabel={() => 'Price range'}
                                             value={value}
                                             onChange={handleChange}
                                             valueLabelDisplay="auto"
                                             max={375}
+                                            ref={rangeInput}
                                             getAriaValueText={valuetext}
-                                        />
+                                            
+                                        /> */}
                                     </div>
                                 </div>
                                 <div className={style.filterDivider}></div>
@@ -350,22 +467,26 @@ export default function Events({ setPageNav }) {
                                     <h2 className={style.filterTitle}>Tour Features</h2>
                                     <div className={style.filterFeatures}>
                                         <div className={style.featureItem}>
-                                            <input type="checkbox" name="ftest1" id="ftest1" />
+                                            <input type="checkbox" name="ftest1" id="ftest1" value="Photography" ref={feature1} />
                                             <label htmlFor="ftest1"><div className={style.custom}></div> Photography</label>
                                         </div>
                                         <div className={style.featureItem}>
-                                            <input type="checkbox" name="ftest2" id="ftest2" />
+                                            <input type="checkbox" name="ftest2" value="Sports" id="ftest2" ref={feature2} />
                                             <label htmlFor="ftest2"><div className={style.custom}></div> Sports</label>
                                         </div>
                                         <div className={style.featureItem}>
-                                            <input type="checkbox" name="ftest3" id="ftest3" />
+                                            <input type="checkbox" name="ftest3" value="Party Places" id="ftest3" ref={feature3} />
                                             <label htmlFor="ftest3"><div className={style.custom}></div> Party places</label>
                                         </div>
                                         <div className={style.featureItem}>
-                                            <input type="checkbox" name="ftest4" id="ftest4" />
+                                            <input type="checkbox" name="ftest4" value="Activities for group" id="ftest4" ref={feature4} />
                                             <label htmlFor="ftest4"><div className={style.custom}></div> Activities for group</label>
                                         </div>
                                     </div>
+                                </div>
+                                <div className={style.filterDivider}></div>
+                                <div className={style.filterElement}>
+                                    <button onClick={() => filterAll()} className={style.showResultBtn}>Show Results</button>
                                 </div>
                             </div>
                         </div>
@@ -389,23 +510,20 @@ export default function Events({ setPageNav }) {
                                     </div>
                                     <div className={style.sorted}>
                                         <p>Sorted by: </p>
-                                        <select name="sortBy" id="sortBy">
-                                            <option value="popular">Popular</option>
-                                            <option value="lowToHight">Price(Low to High)</option>
+                                        <select name="sortBy" id="sortBy" onChange={(e) => sortFilter(e.target.value)}>
                                             <option value="highToLow">Price(High to Low)</option>
+                                            <option value="popular">Popular</option>
+                                            <option value="lowToHigh">Price(Low to High)</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div className={style.resultContainer}>
-                                <CardType1 />
-                                <CardType1 />
-                                <CardType1 />
-                                <CardType1 />
-                                <CardType1 />
-                                <CardType1 />
-                                <CardType1 />
-                                <CardType1 />
+                                {
+                                    data ? result.map((event, key) => (
+                                        <CardType1 title={event.title} image={event.image} price={event.price} id={event.id} key={key} />
+                                    )) : console.log("Events didn't load. L bozo hahaha")
+                                }
                             </div>
                         </div>
                     </div>
