@@ -8,7 +8,7 @@ function CardType1({ title, image, price, id }) {
     return (
         <div className={style.cardType1}>
             <Link to={`tour/${id}`}>
-                <div className={style.ct1Img} >
+                <div className={style.ct1Img} style={{ backgroundImage: `url(${image})` }}>
                     <div className={style.ct1ImgTop}>
                         <div className={style.ct1ImgVerified}>Verified</div>
                         {/* <div className={style.ct1ImgLiked}>

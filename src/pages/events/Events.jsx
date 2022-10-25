@@ -630,6 +630,7 @@ export default function Events({ setPageNav }) {
                                         <CardType1 title={event.title} image={event.image} price={event.price} id={event.id} key={key} />
                                     )) : console.log("Events didn't load. L bozo hahaha")
                                 }
+                                
                             </div>
                         </div>
                     </div>

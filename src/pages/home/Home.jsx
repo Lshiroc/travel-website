@@ -50,6 +50,17 @@ import "react-date-range/dist/theme/default.css";
 // import { valueToPercent } from "@mui/base";
 
 function Home({ setPageNav }) {
+
+  const [result, setResult] = useState([]);
+  const data = useSelector(state => state.eventsReducer.products);
+  useEffect(() => {
+    setResult(data);
+    console.log("Data successfully copied to the state!");
+    console.log("abc", result)
+    console.log("cdf", data);
+  }, [data]);
+
+
   const navigate = useNavigate();
 
   SwiperCore.use([Autoplay]);
@@ -146,7 +157,7 @@ function Home({ setPageNav }) {
 
     console.log("dsds", clickWatch);
 
-      window.location.href = "https://google.com";
+    window.location.href = "https://google.com";
   }
 
   return (
@@ -452,12 +463,17 @@ function Home({ setPageNav }) {
             <p>See More</p>
           </div>
           <div className={style.toursContent}>
-            <CardType1 />
-            <CardType1 />
-            <CardType1 />
-            <CardType1 />
-            <CardType1 />
-            <CardType1 />
+            {
+              data ? result.map((event, key) => (
+                <CardType1 title={event.title} image={event.image} price={event.price} id={event.id} key={key} />
+              )) : console.log("Events didn't load. L bozo hahaha")
+            }
+            {
+              data ? result.map((event, key) => (
+                <CardType1 title={event.title} image={event.image} price={event.price} id={event.id} key={key} />
+              )) : console.log("Events didn't load. L bozo hahaha")
+            }
+
           </div>
         </section>
         <section className={style.contactUs}>
@@ -586,19 +602,19 @@ function Home({ setPageNav }) {
           <div className={style.fancyBlogComponent}>
             <div className={`${style.fbgElement} ${style.fbgMain}`}>
               {/* <Link to="/blog/read"> */}
-                <div onClick={() => goWatch()} className={style.watchVideo}>
-                  <img className={clickWatch ? style.clickedWatch : ''} src={watchIcon} alt="watch" />
+              <div onClick={() => goWatch()} className={style.watchVideo}>
+                <img className={clickWatch ? style.clickedWatch : ''} src={watchIcon} alt="watch" />
+              </div>
+              <div className={style.fbgImg}>
+                <img src="https://www.adventuretreks.com/wp-content/uploads/2020/01/LS-IMG_0012-1280x960-home-640x480.jpg" alt="Fancy Image" />
+              </div>
+              <div className={style.fbgInfo}>
+                <div className={style.fbgText}>
+                  <h2>Just a simple title Lmao :d</h2>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, repudiandae animi? Est nulla fugit nam, nemo cum odio! Alias, vero.</p>
+                  <p className={style.date}>September 25, 2022</p>
                 </div>
-                <div className={style.fbgImg}>
-                  <img src="https://www.adventuretreks.com/wp-content/uploads/2020/01/LS-IMG_0012-1280x960-home-640x480.jpg" alt="Fancy Image" />
-                </div>
-                <div className={style.fbgInfo}>
-                  <div className={style.fbgText}>
-                    <h2>Just a simple title Lmao :d</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, repudiandae animi? Est nulla fugit nam, nemo cum odio! Alias, vero.</p>
-                    <p className={style.date}>September 25, 2022</p>
-                  </div>
-                </div>
+              </div>
               {/* </Link > */}
             </div>
             <div className={style.fbgElement}>
