@@ -470,7 +470,7 @@ function Home({ setPageNav }) {
                   requirements.
                 </p>
                 <div className="btn">
-                  <a href=".">Contact Us</a>
+                  <Link to="/contact">Contact Us</Link>
                 </div>
               </div>
               <div className={style.contactBrand}>

@@ -29,7 +29,7 @@ export default function Events({ setPageNav }) {
         console.log("abc", result)
         console.log("cdf", data);
     }, [data]);
-    console.log(data);
+    // console.log(data);
 
     function valuetext(value) {
         return `${value}`;
@@ -64,7 +64,7 @@ export default function Events({ setPageNav }) {
 
     const takeInput = (e) => {
         setInput(e.selection);
-        console.log(e.selection.startDate.getDate());
+        // console.log(e.selection.startDate.getDate());
     };
 
     const [state, setState] = useState([
@@ -94,8 +94,8 @@ export default function Events({ setPageNav }) {
         }
         setGuests({ ...guests, guestType: guests[guestType] });
 
-        console.log("increased");
-        console.log(guests);
+        // console.log("increased");
+        // console.log(guests);
     };
     const decreaseGuest = (guestType) => {
         if (guests[guestType] > 0) {
@@ -133,6 +133,19 @@ export default function Events({ setPageNav }) {
     //     }
     // };
 
+    const sortFilter = (sort) => {
+        console.log(sort);
+        switch(sort) {
+            case "highToLow":
+                console.log("hmm");
+                setResult([...result].sort((a, b) => b.price - a.price));
+                break;
+            case "lowToHigh":
+                setResult([...result].sort((a, b) => a.price - b.price));
+                break;
+        }
+    }
+
     const typeFilter = (type) => {
 
     }
@@ -142,8 +155,9 @@ export default function Events({ setPageNav }) {
     const [filterSettings, setFilterSettings] = useState({});
 
     const rangeInput = useRef();
+    const [priceRange, setPriceRange] = useState(230);
 
-    const [tourType, setTourType] = useState('');
+    const [tourType, setTourType] = useState('All');
 
     const [features, setFeatures] = useState([]);
     const feature1 = useRef();
@@ -159,39 +173,113 @@ export default function Events({ setPageNav }) {
     //     console.log("Features pulled: ", features);
     // }
 
+    const [featuresResult, setFeaturesResult] = useState([]);
+    const [priceResult, setPriceResult] = useState([]);
+    const [typeResult, setTypeResult] = useState([]);
+    const [startFilter, setStartFilter] = useState(false);
+
+    const handleFeatures = (e) => {
+        console.log(e.target.checked);
+        if (features.includes(e.target.value)) {
+            console.log(features.indexOf(e.target.value));
+            setFeatures(features.filter(a => a !== e.target.value).sort());
+        } else {
+            setFeatures([...features, e.target.value].sort());
+        }
+
+        console.log("version2", features);
+    }
+
+    useEffect(() => {
+        console.log(features);
+    }, [features])
+
     const filterAll = () => {
         // setResult([]);
         // Getting Tour Types: 
 
         // Getting Features:
 
-        setFeatures([]);
-        if (!features.includes(feature1.current.value) && feature1.current.checked) {
-            setFeatures([...features, feature1.current.value]);
-        }
-        if (!features.includes(feature2.current.value) && feature2.current.checked) {
-            setFeatures([...features, feature2.current.value]);
-        }
-        if (!features.includes(feature3.current.value) && feature3.current.checked) {
-            setFeatures([...features, feature3.current.value]);
-        }
-        if (!features.includes(feature4.current.value) && feature4.current.checked) {
-            setFeatures([...features, feature4.current.value]);
-        }
+        // setFeatures([]);
+        // if (!features.includes(feature1.current.value) && feature1.current.checked) {
+        //     setFeatures([...features, feature1.current.value]);
+        // }
+        // if (!features.includes(feature2.current.value) && feature2.current.checked) {
+        //     setFeatures([...features, feature2.current.value]);
+        // }
+        // if (!features.includes(feature3.current.value) && feature3.current.checked) {
+        //     setFeatures([...features, feature3.current.value]);
+        // }
+        // if (!features.includes(feature4.current.value) && feature4.current.checked) {
+        //     setFeatures([...features, feature4.current.value]);
+        // }
 
         console.log("pulled features: ", features);
-        console.log("got the types: ", tourType);
+        // console.log("got the types: ", tourType);
 
-        // Filtering
+        // // Filtering
 
-        /// Filtering the types
-        setResult(data.filter(a => a.type === tourType));
-        if (features[0] !== undefined) {
-            setResult([...result].filter(a => a.features === features));
+        // /// Filtering the types
+        // setTypeResult(data.filter(a => a.type === tourType))
+        // // .then(() => {
+        //     // console.log(result, features, tourType);
+        //     console.log("typeResult", typeResult);
+        //     // if(features !== null) {
+        //     //     setFeaturesResult([...result].filter(a => a.features === features));
+        //     //     console.log("ffs", featuresResult);
+        //     // }
+        // // })
+        // // .then(() => {
+        //     console.log("priceRange:", priceRange);
+        //     setPriceResult([...typeResult].filter(a => a.price <= priceRange));
+        //     console.log("price", priceResult);
+        //     // })
+        // // .then(() => {
+        //     setResult(priceResult);
+        // // })
+        // // if (features[0] !== undefined) {
+        // //     setResult([...result].filter(a => a.features === features));
+        // // }
+        // // console.log("test: ", priceRange);
+        // // setResult([...result].filter(a => a.price <= priceRange));
+        // console.log("****DONE****");
 
-        }
-        console.log("****DONE****");
+        console.log(" ");
+        console.log("*************************");
+
+        setResult((tourType === "All" ? data : data.filter(a => a.type === tourType)).filter(a => a.price <= priceRange).filter((a) => {
+            console.log("dsds a features", a.features);
+            console.log("features", features);
+
+            if (features.length !== 0) {
+                if (JSON.stringify(a.features) == JSON.stringify(features)) {
+                    console.log("found");
+                    return a;
+                }
+            } else {
+                console.log("denied")
+                return a;
+            }
+        }));
+        console.log("*************************");
+        console.log(" ");
+        setStartFilter(!startFilter);
     }
+
+    // useEffect(() => {
+    //     console.log(" ");
+    //     console.log("*************************");
+    //     setFeatures([]);
+    //     setTypeResult(data.filter(a => a.type === tourType));
+    //     console.log("typeResult", typeResult);
+    //     console.log("priceRange:", priceRange);
+    //     setPriceResult([...typeResult].filter(a => a.price <= priceRange));
+    //     console.log("price", priceResult);
+    //     setResult(priceResult);
+    //     console.log("Done!");
+    //     console.log("*************************");
+    //     console.log(" ");
+    // }, [startFilter])
 
 
     // rangeInput.current.addEventListener('change', (e) => {
@@ -433,7 +521,7 @@ export default function Events({ setPageNav }) {
                                 <div className={style.filterElement}>
                                     <h2 className={style.filterTitle}>Site types</h2>
                                     <div className={style.filterTypes}>
-                                        <input type="radio" name="siteTypes" id="test" value="all" onChange={(e) => setTourType(e.target.value)} />
+                                        <input type="radio" name="siteTypes" id="test" defaultChecked value="All" onChange={(e) => setTourType(e.target.value)} />
                                         <label htmlFor="test">All</label>
                                         <input type="radio" name="siteTypes" id="test2" value="In the Nature" onChange={(e) => setTourType(e.target.value)} />
                                         <label htmlFor="test2">In the Nature</label>
@@ -446,8 +534,14 @@ export default function Events({ setPageNav }) {
                                     <h2 className={style.filterTitle}>Price range</h2>
                                     <div className={style.filterPriceRange}>
                                         <div className={style.subTitle}>
-                                            <p>Min</p>
-                                            <p>Max</p>
+                                            <div className={style.minmaxText}>
+                                                <p>Min</p>
+                                                <input type="text" disabled value="0" />
+                                            </div>
+                                            <div className={style.minmaxText}>
+                                                <p>Max</p>
+                                                <input type="text" disabled value={priceRange} />
+                                            </div>
                                         </div>
                                         {/* <Slider
                                             className={style.priceRange}
@@ -460,6 +554,7 @@ export default function Events({ setPageNav }) {
                                             getAriaValueText={valuetext}
                                             
                                         /> */}
+                                        <input className={style.priceRangeInput} onChange={(e) => setPriceRange(e.target.value)} ref={rangeInput} type="range" min="0" max="230" />
                                     </div>
                                 </div>
                                 <div className={style.filterDivider}></div>
@@ -467,19 +562,19 @@ export default function Events({ setPageNav }) {
                                     <h2 className={style.filterTitle}>Tour Features</h2>
                                     <div className={style.filterFeatures}>
                                         <div className={style.featureItem}>
-                                            <input type="checkbox" name="ftest1" id="ftest1" value="Photography" ref={feature1} />
+                                            <input type="checkbox" onChange={(e) => handleFeatures(e)} name="ftest1" id="ftest1" value="Photography" ref={feature1} />
                                             <label htmlFor="ftest1"><div className={style.custom}></div> Photography</label>
                                         </div>
                                         <div className={style.featureItem}>
-                                            <input type="checkbox" name="ftest2" value="Sports" id="ftest2" ref={feature2} />
+                                            <input type="checkbox" onChange={(e) => handleFeatures(e)} name="ftest2" value="Sports" id="ftest2" ref={feature2} />
                                             <label htmlFor="ftest2"><div className={style.custom}></div> Sports</label>
                                         </div>
                                         <div className={style.featureItem}>
-                                            <input type="checkbox" name="ftest3" value="Party Places" id="ftest3" ref={feature3} />
+                                            <input type="checkbox" onChange={(e) => handleFeatures(e)} name="ftest3" value="Party Places" id="ftest3" ref={feature3} />
                                             <label htmlFor="ftest3"><div className={style.custom}></div> Party places</label>
                                         </div>
                                         <div className={style.featureItem}>
-                                            <input type="checkbox" name="ftest4" value="Activities for group" id="ftest4" ref={feature4} />
+                                            <input type="checkbox" onChange={(e) => handleFeatures(e)} name="ftest4" value="Activities for group" id="ftest4" ref={feature4} />
                                             <label htmlFor="ftest4"><div className={style.custom}></div> Activities for group</label>
                                         </div>
                                     </div>
@@ -495,24 +590,35 @@ export default function Events({ setPageNav }) {
                                 <p className={style.found}>3 Campgrounds found</p>
                                 <div className={style.resultExtraFilter}>
                                     <div className={style.tags}>
-                                        <div className={style.tag}>
-                                            <p>RV Sites</p>
-                                            <div className={style.close}>
-                                                <img src={closeIcon} alt="close" />
-                                            </div>
-                                        </div>
-                                        <div className={style.tag}>
-                                            <p>Camping</p>
-                                            <div className={style.close}>
-                                                <img src={closeIcon} alt="close" />
-                                            </div>
-                                        </div>
+                                        {tourType ?
+                                            (
+                                                <div className={style.tag}>
+                                                    <p>{tourType}</p>
+                                                    <div className={style.close}>
+                                                        <img src={closeIcon} alt="close" />
+                                                    </div>
+                                                </div>
+                                            ) : ''
+                                        }
+                                        {
+                                            features ? (
+                                                features.map((a, index) => (
+                                                    <div className={style.tag} key={index}>
+                                                        <p>{a}</p>
+                                                        <div className={style.close}>
+                                                            <img src={closeIcon} alt="close" />
+                                                        </div>
+                                                    </div>
+                                                ))
+                                            ) : ''
+                                        }
                                     </div>
+
                                     <div className={style.sorted}>
                                         <p>Sorted by: </p>
                                         <select name="sortBy" id="sortBy" onChange={(e) => sortFilter(e.target.value)}>
                                             <option value="highToLow">Price(High to Low)</option>
-                                            <option value="popular">Popular</option>
+                                            {/* <option value="popular">Popular</option> */}
                                             <option value="lowToHigh">Price(Low to High)</option>
                                         </select>
                                     </div>

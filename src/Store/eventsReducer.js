@@ -27,7 +27,7 @@ export const eventsReducer = createSlice({
                 image: "https://www.ubuy.hu/productimg/?image=aHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL0kvNzFuOENMMmUxdEwuX0FDX1NMMTAwMF8uanBn.jpg",
                 price: 23,
                 type: "City",
-                features: ["Activities for Group"]
+                features: ["Activities for group"]
             },
         ]
     },

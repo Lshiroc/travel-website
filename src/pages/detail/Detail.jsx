@@ -17,7 +17,7 @@ export default function Detail({ setPageNav }) {
         console.log("Data successfully copied to the state!");
         console.log("abc", allTours);
         console.log("cdf", data);
-    }, [data]);
+    }, [data]); 
     console.log(data);
 
     // Getting specific tour data

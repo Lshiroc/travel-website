@@ -360,14 +360,35 @@
                     display: flex;
                     justify-content: space-between;
                     font-size: 14px;
-                    margin-bottom: 5px;
+                    margin-bottom: 20px;
                     color: rgb(101, 101, 101);
+
+                    .minmaxText {
+                        input {
+                            width: 40px;
+                            padding: 5px;
+                        }
+
+                        p {
+                            margin-bottom: 4px;
+                        }
+                    }
+
+                    .minmaxText:last-child {
+                        p {
+                            text-align: right;
+                        }
+                    }
                 }
 
                 .priceRange {
                     width: 94%;
                     justify-self: center;
                     color: rgb(206, 206, 206) !important;
+                }
+
+                .priceRangeInput {
+                    cursor: pointer;
                 }
             }
 
@@ -465,7 +486,8 @@
         }
 
         .resultExtraFilter {
-            display: flex;
+            display: grid;
+            grid-template-columns: 75% 25%;
             justify-content: space-between;
             align-items: center;
 
@@ -473,20 +495,26 @@
                 display: flex;
                 align-items: center;
                 gap: 5px;
+                overflow: hidden;
+                position: relative;
 
                 .tag {
                     border: 1px solid rgb(30, 231, 30);
                     border-radius: 50px;
-                    padding: 10px;
+                    padding: 5px 10px;
                     font-size: 16px;
                     display: flex;
                     align-items: center;
                     column-gap: 10px;
                     background: white;
 
+                    p {
+                        white-space: nowrap;
+                    }
+
                     .close {
-                        width: 20px;
-                        height: 20px;
+                        width: 15px;
+                        height: 15px;
 
                         img {
                             width: 100%;
@@ -496,10 +524,22 @@
                 }
             }
 
+            .tags::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                height: 100%;
+                width: 35px;
+                background: linear-gradient(to left, #ededed, transparent);
+            }
+
             .sorted {
                 display: flex;
                 align-items: center;
                 column-gap: 5px;
+                justify-self: end;
 
                 select {
                     border-radius: 5px;
