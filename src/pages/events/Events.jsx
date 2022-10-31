@@ -160,6 +160,7 @@ export default function Events({ setPageNav }) {
     const [tourType, setTourType] = useState('All');
 
     const [features, setFeatures] = useState([]);
+    const featuresTotal = useRef();
     const feature1 = useRef();
     const feature2 = useRef();
     const feature3 = useRef();
@@ -188,6 +189,18 @@ export default function Events({ setPageNav }) {
         }
 
         console.log("version2", features);
+    }
+
+    const removeTag = (tagValue) => {
+        setFeatures(features.filter(a => a != tagValue));
+        console.log("REMOVED", tagValue);
+        console.log(features);
+        setFeatures[features.filter(a => a !== tagValue)];
+        for(let i = 0; i < featuresTotal.current.children.length; i++) {
+            if(featuresTotal.current.children[i].children[0].value === tagValue) {
+                featuresTotal.current.children[i].children[0].checked = false;
+            }
+        }
     }
 
     useEffect(() => {
@@ -560,7 +573,7 @@ export default function Events({ setPageNav }) {
                                 <div className={style.filterDivider}></div>
                                 <div className={style.filterElement}>
                                     <h2 className={style.filterTitle}>Tour Features</h2>
-                                    <div className={style.filterFeatures}>
+                                    <div className={style.filterFeatures} ref={featuresTotal}>
                                         <div className={style.featureItem}>
                                             <input type="checkbox" onChange={(e) => handleFeatures(e)} name="ftest1" id="ftest1" value="Photography" ref={feature1} />
                                             <label htmlFor="ftest1"><div className={style.custom}></div> Photography</label>
@@ -587,16 +600,13 @@ export default function Events({ setPageNav }) {
                         </div>
                         <div className={style.eventsResult}>
                             <div className={style.resultTop}>
-                                <p className={style.found}>3 Campgrounds found</p>
+                                <p className={style.found}>{result.length} Campgrounds found</p>
                                 <div className={style.resultExtraFilter}>
                                     <div className={style.tags}>
                                         {tourType ?
                                             (
                                                 <div className={style.tag}>
                                                     <p>{tourType}</p>
-                                                    <div className={style.close}>
-                                                        <img src={closeIcon} alt="close" />
-                                                    </div>
                                                 </div>
                                             ) : ''
                                         }
@@ -605,7 +615,7 @@ export default function Events({ setPageNav }) {
                                                 features.map((a, index) => (
                                                     <div className={style.tag} key={index}>
                                                         <p>{a}</p>
-                                                        <div className={style.close}>
+                                                        <div className={style.close} onClick={() => removeTag(a)}>
                                                             <img src={closeIcon} alt="close" />
                                                         </div>
                                                     </div>
