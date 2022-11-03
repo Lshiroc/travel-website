@@ -118,10 +118,10 @@ export default function Detail({ setPageNav }) {
                 <div className={style.detail2Column}>
                     <div className={style.detailContainer}>
                         <div className={style.tourSneakPeakInfo}>
-                            <p>Berlin - {tour[0]?.title}</p>
+                            <p>{tour[0]?.upPlace} - {tour[0]?.title}</p>
                         </div>
                         <div className={style.tourInfo}>
-                            <div className={style.tourImg}></div>
+                            <div className={style.tourImg} style={{backgroundImage: `url(${tour[0]?.banner})`}}></div>
                             <div className={style.tourIntro}>
                                 <h1 className={style.tourTitle}>{tour[0]?.title}</h1>
                                 <p className={style.tourShortDescription}>Hike and camp among otherworldly rock formations at this Utah park.</p>
@@ -171,7 +171,7 @@ export default function Detail({ setPageNav }) {
 
                             </div>
                         </div>
-                        <div className={style.add}>
+                        {/* <div className={style.add}>
                             <form className={style.tripSearch}>
 
                                 <div className={style.datePick}>
@@ -314,9 +314,10 @@ export default function Detail({ setPageNav }) {
                                     <img src={searchIcon} alt="search" />
                                 </div>
                             </form>
-                        </div>
+                        </div> */}
                     </div>
                     <div className={style.tourRecommendations}>
+                        <p className={style.recTitle}>Other Recommendations</p>
                         {
                             data ? data.map((event, key) => (
                                 <CardType1 title={event.title} image={event.image} price={event.price} id={event.id} key={key} />

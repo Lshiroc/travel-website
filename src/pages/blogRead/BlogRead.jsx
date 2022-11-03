@@ -21,6 +21,7 @@ export default function BlogRead({ setPageNav }) {
         setTimeout(() => setDone(false), 4000);
     }
 
+
     return (
         <>
             <main className={style.blogReadMain}>

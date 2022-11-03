@@ -64,6 +64,7 @@ export default function Events({ setPageNav }) {
 
     const takeInput = (e) => {
         setInput(e.selection);
+        console.log("Lmaooooooo its mt timeee", e.selection);
         // console.log(e.selection.startDate.getDate());
     };
 
@@ -315,6 +316,12 @@ export default function Events({ setPageNav }) {
     // useEffect(() => {
     //     console.log(filterSettings);
     // }, [filterSettings]);
+
+    // Search by Search Bar
+
+    const searchBy = () => {
+        // Working on it....
+    }
 
 
     return (
