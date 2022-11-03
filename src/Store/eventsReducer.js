@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// Images 
+import Hiking from './../assets/images/Hiking.png';
+import Wifi from './../assets/images/wifi.png';
+import Wildlife from './../assets/images/wildlife.png';
+
 export const eventsReducer = createSlice({
     name: "eventsReducer",
     initialState: {
@@ -11,6 +16,24 @@ export const eventsReducer = createSlice({
                 price: 34,
                 type: "In the Nature",
                 features: ["Sports"],
+                visited: 234,
+                activities: [
+                    {
+                        name: "Hiking",
+                        image: Hiking,
+                    },
+                    {
+                        name: "Wildlife Watching",
+                        image: Wildlife,
+                    },
+                ],
+                internet: [
+                    {
+                        name: "WIFI",
+                        status: true,
+                        image: Wifi,
+                    },
+                ]
             },
             {
                 id: 2,
@@ -20,6 +43,20 @@ export const eventsReducer = createSlice({
                 popular: true, 
                 type: "In the Nature",
                 features: ["Party Places", "Photography"],
+                visited: 138,
+                activities: [
+                    {
+                        name: "Wildlife Watching",
+                        image: Wildlife,
+                    },
+                ],
+                internet: [
+                    {
+                        name: "WIFI",
+                        staus: false,
+                        image: Wifi,
+                    },
+                ],
             },
             {
                 id: 3,
@@ -27,7 +64,10 @@ export const eventsReducer = createSlice({
                 image: "https://www.ubuy.hu/productimg/?image=aHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL0kvNzFuOENMMmUxdEwuX0FDX1NMMTAwMF8uanBn.jpg",
                 price: 23,
                 type: "City",
-                features: ["Activities for group"]
+                features: ["Activities for group"],
+                visited: 78,
+                activities: [],
+                internet: [],
             },
         ]
     },

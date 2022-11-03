@@ -7,7 +7,7 @@ import animated1 from './../../assets/icons/location-animated.gif';
 function CardType1({ title, image, price, id }) {
     return (
         <div className={style.cardType1}>
-            <Link to={`tour/${id}`}>
+            <Link to={`/events/tour/${id}`}>
                 <div className={style.ct1Img} style={{ backgroundImage: `url(${image})` }}>
                     <div className={style.ct1ImgTop}>
                         <div className={style.ct1ImgVerified}>Verified</div>

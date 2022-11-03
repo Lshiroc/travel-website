@@ -14,7 +14,7 @@ import Footer from './src/components/footer/Footer';
 function App() {
   const [pageNav, setPageNav] = useState('');
 
-  return (
+  return ( 
     <>
       {/* <MantineProvider withGlobalStyles withNormalizeCSS> */}
 

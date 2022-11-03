@@ -5,8 +5,9 @@
 
 .detail2Column {
     display: grid;
-    grid-template-columns: 63% 25%;
+    grid-template-columns: 63% 30%;
     column-gap: 40px;
+    justify-content: space-between;
 }
 
 .detailContainer {
@@ -14,6 +15,7 @@
     border-right: 1px solid #ebebeb;
     border-radius: 5px;
     margin-bottom: 30px;
+
     .tourImg {
         width: 100%;
         height: 200px;
@@ -28,29 +30,394 @@
     .tourIntro {
         padding: 10px 20px 20px 20px;
         border-bottom: 1px solid #ebebeb;
+
         .tourTitle {
             color: rgb(70, 70, 70);
             font-size: 30px;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
 
-        .tourSHortDescription {
+        .tourShortDescription {
             font-size: 16px;
-            color: rgb(203, 203, 203);
+            color: rgb(88, 88, 88);
+            margin-bottom: 15px;
+        }
+
+        .visitedBy {
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+            gap: 10px;
+
+            img {
+                display: block;
+                filter: invert(83%) sepia(55%) saturate(510%) hue-rotate(94deg) brightness(87%) contrast(94%);
+            }
+
+            span {
+                color: #3cbf9a;
+                font-weight: 600;
+            }
         }
     }
 
     .tourAbout {
         padding: 10px 20px 20px 20px;
-        border-bottom: 1px solid #ebebeb;   
+        border-bottom: 1px solid #ebebeb;
         font-size: 15px;
+
         h3 {
             font-size: 15px;
             margin-bottom: 7px;
         }
+
         p {
             font-size: 15px;
             line-height: 23.7px;
+        }
+    }
+
+    .tourActivities {
+        padding: 10px 20px 20px 20px;
+        border-bottom: 1px solid #ebebeb;
+
+        h3 {
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .activitiesContainer {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+
+            .tourActivity {
+                padding: 15px 5px;
+                border: 1px solid #ebebeb;
+                border-radius: 2px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+
+                p {
+                    text-align: center;
+                    font-weight: 600;
+                }
+
+                .actImg {
+                    width: 50px;
+                    height: 50px;
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                }
+            }
+        }
+
+    }
+
+    .tourInternetInfos {
+        padding: 10px 20px 20px 20px;
+        border-bottom: 1px solid #ebebeb;
+
+        h3 {
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .internetContainer {
+            .internetInfo {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+
+                .internetImg {
+                    width: 40px;
+                    height: 40px;
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                }
+
+                .intDetail {
+                    .intName {
+                        font-size: 17px;
+                        font-weight: 600;
+                        margin-bottom: 5px;
+                    }
+
+                    p {
+                        font-size: 15px;
+                    }
+
+                    .usable {
+                        color: #3cbf9a;
+                        font-weight: 600;
+                    }
+
+                    .unusable {
+                        color: rgb(186, 186, 186);
+                    }
+                }
+            }
+        }
+    }
+
+    .add {
+        form {
+            // Filter section
+
+            .eventMainFilter {
+                margin-bottom: 60px !important;
+            }
+
+
+            .searchElementContainer {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                column-gap: 10px;
+                border-radius: 10px;
+                border: 1px solid rgb(192, 193, 191);
+                padding-left: 10px;
+                padding-right: 15px;
+                background: rgb(255, 255, 255);
+                position: relative;
+
+                .elementLeft {
+                    display: flex;
+                    align-items: center;
+                }
+
+                .arrowDown {
+                    width: 15px;
+                }
+
+                .guestsInput {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                .searchInput {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                }
+
+                .searchInput:focus {
+                    display: block;
+                }
+
+                .searchResults {
+                    position: absolute;
+                    background: #fff;
+                    border-radius: 10px;
+                    box-shadow: rgb(0 0 0 / 16%) 0px 2px 4px 0px;
+                    padding: 15px;
+                    left: 0;
+                    right: 0;
+                    top: 60px;
+                    z-index: 1;
+                }
+
+
+            }
+
+            .elementIcon {
+                width: 17px;
+                height: 17px;
+
+                & img {
+                    width: 100%;
+                }
+            }
+
+            .tripElement {
+                flex-grow: 1;
+                font-size: 17px;
+                font-weight: 400;
+                border: none;
+                outline: none;
+                padding: 10px 15px;
+                background: rgb(255, 255, 255);
+                border-radius: 50px;
+            }
+
+            .searchResults {
+                display: none;
+                row-gap: 5px;
+
+                .searchRecommendation {
+                    padding: 15px 5px;
+                    display: flex;
+                    align-items: center;
+                    column-gap: 15px;
+                    transition: 0.3s;
+                    border-radius: 10px;
+                    cursor: pointer;
+
+                    .searchIcon {
+                        width: 40px;
+                        height: 40px;
+                        background-color: rgb(236, 236, 236);
+                        border-radius: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        img {
+                            filter: invert(81%) sepia(0%) saturate(274%) hue-rotate(204deg) brightness(97%) contrast(74%);
+                        }
+
+                        p {
+                            font-size: 17px;
+                        }
+                    }
+                }
+
+                .searchRecommendation:hover {
+                    background-color: rgb(233, 233, 233);
+                }
+            }
+
+            .popUpInput {
+                position: absolute;
+                width: 100%;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                top: 60px;
+                display: none;
+            }
+
+            .popUpClose {
+                width: 100%;
+                background: white;
+                padding: 8px 10px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-top-left-radius: 20px;
+                border-top-right-radius: 20px;
+
+                .closeBtn {
+                    border-radius: 5px;
+                    ;
+                    cursor: pointer;
+                    width: 22px;
+                    height: 22px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .closeBtn:hover {
+                    background: rgb(229, 234, 223);
+                }
+            }
+
+            .popUpClose img {
+                width: 20px;
+            }
+
+            .openElement {
+                display: block !important;
+                z-index: 1;
+            }
+
+            .guestsContainer {
+                width: 320px;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 60px;
+                background: white;
+                border-radius: 10px;
+                box-shadow: rgb(0 0 0 / 16%) 0px 2px 4px 0px;
+                color: rgb(40, 64, 12);
+                display: none;
+
+                .guestsItem {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 20px 15px;
+                    cursor: context-menu
+                }
+
+                .guestsItem:nth-child(2) {
+                    border-top: 1px solid rgb(229, 234, 223);
+                    border-bottom: 1px solid rgb(229, 234, 223);
+                }
+
+                .guestsLeft {
+                    display: grid;
+                    align-items: center;
+                }
+
+                .guestsLeft p:nth-child(2) {
+                    margin-top: 5px;
+                }
+
+                .guestsRight {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    justify-content: center;
+                    align-items: center;
+                    column-gap: 10px;
+                    font-size: 18px;
+                    text-align: center;
+                }
+
+                .countBtn {
+                    border: 2px solid rgb(40, 64, 12);
+                    border-radius: 50%;
+                    width: 30px;
+                    height: 30px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-weight: 600;
+                    color: rgb(40, 64, 12);
+                    cursor: pointer;
+                    transition: 0.3s;
+                }
+
+                .countBtn:hover {
+                    background-color: rgb(228, 228, 228);
+                    ;
+                }
+            }
+
+            .searchBtn {
+                background: var(--primary);
+                border-radius: 10px;
+                border: 3px solid transparent;
+                width: 45px;
+                height: 45px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                transition: 0.3s;
+
+                &:hover {
+                    background-color: white;
+                    border: 3px solid var(--primary);
+                }
+
+                &:hover img {
+                    filter: invert(0%) sepia(89%) saturate(7500%) hue-rotate(198deg) brightness(87%) contrast(111%);
+                }
+
+                img {
+                    width: 20px;
+                    filter: invert(100%) sepia(0%) saturate(11%) hue-rotate(221deg) brightness(105%) contrast(101%);
+                    transition: 0.3s;
+                }
+            }
+
         }
     }
 
