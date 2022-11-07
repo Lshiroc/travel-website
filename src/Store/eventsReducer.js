@@ -13,7 +13,7 @@ export const eventsReducer = createSlice({
         products: [
             {
                 id: 1,
-                upPlace: "Berlin",
+                city: "Berlin",
                 title: "Berlin Nature",
                 image: "https://www.sa-venues.com/visit/platbosforest/26g.jpg",
                 banner: berlinBg,
@@ -38,22 +38,25 @@ export const eventsReducer = createSlice({
                         image: Wifi,
                     },
                 ],
-                reservable: [
-                    {
+                reservable: {
                         start: {
-                            month: 10,
+                            month: 11,
                             day: 6,
                         },
                         end: {
-                            month: 10,
-                            end: 25,
+                            month: 11,
+                            day: 25,
                         }
-                    }
-                ]
+                },
+                guests: {
+                    adults: 3,
+                    children: 2,
+                    pets: 5,
+                },
             },
             {
                 id: 2,
-                upPlace: "Madrid",
+                city: "Madrid",
                 title: "Madrid Camp",
                 image: "https://www.campingintheforest.co.uk/images/default-source/campsite-images/setthorns/setthorns-01.jpg?sfvrsn=c13e0071_2",
                 banner: madridBg,
@@ -75,10 +78,25 @@ export const eventsReducer = createSlice({
                         image: Wifi,
                     },
                 ],
+                reservable: {
+                        start: {
+                            month: 11,
+                            day: 6,
+                        },
+                        end: {
+                            month: 11,
+                            day: 25,
+                        }
+                },
+                guests: {
+                    adults: 3,
+                    children: 2,
+                    pets: 1,
+                },
             },
             {
                 id: 3,
-                upPlace: "Swed",
+                city: "Swed",
                 title: "Swed Build",
                 image: "https://www.ubuy.hu/productimg/?image=aHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL0kvNzFuOENMMmUxdEwuX0FDX1NMMTAwMF8uanBn.jpg",
                 banner: berlinBg,
@@ -94,6 +112,21 @@ export const eventsReducer = createSlice({
                         image: Wifi,
                     },
                 ],
+                reservable: {
+                        start: {
+                            month: 11,
+                            day: 2,
+                        },
+                        end: {
+                            month: 11,
+                            day: 25,
+                        }
+                },
+                guests: {
+                    adults: 3,
+                    children: 2,
+                    pets: 1,
+                },
             },
         ]
     },

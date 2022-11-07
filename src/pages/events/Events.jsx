@@ -23,8 +23,10 @@ import "react-date-range/dist/theme/default.css";
 export default function Events({ setPageNav }) {
 
     const data = useSelector(state => state.eventsReducer.products);
+    const [backupData, setData] = useState([]);
     useEffect(() => {
         setResult(data);
+        setData(data);
         console.log("Data successfully copied to the state!");
         console.log("abc", result)
         console.log("cdf", data);
@@ -136,7 +138,7 @@ export default function Events({ setPageNav }) {
 
     const sortFilter = (sort) => {
         console.log(sort);
-        switch(sort) {
+        switch (sort) {
             case "highToLow":
                 console.log("hmm");
                 setResult([...result].sort((a, b) => b.price - a.price));
@@ -151,6 +153,8 @@ export default function Events({ setPageNav }) {
 
     }
 
+
+    const [errmsg, setErrMsg] = useState(false);
     const [result, setResult] = useState([]);
 
     const [filterSettings, setFilterSettings] = useState({});
@@ -197,8 +201,8 @@ export default function Events({ setPageNav }) {
         console.log("REMOVED", tagValue);
         console.log(features);
         setFeatures[features.filter(a => a !== tagValue)];
-        for(let i = 0; i < featuresTotal.current.children.length; i++) {
-            if(featuresTotal.current.children[i].children[0].value === tagValue) {
+        for (let i = 0; i < featuresTotal.current.children.length; i++) {
+            if (featuresTotal.current.children[i].children[0].value === tagValue) {
                 featuresTotal.current.children[i].children[0].checked = false;
             }
         }
@@ -261,7 +265,7 @@ export default function Events({ setPageNav }) {
         console.log(" ");
         console.log("*************************");
 
-        setResult((tourType === "All" ? data : data.filter(a => a.type === tourType)).filter(a => a.price <= priceRange).filter((a) => {
+        setResult((tourType === "All" ? (primaryFilter ? primaryResult : data) : (primaryFilter ? primaryResult : data).filter(a => a.type === tourType)).filter(a => a.price <= priceRange).filter((a) => {
             console.log("dsds a features", a.features);
             console.log("features", features);
 
@@ -319,10 +323,49 @@ export default function Events({ setPageNav }) {
 
     // Search by Search Bar
 
+    const [primaryResult, setPrimaryResult] = useState([]);
+    const [primaryFilter, setPrimaryFilter] = useState(false);
     const searchBy = () => {
         // Working on it....
+        console.log(guests);
+        console.log("cheeky filter worked!");
+        // console.log(input.startDate.getMonth(), input.startDate.getDate(), input.endDate.getMonth(), input.endDate.getDate());
+        if (input.startDate === undefined || guests.adults === 0) {
+            setErrMsg(true)
+        } else {
+            // setResult((cities !== "" ? backupData.filter(a => a.city === cityInput) : backupData).filter((tour) => ((tour.reservable.start.month - 1) <= input.startDate.getMonth()) && ((tour.reservable.end.month - 1) >= input.endDate.getMonth()) && (tour.reservable.start.day <= input.startDate.getDate()) && (tour.reservable.end.day >= input.endDate.getDate())).filter((tour) => tour.guests.adults >= guests.adults && tour.guests.children >= guests.children && tour.guests.pets >= guests.pets));
+            setResult((cities !== "" ? backupData.filter(a => a.city === cityInput) : backupData).filter((tour) => ((tour.reservable.start.month - 1) <= input.startDate.getMonth()) && ((tour.reservable.end.month - 1) >= input.endDate.getMonth()) && (tour.reservable.start.day <= input.startDate.getDate()) && (tour.reservable.end.day >= input.endDate.getDate())).filter((tour) => tour.guests.adults >= guests.adults && tour.guests.children >= guests.children && tour.guests.pets >= guests.pets));
+            setPrimaryResult((cities !== "" ? backupData.filter(a => a.city === cityInput) : backupData).filter((tour) => ((tour.reservable.start.month - 1) <= input.startDate.getMonth()) && ((tour.reservable.end.month - 1) >= input.endDate.getMonth()) && (tour.reservable.start.day <= input.startDate.getDate()) && (tour.reservable.end.day >= input.endDate.getDate())).filter((tour) => tour.guests.adults >= guests.adults && tour.guests.children >= guests.children && tour.guests.pets >= guests.pets));
+            console.log("data filtered", data);
+            console.log("****", result);
+            setErrMsg(false);
+        }
+
+        setPrimaryFilter(true);
     }
 
+    // Searching for places (manual)
+    const [cities, setCities] = useState([]);
+    const searchCity = (e) => {
+        console.log("Intitial Value: ", cities);
+        console.log("typed", e.target.value);
+        setCities(backupData.filter((a) => a.city.toLowerCase().includes(e.target.value.toLowerCase())));
+
+        console.log("Exp Value: ", cities);
+    }
+
+    const [cityInput, setCityInput] = useState("");
+    const cityInputElement = useRef();
+    const chooseCity = (city) => {
+        cityInputElement.current.value = city;
+        setCityInput(city);
+        console.log("City has chosed");
+    }
+
+    const cancelAll = () => {
+        setPrimaryFilter(false);
+        setResult(data);
+    }
 
     return (
         <>
@@ -343,8 +386,10 @@ export default function Events({ setPageNav }) {
                                         <input
                                             className={style.tripElement}
                                             type="text"
+                                            ref={cityInputElement}
                                             placeholder="Try California Park..."
                                             onClick={(e) => { setOpenSearch(!openSearch); e.stopPropagation() }}
+                                            onChange={(e) => searchCity(e)}
                                         />
                                     </div>
                                     <div
@@ -352,42 +397,16 @@ export default function Events({ setPageNav }) {
                                             }`}
                                         onClick={(e) => e.stopPropagation()}
                                     >
-                                        <div className={style.searchRecommendation}>
-                                            <div className={style.searchIcon}>
-                                                <img src={forestIcon} alt="icon" />
-                                            </div>
-                                            <p>Forests</p>
-                                        </div>
-                                        <div className={style.searchRecommendation}>
-                                            <div className={style.searchIcon}>
-                                                <img src={forestIcon} alt="icon" />
-                                            </div>
-                                            <p>Forests</p>
-                                        </div>
-                                        <div className={style.searchRecommendation}>
-                                            <div className={style.searchIcon}>
-                                                <img src={forestIcon} alt="icon" />
-                                            </div>
-                                            <p>Forests</p>
-                                        </div>
-                                        <div className={style.searchRecommendation}>
-                                            <div className={style.searchIcon}>
-                                                <img src={forestIcon} alt="icon" />
-                                            </div>
-                                            <p>Forests</p>
-                                        </div>
-                                        <div className={style.searchRecommendation}>
-                                            <div className={style.searchIcon}>
-                                                <img src={forestIcon} alt="icon" />
-                                            </div>
-                                            <p>Forests</p>
-                                        </div>
-                                        <div className={style.searchRecommendation}>
-                                            <div className={style.searchIcon}>
-                                                <img src={forestIcon} alt="icon" />
-                                            </div>
-                                            <p>Forests</p>
-                                        </div>
+                                        {
+                                            cities.map(city => (
+                                                <div className={style.searchRecommendation} onClick={() => chooseCity(city.city)}>
+                                                    <div className={style.searchIcon}>
+                                                        <img src={forestIcon} alt="icon" />
+                                                    </div>
+                                                    <p>{city.city}</p>
+                                                </div>
+                                            ))
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -527,10 +546,11 @@ export default function Events({ setPageNav }) {
                                     </div>
                                 </div>
                             </div>
-                            <div className={style.searchBtn}>
+                            <div className={style.searchBtn} onClick={() => searchBy()}>
                                 <img src={searchIcon} alt="search" />
                             </div>
                         </form>
+                        {errmsg && (<p className={style.fillMsg}>*Please fill the required spaces</p>)}
                     </div>
                 </div>
                 <div className={style.eventsContent}>
@@ -603,6 +623,9 @@ export default function Events({ setPageNav }) {
                                 <div className={style.filterElement}>
                                     <button onClick={() => filterAll()} className={style.showResultBtn}>Show Results</button>
                                 </div>
+                                <div className={style.filterElement}>
+                                    <button onClick={() => cancelAll()} className={style.showResultBtn}>Cancel All Filters</button>
+                                </div>
                             </div>
                         </div>
                         <div className={style.eventsResult}>
@@ -647,7 +670,7 @@ export default function Events({ setPageNav }) {
                                         <CardType1 title={event.title} image={event.image} price={event.price} id={event.id} key={key} />
                                     )) : console.log("Events didn't load. L bozo hahaha")
                                 }
-                                
+
                             </div>
                         </div>
                     </div>

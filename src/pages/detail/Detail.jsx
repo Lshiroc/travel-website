@@ -118,7 +118,7 @@ export default function Detail({ setPageNav }) {
                 <div className={style.detail2Column}>
                     <div className={style.detailContainer}>
                         <div className={style.tourSneakPeakInfo}>
-                            <p>{tour[0]?.upPlace} - {tour[0]?.title}</p>
+                            <p>{tour[0]?.city} - {tour[0]?.title}</p>
                         </div>
                         <div className={style.tourInfo}>
                             <div className={style.tourImg} style={{backgroundImage: `url(${tour[0]?.banner})`}}></div>

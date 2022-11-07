@@ -32,6 +32,12 @@
     font-weight: 600;
 }
 
+.fillMsg {
+    color: rgb(233, 42, 42);
+    font-size: 15px;
+    padding-left: 5px;
+}
+
 .searchElementContainer {
     display: flex;
     align-items: center;
@@ -70,6 +76,8 @@
     }
 
     .searchResults {
+        max-height: 400px;
+        overflow-y: auto;
         position: absolute;
         background: #fff;
         border-radius: 10px;
@@ -80,7 +88,6 @@
         top: 60px;
         z-index: 1;
     }
-
 
 }
 
