@@ -99,6 +99,9 @@
     row-gap: 5px;
     color: #2e2c2c;
     padding: 10px 5px;
+    transition: 0.3s;
+    position: relative;
+    top: 0;
 }
 
 .ct1ImgVerified {
@@ -151,4 +154,54 @@
     align-items: center;
     font-weight: 600;
     column-gap: 5px;
+}
+
+.addBtn {
+    position: absolute;
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    top: 5px;
+    right: 5px;
+    background: var(--primary);
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-size: 17px;
+    transition: 0.3s;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        width: 100%;
+    }
+}
+
+.removeBtn {
+    position: absolute;
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    top: 5px;
+    right: 5px;
+    background: rgb(231, 42, 24);
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-size: 17px;
+    transition: 0.3s;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        width: 100%;
+    }
+}
+
+.cardType1:hover {
+    .addBtn, .removeBtn {
+        opacity: 1;
+    }
 }

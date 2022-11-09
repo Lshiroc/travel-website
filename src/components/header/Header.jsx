@@ -1,18 +1,22 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+
 //Style & images
 import logo from './../../assets/images/logo-monochrome.svg';
 import cartIcon from './../../assets/images/cart2.svg';
 import menuIcon from './../../assets/images/menu-icon.svg';
 import closeIcon from './../../assets/images/close-icon.svg';
 import style from './header.module.scss';
+import { useEffect } from 'react';
 
 
 export default function Header({ pageNav, setPageNav }) {
+
+    const { badge } = useSelector(state => state.basketReducer);
+
     return (
         <>
-
-
             <nav className={style.navbar}>
                 <div className={`section-x padding-x ${style.navbarContainer}`}>
                     <div className={style.menuLeft}>
@@ -64,6 +68,9 @@ export default function Header({ pageNav, setPageNav }) {
                             <div className={style.cartImg}>
                                 <img src={cartIcon} alt="Cart" />
                             </div>
+                            {
+                                badge !== 0 && (<div className={style.badge}>{badge}</div>)
+                            }
                         </div>
                     </div>
                 </div>

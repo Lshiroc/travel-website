@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import CardType1 from "../../components/card1/CardType1";
 import { useSelector } from 'react-redux';
-
+import Basket from './../../components/basket/Basket';
 
 // Images & Styles
 import style from './events.module.scss';
@@ -282,6 +282,7 @@ export default function Events({ setPageNav }) {
         console.log("*************************");
         console.log(" ");
         setStartFilter(!startFilter);
+        console.log("tour type", tourType);
     }
 
     // useEffect(() => {
@@ -334,8 +335,9 @@ export default function Events({ setPageNav }) {
             setErrMsg(true)
         } else {
             // setResult((cities !== "" ? backupData.filter(a => a.city === cityInput) : backupData).filter((tour) => ((tour.reservable.start.month - 1) <= input.startDate.getMonth()) && ((tour.reservable.end.month - 1) >= input.endDate.getMonth()) && (tour.reservable.start.day <= input.startDate.getDate()) && (tour.reservable.end.day >= input.endDate.getDate())).filter((tour) => tour.guests.adults >= guests.adults && tour.guests.children >= guests.children && tour.guests.pets >= guests.pets));
-            setResult((cities !== "" ? backupData.filter(a => a.city === cityInput) : backupData).filter((tour) => ((tour.reservable.start.month - 1) <= input.startDate.getMonth()) && ((tour.reservable.end.month - 1) >= input.endDate.getMonth()) && (tour.reservable.start.day <= input.startDate.getDate()) && (tour.reservable.end.day >= input.endDate.getDate())).filter((tour) => tour.guests.adults >= guests.adults && tour.guests.children >= guests.children && tour.guests.pets >= guests.pets));
-            setPrimaryResult((cities !== "" ? backupData.filter(a => a.city === cityInput) : backupData).filter((tour) => ((tour.reservable.start.month - 1) <= input.startDate.getMonth()) && ((tour.reservable.end.month - 1) >= input.endDate.getMonth()) && (tour.reservable.start.day <= input.startDate.getDate()) && (tour.reservable.end.day >= input.endDate.getDate())).filter((tour) => tour.guests.adults >= guests.adults && tour.guests.children >= guests.children && tour.guests.pets >= guests.pets));
+            setResult((cityInput !== "" ? backupData.filter(a => a.city === cityInput) : [...backupData]).filter((tour) => ((tour.reservable.start.month - 1) <= input.startDate.getMonth()) && ((tour.reservable.end.month - 1) >= input.endDate.getMonth()) && (tour.reservable.start.day <= input.startDate.getDate()) && (tour.reservable.end.day >= input.endDate.getDate())).filter((tour) => tour.guests.adults >= guests.adults && tour.guests.children >= guests.children && tour.guests.pets >= guests.pets));
+            setPrimaryResult((cityInput !== "" ? backupData.filter(a => a.city === cityInput) : backupData).filter((tour) => ((tour.reservable.start.month - 1) <= input.startDate.getMonth()) && ((tour.reservable.end.month - 1) >= input.endDate.getMonth()) && (tour.reservable.start.day <= input.startDate.getDate()) && (tour.reservable.end.day >= input.endDate.getDate())).filter((tour) => tour.guests.adults >= guests.adults && tour.guests.children >= guests.children && tour.guests.pets >= guests.pets));
+            console.log("cities" , cities)
             console.log("data filtered", data);
             console.log("****", result);
             setErrMsg(false);
@@ -362,14 +364,28 @@ export default function Events({ setPageNav }) {
         console.log("City has chosed");
     }
 
+    const defaultRadio = useRef();
     const cancelAll = () => {
         setPrimaryFilter(false);
+        setInput([]);
+        setCityInput("");
+        cityInputElement.current.value = "";
+        setGuests({adults: 0, children: 0, pets: 0});
+        console.log(featuresTotal);
+        for (let i = 0; i < featuresTotal.current.children.length; i++) {
+            featuresTotal.current.children[i].children[0].checked = false;
+        }
+        setFeatures([]);
+        setTourType("All");
+        defaultRadio.current.checked = true;
+        setPriceRange(230);
         setResult(data);
     }
 
     return (
         <>
             <main className={style.events}>
+                <Basket />
                 <div className={`section-x padding-x ${style.eventsTop}`}>
                     <div className={`section-x ${style.eventMainFilter}`}>
                         <form className={style.tripSearch}>
@@ -398,8 +414,8 @@ export default function Events({ setPageNav }) {
                                         onClick={(e) => e.stopPropagation()}
                                     >
                                         {
-                                            cities.map(city => (
-                                                <div className={style.searchRecommendation} onClick={() => chooseCity(city.city)}>
+                                            cities.map((city, key) => (
+                                                <div className={style.searchRecommendation} key={key} onClick={() => chooseCity(city.city)}>
                                                     <div className={style.searchIcon}>
                                                         <img src={forestIcon} alt="icon" />
                                                     </div>
@@ -561,11 +577,11 @@ export default function Events({ setPageNav }) {
                                 <div className={style.filterElement}>
                                     <h2 className={style.filterTitle}>Site types</h2>
                                     <div className={style.filterTypes}>
-                                        <input type="radio" name="siteTypes" id="test" defaultChecked value="All" onChange={(e) => setTourType(e.target.value)} />
+                                        <input type="radio" name="siteTypes" ref={defaultRadio} id="test" defaultChecked value="All" onClick={(e) => setTourType(e.target.value)} />
                                         <label htmlFor="test">All</label>
-                                        <input type="radio" name="siteTypes" id="test2" value="In the Nature" onChange={(e) => setTourType(e.target.value)} />
+                                        <input type="radio" name="siteTypes" id="test2" value="In the Nature" onClick={(e) => setTourType(e.target.value)} />
                                         <label htmlFor="test2">In the Nature</label>
-                                        <input type="radio" name="siteTypes" id="test3" value="City" onChange={(e) => setTourType(e.target.value)} />
+                                        <input type="radio" name="siteTypes" id="test3" value="City" onClick={(e) => setTourType(e.target.value)} />
                                         <label htmlFor="test3">City</label>
                                     </div>
                                 </div>
@@ -624,7 +640,7 @@ export default function Events({ setPageNav }) {
                                     <button onClick={() => filterAll()} className={style.showResultBtn}>Show Results</button>
                                 </div>
                                 <div className={style.filterElement}>
-                                    <button onClick={() => cancelAll()} className={style.showResultBtn}>Cancel All Filters</button>
+                                    <button onClick={() => cancelAll()} className={style.cancelBtn}>Cancel All Filters</button>
                                 </div>
                             </div>
                         </div>
@@ -667,7 +683,7 @@ export default function Events({ setPageNav }) {
                             <div className={style.resultContainer}>
                                 {
                                     data ? result.map((event, key) => (
-                                        <CardType1 title={event.title} image={event.image} price={event.price} id={event.id} key={key} />
+                                        <CardType1 event={event} key={key} />
                                     )) : console.log("Events didn't load. L bozo hahaha")
                                 }
 

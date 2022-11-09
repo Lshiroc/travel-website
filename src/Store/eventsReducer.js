@@ -53,6 +53,21 @@ export const eventsReducer = createSlice({
                     children: 2,
                     pets: 5,
                 },
+                guestsWill: {
+                    adults: 0,
+                    children: 0,
+                    pets: 0,
+                },
+                reserved: {
+                    start: {
+                        month: 0,
+                        day: 0,
+                    },
+                    end: {
+                        month: 0,
+                        day: 0,
+                    }
+                },
             },
             {
                 id: 2,
@@ -93,6 +108,21 @@ export const eventsReducer = createSlice({
                     children: 2,
                     pets: 1,
                 },
+                guestsWill: {
+                    adults: 0,
+                    children: 0,
+                    pets: 0,
+                },
+                reserved: {
+                    start: {
+                        month: 0,
+                        day: 0,
+                    },
+                    end: {
+                        month: 0,
+                        day: 0,
+                    }
+                },
             },
             {
                 id: 3,
@@ -126,6 +156,21 @@ export const eventsReducer = createSlice({
                     adults: 3,
                     children: 2,
                     pets: 1,
+                },
+                guestsWill: {
+                    adults: 0,
+                    children: 0,
+                    pets: 0,
+                },
+                reserved: {
+                    start: {
+                        month: 0,
+                        day: 0,
+                    },
+                    end: {
+                        month: 0,
+                        day: 0,
+                    }
                 },
             },
         ]
