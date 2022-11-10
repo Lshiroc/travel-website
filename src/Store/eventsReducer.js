@@ -68,6 +68,7 @@ export const eventsReducer = createSlice({
                         day: 0,
                     }
                 },
+                totalPrice: 0,
             },
             {
                 id: 2,
@@ -123,6 +124,7 @@ export const eventsReducer = createSlice({
                         day: 0,
                     }
                 },
+                totalPrice: 0,
             },
             {
                 id: 3,
@@ -172,6 +174,7 @@ export const eventsReducer = createSlice({
                         day: 0,
                     }
                 },
+                totalPrice: 0,
             },
         ]
     },

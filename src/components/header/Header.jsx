@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Basket from './../../components/basket/Basket';
 import { basketWindowChange } from './../../Store/basketReducer.js';
+import Sign from './../../components/sign/Sign';
 
 //Style & images
 import logo from './../../assets/images/logo-monochrome.svg';
@@ -26,6 +27,7 @@ export default function Header({ pageNav, setPageNav }) {
         {
             isOpen ? <Basket /> : ''
         }
+        <Sign />
             <nav className={style.navbar}>
                 <div className={`section-x padding-x ${style.navbarContainer}`}>
                     <div className={style.menuLeft}>

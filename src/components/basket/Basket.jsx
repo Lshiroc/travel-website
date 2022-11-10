@@ -49,10 +49,10 @@ export default function Basket() {
   const [openGuests, setOpenGuests] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   const [toggleMenu, setToggleMenu] = useState(false);
+  const [err, setErr] = useState(false);
 
   // Guests Choosing
   const [guests, setGuests] = useState({ adults: 0, children: 0, pets: 0 });
-
 
   const increaseGuest = (guestType) => {
     console.log(guests);
@@ -114,6 +114,7 @@ export default function Basket() {
   const [tourWindow, setTourWindow] = useState(false);
   const [basketWindow, setBasketWindow] = useState(true);
   const [tempTour, setTempTour] = useState({});
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const openSetTour = (tour) => {
     console.log(tour);
@@ -146,13 +147,15 @@ export default function Basket() {
             month: input.endDate.getMonth(),
             day: input.endDate.getDate(),
           }
-        }, guests]));
+        }, guests, totalPrice]));
     
         setInput({});
         setTourWindow(false);
         setBasketWindow(true);
+        setErr(false);
       } else {
         console.log("not accepted!! bitctcctc");
+        setErr(true);
       }
     } else  {
       console.log("get pack")
@@ -183,11 +186,34 @@ export default function Basket() {
   const dateRanges = useRef();
 
   useEffect(() => {
-    console.log(tempTour);
-    if(tempTour.reserved !== undefined) {
-      console.log("inputs",input);
+    setTotalPrice(tempTour.totalPrice);
+    if(tempTour.guests !== undefined) {
+      setGuests(tempTour.guestsWill);
     }
+    console.log("guests updated");
   }, [tempTour])
+
+  useEffect(() => {
+    if(input.startDate !== undefined) {
+      // if(input.startDate.getMonth() === input.endDate.getMonth()) {
+      //   setTotalPrice((input.endDate.getDate() - input.startDate.getDate())*tempTour.price);
+      // } else {
+        if(tempTour.totalPrice !== 0) {
+          setTotalPrice(tempTour.totalPrice);
+        } 
+        setTotalPrice(Math.ceil((input.endDate.getTime() - input.startDate.getTime()) / (1000 * 3600 * 24))*tempTour.price)
+      console.log("dammmmm time is gold", (Math.ceil(input.endDate.getTime() - input.startDate.getTime())) / (1000 * 3600 * 24))
+      console.log("sas", input.startDate.getTime(), input.endDate.getTime()) 
+      // }
+    }
+  }, [input]);
+
+
+  // Go to payment
+
+  const goPayment = () => {
+    console.log("goinf to pay....");
+  }
 
   return (
     <>
@@ -212,6 +238,7 @@ export default function Basket() {
                   ))
                 }
               </div>
+              <div className={style.payBtn} onClick={() => goPayment()}>Pay</div>
             </div>
           </div>
           <div className={`${tourWindow ? (style.appear, style.tourSettings) : style.disappear}`}>
@@ -223,7 +250,8 @@ export default function Basket() {
               <div className={style.settings}>
                 <div className={style.tourTitle}>{tempTour.title}</div>
                 <div className={style.tourReserve}>Reservable: {months[tempTour?.reservable?.start.month - 1]} {tempTour.reservable?.start.day} - {months[tempTour.reservable?.end.month - 1]} {tempTour.reservable?.end.day}</div>
-                <div className={style.tourReserve}>Reservable: {months[tempTour?.reserved?.start.month - 1]} {tempTour.reserved?.start.day} - {months[tempTour.reserved?.end.month - 1]} {tempTour.reserved?.end.day}</div>
+                <div className={style.tourReserve}>Reserved: {months[tempTour?.reserved?.start.month - 1]} {tempTour.reserved?.start.day} - {months[tempTour.reserved?.end.month - 1]} {tempTour.reserved?.end.day}</div>
+                <div className={style.tourTotalPrice}>Price: {totalPrice !== 0 ? totalPrice : ''}</div>
                 <div className={style.datePick}>
                   <p className={style.tripSearchTitle}>Reserve: </p>
                   <div className={style.searchElementContainer}>
@@ -361,6 +389,7 @@ export default function Basket() {
                     </div>
                   </div>
                 </div>
+                {err ? <p>please fill correctly</p> : ''}
                 <div className={style.btns}>
                   <div className={style.cancelBtn} onClick={() => cancel()}>Cancel</div>
                   <div className={style.saveBtn} onClick={() => saveInfo(tempTour?.id)}>Save</div>

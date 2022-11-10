@@ -51,6 +51,8 @@ export const basketReducer = createSlice({
                     tour.reserved.end.month = action.payload[1].end.month + 1;
                     delete action.payload[2].guestType;
                     tour.guestsWill = action.payload[2];
+                    tour.totalPrice = action.payload[3];
+                    console.log("totalPriceeee", action.payload[3]);
                     console.log(current(tour));
                     
                     // Saving to localStorage
