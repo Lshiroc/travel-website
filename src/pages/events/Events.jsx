@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import CardType1 from "../../components/card1/CardType1";
 import { useSelector } from 'react-redux';
-import Basket from './../../components/basket/Basket';
 
 // Images & Styles
 import style from './events.module.scss';
@@ -385,7 +384,6 @@ export default function Events({ setPageNav }) {
     return (
         <>
             <main className={style.events}>
-                <Basket />
                 <div className={`section-x padding-x ${style.eventsTop}`}>
                     <div className={`section-x ${style.eventMainFilter}`}>
                         <form className={style.tripSearch}>

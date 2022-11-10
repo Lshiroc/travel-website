@@ -1,6 +1,6 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { edit } from './../../Store/basketReducer.js';
+import { edit, basketWindowChange } from './../../Store/basketReducer.js';
 
 // Styles & Images
 import style from './basket.module.scss';
@@ -75,26 +75,16 @@ export default function Basket() {
   const decreaseGuest = (guestType) => {
     // setGuests({ ...guests, [guestType]: guests[guestType] - 1 });
 
-    if(guests[guestType] > 0) {
-      setGuests({...guests, [guestType]: guests[guestType]-1});
-
-      if(guests.adults === 0) {
-        console.log("detected")
-        setGuests({...guests, "children": 0});
-        setGuests({...guests, "pets": 0});
+    if (guests[guestType] > 0) {
+      if((guests.adults - 1) === 0) {
+        console.log("thanks god");
+        guests.pets = 0;
+        guests.children = 0;
       }
+      setGuests({ ...guests, [guestType]: guests[guestType] - 1 });
+      console.log("decreased");
       // setGuests({...guests, guestType: guests[guestType]})
     }
-
-    // if (guests[guestType] > 0) {
-    //   console.log("worked")
-    //   setGuests({ ...guests, [guestType]: guests[guestType] - 1 });
-    //   if (guests.adults === 0) {
-    //     setGuests({ ...guests, children: 0 });
-    //     setGuests({ ...guests, pets: 0});
-    //   }
-    //   setGuests({ ...guests, guestType: guests[guestType] });
-    // }
   };
 
   window.addEventListener('click', () => {
@@ -136,27 +126,68 @@ export default function Basket() {
     console.log("First one", input);
     console.log("second one", guests);
 
-    dispatch(edit([id, {
-      start: {
-        month: input.startDate.getMonth(),
-        day: input.startDate.getDate(),
-      },
-      end: {
-        month: input.endDate.getMonth(),
-        day: input.endDate.getDate(),
+    if(input.startDate !== undefined) {
+      console.log(tempTour.reservable.start.month-1)
+      console.log(input.startDate.getMonth())
+      console.log(tempTour.reservable.start.day)
+      console.log(input.startDate.getDate())
+      console.log(tempTour.reservable.end.month-1)
+      console.log(input.endDate.getMonth())
+      console.log(tempTour.reservable.end.day)
+      console.log(input.endDate.getDate())
+      if(tempTour.reservable.start.month-1 <= input.startDate.getMonth() && tempTour.reservable.start.day <= input.startDate.getDate() && tempTour.reservable.end.month-1 >= input.endDate.getMonth() && tempTour.reservable.end.day >= input.endDate.getDate()) {
+        console.log("acceped")
+        dispatch(edit([id, {
+          start: {
+            month: input.startDate.getMonth(),
+            day: input.startDate.getDate(),
+          },
+          end: {
+            month: input.endDate.getMonth(),
+            day: input.endDate.getDate(),
+          }
+        }, guests]));
+    
+        setInput({});
+        setTourWindow(false);
+        setBasketWindow(true);
+      } else {
+        console.log("not accepted!! bitctcctc");
       }
-    }, guests]));
+    } else  {
+      console.log("get pack")
+      dispatch(edit([id, tempTour.reserved, guests]));
+  
+      setInput({});
+      setTourWindow(false);
+      setBasketWindow(true);
+    }
 
-    setTourWindow(false);
-    setBasketWindow(true);
   }
 
+  const cancel = () => {
+    setTourWindow(false);
+    setBasketWindow(true);
+    setInput({});
+  }
+
+  // opening basket window
+
+  const { isOpen } = useSelector(state => state.basketReducer);
+
+  // useEffect(() => {
+  //   setBasketWindow(isOpen);
+  // }, [isOpen])
+
+
+  const dateRanges = useRef();
+
   useEffect(() => {
-    if (tempTour.id !== undefined) {
-      setGuests(tempTour.guestsWill);
-      console.log("attahced");
+    console.log(tempTour);
+    if(tempTour.reserved !== undefined) {
+      console.log("inputs",input);
     }
-  }, [tempTour]);
+  }, [tempTour])
 
   return (
     <>
@@ -165,7 +196,7 @@ export default function Basket() {
           <div className={`${basketWindow ? (style.appear) : style.disappear}`}>
             <div className={style.top}>
               <div className={style.process}>Basket</div>
-              <div className={style.close}>x</div>
+              <div className={style.close} onClick={() => dispatch(basketWindowChange())}>x</div>
             </div>
             <div className={style.main}>
               <div className={style.tours}>
@@ -218,6 +249,7 @@ export default function Basket() {
                     >
 
                       <DateRange
+                        ref={dateRanges}
                         editableDateInputs={true}
                         onChange={(item) => {
                           setState([item.selection]);
@@ -330,7 +362,7 @@ export default function Basket() {
                   </div>
                 </div>
                 <div className={style.btns}>
-                  <div className={style.cancelBtn}>Cancel</div>
+                  <div className={style.cancelBtn} onClick={() => cancel()}>Cancel</div>
                   <div className={style.saveBtn} onClick={() => saveInfo(tempTour?.id)}>Save</div>
                 </div>
               </div>

@@ -1,6 +1,8 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import Basket from './../../components/basket/Basket';
+import { basketWindowChange } from './../../Store/basketReducer.js';
 
 //Style & images
 import logo from './../../assets/images/logo-monochrome.svg';
@@ -13,10 +15,17 @@ import { useEffect } from 'react';
 
 export default function Header({ pageNav, setPageNav }) {
 
+    const dispatch = useDispatch();
+
     const { badge } = useSelector(state => state.basketReducer);
+    const { isOpen } = useSelector(state => state.basketReducer);
+    
 
     return (
         <>
+        {
+            isOpen ? <Basket /> : ''
+        }
             <nav className={style.navbar}>
                 <div className={`section-x padding-x ${style.navbarContainer}`}>
                     <div className={style.menuLeft}>
@@ -64,7 +73,7 @@ export default function Header({ pageNav, setPageNav }) {
                         <div className="btn">
                             <a href=".">Sign Up</a>
                         </div>
-                        <div className={style.cartMenu}>
+                        <div className={style.cartMenu} onClick={() => dispatch(basketWindowChange())}>
                             <div className={style.cartImg}>
                                 <img src={cartIcon} alt="Cart" />
                             </div>
