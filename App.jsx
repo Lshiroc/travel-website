@@ -14,6 +14,7 @@ import Footer from './src/components/footer/Footer';
 // import { Header, MantineProvider } from '@mantine/core';
 
 function App() {
+
   const [pageNav, setPageNav] = useState('');
   const dispatch = useDispatch();
   // const {basket} = useSelector(state => state.basketReducer);
@@ -37,7 +38,7 @@ function App() {
           <Route path="/events" element={<Events setPageNav={setPageNav}/>} />
           <Route path="/events/tour/:id" element={<Detail setPageNav={setPageNav} />} />
           <Route path="/blog" element={<Blog setPageNav={setPageNav} />} />
-          <Route path="/blog/read" element={<BlogRead setPageNav={setPageNav} />} />
+          <Route path="/blog/read/:id" element={<BlogRead setPageNav={setPageNav} />} />
           <Route path="/contact" element={<Contact setPageNav={setPageNav} />}/>
           <Route path="/about" element={<About setPageNav={setPageNav} />} />
         </Routes>

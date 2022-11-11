@@ -12,7 +12,7 @@ function blogCard({id, image, title, description}) {
               <h2 className={style.title}>{title}</h2>
               <p className={style.description}>{description}</p>
             </div>
-            <Link to="blog/read" className={style.readMoreBtn}>Read More</Link>
+            <Link to={`/blog/read/${id}`} className={style.readMoreBtn}>Read More</Link>
           </div>
       </div>
     </>
