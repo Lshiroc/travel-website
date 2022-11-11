@@ -2,12 +2,14 @@ import { isSameDateError } from '@mui/x-date-pickers/internals/hooks/validation/
 import { useResetProjection } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { signWindowChange } from '../../Store/basketReducer';
 
 
 // Styles & Images
 import style from './sign.module.scss';
 
 export default function Sign() {
+    const dispatch = useDispatch();
 
     const [signupWindow, setSignupWindow] = useState(true);
     const [loginWindow, setLoginWindow] = useState(false);
@@ -93,6 +95,7 @@ export default function Sign() {
                         <div className={style.signUpContainer}>
                             <div className={style.popTitle}>
                                 <h1>Sign Up</h1>
+                                <p onClick={() => dispatch(signWindowChange())}>X</p>
                             </div>
                             <form onSubmit={(e) => checkSignUp(e)}>
                                 <div className={style.signContent}>

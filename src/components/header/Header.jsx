@@ -2,7 +2,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Basket from './../../components/basket/Basket';
-import { basketWindowChange } from './../../Store/basketReducer.js';
+import { basketWindowChange, signWindowChange } from './../../Store/basketReducer.js';
 import Sign from './../../components/sign/Sign';
 
 //Style & images
@@ -20,14 +20,16 @@ export default function Header({ pageNav, setPageNav }) {
 
     const { badge } = useSelector(state => state.basketReducer);
     const { isOpen } = useSelector(state => state.basketReducer);
-    
+    const { isOpenSign } = useSelector(state => state.basketReducer);
 
     return (
         <>
-        {
-            isOpen ? <Basket /> : ''
-        }
-        <Sign />
+            {
+                isOpen ? <Basket /> : ''
+            }
+            {
+                isOpenSign ? <Sign /> : ''
+            }
             <nav className={style.navbar}>
                 <div className={`section-x padding-x ${style.navbarContainer}`}>
                     <div className={style.menuLeft}>
@@ -72,8 +74,8 @@ export default function Header({ pageNav, setPageNav }) {
                                 <img src={closeIcon} alt="Menu Close" />
                             </div> */}
                         </ul>
-                        <div className="btn">
-                            <a href=".">Sign Up</a>
+                        <div className={style.btn} onClick={() => dispatch(signWindowChange())}>
+                            Sign Up
                         </div>
                         <div className={style.cartMenu} onClick={() => dispatch(basketWindowChange())}>
                             <div className={style.cartImg}>

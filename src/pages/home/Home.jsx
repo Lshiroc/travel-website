@@ -465,12 +465,12 @@ function Home({ setPageNav }) {
           <div className={style.toursContent}>
             {
               data ? result.map((event, key) => (
-                <CardType1 title={event.title} image={event.image} price={event.price} id={event.id} key={key} />
+                <CardType1 event={event} key={key} />
               )) : console.log("Events didn't load. L bozo hahaha")
             }
             {
               data ? result.map((event, key) => (
-                <CardType1 title={event.title} image={event.image} price={event.price} id={event.id} key={key} />
+                <CardType1 event={event} key={key} />
               )) : console.log("Events didn't load. L bozo hahaha")
             }
 
