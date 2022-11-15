@@ -16,18 +16,43 @@
     width: 500px;
     padding: 10px;
     border-radius: 10px;
-    background: gray;
+    background: rgb(255, 255, 255);
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
 }
 
 .popTitle {
-    font-size: 22px;
-    padding: 0 20px;
-    border-bottom: 2px solid red;
+    font-size: 21px;
+    padding: 10px 20px;
+    border-bottom: 2px solid rgb(64, 234, 52);
     margin-bottom: 20px;    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+
+    .closeBtn {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: 0.3s;
+        
+        svg {
+            width: 100%;
+            fill: rgb(60, 214, 49);
+        }
+    }
+
+    .closeBtn:hover {
+        transform: rotate(180deg);
+        svg {
+            fill: rgb(61, 232, 49);
+        }
+    }
 }
 
 .popBottom {
-    border-top: 2px solid red;
+    border-top: 2px solid rgb(64, 234, 52);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,10 +68,12 @@
 
     .sendBtn {
         border-radius: 5px;
-        font-size: 18px;
+        font-size: 19px;
+        width: 100%;
         background: linear-gradient(to right, rgb(20, 149, 20), rgb(33, 190, 15));
+        border: none;
         color: white;
-        padding: 5px 10px;
+        padding: 10px 25px;
         cursor: pointer;
     }
 }

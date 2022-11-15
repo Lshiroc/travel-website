@@ -22,10 +22,14 @@ export default function Header({ pageNav, setPageNav }) {
     const { badge } = useSelector(state => state.basketReducer);
     const { isOpen } = useSelector(state => state.basketReducer);
     const { isOpenSign } = useSelector(state => state.basketReducer);
-    const [loginned, setLoginned] = useState({});
+    const [loginned, setLoginned] = useState(false);
 
     useEffect(() => {
-        setLoginned(JSON.parse(localStorage.getItem("loginInfo")));
+        if(localStorage.getItem("loginInfo") === null) {
+            setLoginned(false);
+        } else {
+            setLoginned(true);
+        }
     }, [])
     console.log("login info", loginned);
 
@@ -85,7 +89,7 @@ export default function Header({ pageNav, setPageNav }) {
                             </div> */}
                         </ul>
                         {
-                            loginned !== '' ? (
+                            loginned ? (
                                 <div className={style.userProfile} onClick={() => setUserPopup(!userPopup)}>
                                     <img src={userIcon} alt="User" />
                                     <div className={`${style.popUp} ${userPopup ? style.show : ''}`}>Log out</div>
