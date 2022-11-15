@@ -206,3 +206,34 @@
     }
 
 }
+
+
+.userProfile {
+    width: 25px;
+    height: 25px;
+    position: relative;
+    cursor: pointer;
+
+    img {
+        width: 100%;
+    }
+
+    .popUp {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 40px;
+        background: white;
+        width: 120px;
+        height: 40px;
+        font-size: 17px;
+        padding: 5px;
+        border: 1px solid lightpink;
+        border-radius: 5px;
+    }
+
+    .show {
+        display: block;
+    }
+}
+

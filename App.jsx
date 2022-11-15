@@ -11,7 +11,6 @@ import BlogRead from './src/pages/blogRead/BlogRead';
 import Contact from './src/pages/contact/Contact';
 import About from './src/pages/about/About.jsx';
 import Footer from './src/components/footer/Footer';
-// import { Header, MantineProvider } from '@mantine/core';
 
 function App() {
 

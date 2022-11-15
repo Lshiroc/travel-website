@@ -10,6 +10,7 @@ import logo from './../../assets/images/logo-monochrome.svg';
 import cartIcon from './../../assets/images/cart2.svg';
 import menuIcon from './../../assets/images/menu-icon.svg';
 import closeIcon from './../../assets/images/close-icon.svg';
+import userIcon from './../../assets/icons/user-icon.png';
 import style from './header.module.scss';
 import { useEffect } from 'react';
 
@@ -21,6 +22,15 @@ export default function Header({ pageNav, setPageNav }) {
     const { badge } = useSelector(state => state.basketReducer);
     const { isOpen } = useSelector(state => state.basketReducer);
     const { isOpenSign } = useSelector(state => state.basketReducer);
+    const [loginned, setLoginned] = useState({});
+
+    useEffect(() => {
+        setLoginned(JSON.parse(localStorage.getItem("loginInfo")));
+    }, [])
+    console.log("login info", loginned);
+
+
+    const [userPopup, setUserPopup] = useState(false);
 
     return (
         <>
@@ -74,9 +84,18 @@ export default function Header({ pageNav, setPageNav }) {
                                 <img src={closeIcon} alt="Menu Close" />
                             </div> */}
                         </ul>
-                        <div className={style.btn} onClick={() => dispatch(signWindowChange())}>
+                        {
+                            loginned !== '' ? (
+                                <div className={style.userProfile} onClick={() => setUserPopup(!userPopup)}>
+                                    <img src={userIcon} alt="User" />
+                                    <div className={`${style.popUp} ${userPopup ? style.show : ''}`}>Log out</div>
+                                </div>
+                            ) : (
+                                <div className={style.btn} onClick={() => dispatch(signWindowChange())}>
                             Sign Up
                         </div>
+                            )
+                        }
                         <div className={style.cartMenu} onClick={() => dispatch(basketWindowChange())}>
                             <div className={style.cartImg}>
                                 <img src={cartIcon} alt="Cart" />

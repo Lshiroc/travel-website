@@ -28,7 +28,7 @@ export default function Sign() {
     const checkSignUp = (e) => {
         e.preventDefault();
 
-        if (passwordInput.current.value.length > 8) {
+        if (passwordInput.current.value.length > 7) {
             if (passwordInput.current.value === passwordAgainInput.current.value) {
                 console.log("mhm");
                 let tester = 0;
@@ -71,11 +71,25 @@ export default function Sign() {
 
         if(localStorage.getItem("users") !== null) {
             const users = JSON.parse(localStorage.getItem("users"));
+            console.log("userss", users);
             let logStatus = 0;
             users.map(user => {
-                if(user.mail === mailInput2.current.value && user.password === passwordInput2.current.value) {
+                console.log("aha user", user.mail.replace(' ', ''), mailInput2.current.value.replace(' ', ''), passwordInput2.current.value);
+                console.log(user.mail.replace(mailInput2.current.value));
+                if(user.mail.replace(/\s+/g, "") === mailInput2.current.value.replace(/\s+/g, "")) {
+                    console.log("yeppppp");
+                } else {
+                    console.log("wtff");
+                }
+                if(user.password === passwordInput2.current.value) {
+                    console.log("yepppp2");
+                } else {
+                    console.log("wtff2");
+                }
+                if((user.mail.replace(/\s+/g, "") === mailInput2.current.value.replace(/\s+/g, "") && user.mail.length === mailInput2.current.value.length) && user.password === passwordInput2.current.value) {
                     console.log("loginned!");
                     logStatus = 200;
+                    localStorage.setItem("loginInfo", JSON.stringify(mailInput2.current.value));
                 }
             })
             if(logStatus === 0) {
