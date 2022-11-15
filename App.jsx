@@ -41,8 +41,8 @@ function App() {
           <Route path="/contact" element={<Contact setPageNav={setPageNav} />}/>
           <Route path="/about" element={<About setPageNav={setPageNav} />} />
         </Routes>
-      </div>
       <Footer />
+      </div>
       {/* </MantineProvider > */}
     </>
   )
