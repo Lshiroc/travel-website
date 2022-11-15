@@ -23,6 +23,7 @@ export default function Header({ pageNav, setPageNav }) {
     const { isOpen } = useSelector(state => state.basketReducer);
     const { isOpenSign } = useSelector(state => state.basketReducer);
     const [loginned, setLoginned] = useState(false);
+    const [showMenu, setShowMenu] = useState(false);
 
     useEffect(() => {
         if(localStorage.getItem("loginInfo") === null) {
@@ -58,7 +59,7 @@ export default function Header({ pageNav, setPageNav }) {
                     </div>
                     <div className={style.menuRight}>
                         {/* <ul className={`${style.menu} ${toggleMenu ? style.openToggleMenu : style.closeToggleMenu}`}> */}
-                        <ul className={style.menu}>
+                        <ul className={`${style.menu} ${showMenu ? style.showMenu : ''}`}>
                             <li className={style.menuItem}>
                                 <NavLink to="/">
                                     <p className={pageNav === "home" ? style.activatedNav : ''}>Home</p>
@@ -107,6 +108,9 @@ export default function Header({ pageNav, setPageNav }) {
                             {
                                 badge !== 0 && (<div className={style.badge}>{badge}</div>)
                             }
+                        </div>
+                        <div className={style.menuBtn} onClick={() => setShowMenu(!showMenu)}>
+                            <img src={menuIcon} alt="Menu" />
                         </div>
                     </div>
                 </div>

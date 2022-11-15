@@ -9,8 +9,6 @@ import calendarIcon from "./../../assets/icons/calendar-logo.svg";
 import guestsIcon from "./../../assets/icons/guests-icon.svg";
 import arrowDownIcon from "./../../assets/icons/arrow-down.svg";
 import forestIcon from "./../../assets/icons/forest-icon.svg";
-import brandLogo from './../../assets/images/logoVector/default-monochrome-white.svg'
-import watchIcon from './../../assets/icons/watch-icon.svg';
 import closeIcon from './../../assets/icons/x-mark.svg';
 
 // External Components
