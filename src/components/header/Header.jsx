@@ -26,7 +26,7 @@ export default function Header({ pageNav, setPageNav }) {
     const [showMenu, setShowMenu] = useState(false);
 
     useEffect(() => {
-        if(localStorage.getItem("loginInfo") === null) {
+        if (localStorage.getItem("loginInfo") === null) {
             setLoginned(false);
         } else {
             setLoginned(true);
@@ -88,6 +88,20 @@ export default function Header({ pageNav, setPageNav }) {
                             {/* <div className={style.mobileMenuClose} onClick={() => setToggleMenu(!toggleMenu)}>
                                 <img src={closeIcon} alt="Menu Close" />
                             </div> */}
+                            <li className={style.menuItem}>
+                                {
+                                    loginned ? (
+                                        <div className={style.userProfile} onClick={() => setUserPopup(!userPopup)}>
+                                            <img src={userIcon} alt="User" />
+                                            <div className={`${style.popUp} ${userPopup ? style.show : ''}`}>Log out</div>
+                                        </div>
+                                    ) : (
+                                        <div className={style.btn} onClick={() => dispatch(signWindowChange())}>
+                                            Sign Up
+                                        </div>
+                                    )
+                                }
+                            </li>
                         </ul>
                         {
                             loginned ? (
@@ -97,8 +111,8 @@ export default function Header({ pageNav, setPageNav }) {
                                 </div>
                             ) : (
                                 <div className={style.btn} onClick={() => dispatch(signWindowChange())}>
-                            Sign Up
-                        </div>
+                                    Sign Up
+                                </div>
                             )
                         }
                         <div className={style.cartMenu} onClick={() => dispatch(basketWindowChange())}>
