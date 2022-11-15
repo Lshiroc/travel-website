@@ -35,6 +35,7 @@ body {
 
 .whole {
   position: relative;
+  overflow: hidden;
 }
 
 .btn a {
