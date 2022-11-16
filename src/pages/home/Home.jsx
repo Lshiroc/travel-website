@@ -644,7 +644,6 @@ function Home({ setPageNav }) {
         </div>
       </header>
       <main className={style.homeMain}>
-
         <section className={`section-x padding-x ${style.whyUs}`}>
           <h1 className="section-title">Why Campspot?</h1>
           <div className={style.whyUsContent}>
@@ -674,12 +673,14 @@ function Home({ setPageNav }) {
               <div className={`${style.whyUsImg}`}>
                 <div className={`${style.blobBg} ${style.whyUsImg2}`}></div>
               </div>
-              <h3>Your favorite campgrounds</h3>
-              <p>
-                Campspot lists top-rated camping destinations available for
-                online booking in North America. Discover campgrounds big and
-                small, RV parks, glamping, and more.
-              </p>
+              <div className={style.whyUsItemContent}>
+                <h3>Your favorite campgrounds</h3>
+                <p>
+                  Campspot lists top-rated camping destinations available for
+                  online booking in North America. Discover campgrounds big and
+                  small, RV parks, glamping, and more.
+                </p>
+              </div>
             </div>
           </div>
         </section>
