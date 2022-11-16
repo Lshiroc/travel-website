@@ -172,6 +172,228 @@ function Home({ setPageNav }) {
               glamping.
             </p>
           </div>
+
+          <div onClick={(e) => e.stopPropagation()} className={`${style.whereTo} ${style.tripSearchNone} ${openSearch ? style.mobileWhereTo : style.tripSearchNone}`}>
+            <div className={style.tripSearchTop}>
+              <p className={style.tripSearchTitle}>Where To?</p>
+              <div className={style.searchCloseBtn} onClick={() => setOpenSearch(false)}>
+                <img src={xMark} alt="Close" />
+              </div>
+            </div>
+            <div className={style.searchElementContainer} onClick={(e) => e.preventDefault()}>
+              <div
+                className={style.searchInput}
+                onClick={() => setOpenSearch(!openSearch)}
+              >
+                <div className={style.elementIcon}>
+                  <img src={searchIcon} alt="search" />
+                </div>
+                <input
+                  className={style.tripElement}
+                  type="text"
+                  placeholder="Try California Park..."
+                  onClick={(e) => { e.stopPropagation() }}
+                />
+              </div>
+              <div
+                className={`${style.searchResults} ${openSearch ? style.openElement : ""
+                  }`}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className={style.searchRecommendation}>
+                  <div className={style.searchIcon}>
+                    <img src={forestIcon} alt="icon" />
+                  </div>
+                  <p>Forests</p>
+                </div>
+                <div className={style.searchRecommendation}>
+                  <div className={style.searchIcon}>
+                    <img src={forestIcon} alt="icon" />
+                  </div>
+                  <p>Forests</p>
+                </div>
+                <div className={style.searchRecommendation}>
+                  <div className={style.searchIcon}>
+                    <img src={forestIcon} alt="icon" />
+                  </div>
+                  <p>Forests</p>
+                </div>
+                <div className={style.searchRecommendation}>
+                  <div className={style.searchIcon}>
+                    <img src={forestIcon} alt="icon" />
+                  </div>
+                  <p>Forests</p>
+                </div>
+                <div className={style.searchRecommendation}>
+                  <div className={style.searchIcon}>
+                    <img src={forestIcon} alt="icon" />
+                  </div>
+                  <p>Forests</p>
+                </div>
+                <div className={style.searchRecommendation}>
+                  <div className={style.searchIcon}>
+                    <img src={forestIcon} alt="icon" />
+                  </div>
+                  <p>Forests</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className={`${style.datePick} ${style.tripSearchNone} ${openDateRange ? style.mobileWhereTo : style.tripSearchNone}`} onClick={(e) => e.stopPropagation()}>
+            <div className={style.tripSearchTop}>
+              <p className={style.tripSearchTitle}>Dates</p>
+              <div className={style.searchCloseBtn} onClick={() => setOpenDateRange(false)}>
+                <img src={xMark} alt="Close" />
+              </div>
+            </div>
+            <div className={style.searchElementContainer}>
+              <div className={style.elementIcon}>
+                <img src={calendarIcon} alt="date" />
+              </div>
+              <div
+                className={style.tripElement}
+                type="text"
+              // onClick={(e) => { setOpenDateRange(!openDateRange); e.stopPropagation() }}
+              >
+                {input.startDate
+                  ? `${months[input.startDate.getMonth()]
+                  } ${input.startDate.getDate()}
+                    - ${months[input.endDate.getMonth()]
+                  } ${input.endDate.getDate()}`
+                  : "Choose Date"}
+              </div>
+              <div
+                className={`${style.popUpInput} ${openDateRange ? style.openElement : ""
+                  } `}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* <div className={style.popUpClose}>
+                      <p>Date</p>
+                      <div
+                        className={style.closeBtn}
+                        onClick={() => setOpenDateRange(!openDateRange)}
+                      >
+                        <img src={xMark} alt="close" />
+                      </div>
+                    </div> */}
+                <DateRange
+                  editableDateInputs={true}
+                  onChange={(item) => {
+                    setState([item.selection]);
+                    takeInput(item);
+                  }}
+                  className={style.datePickerStyle}
+                  moveRangeOnFirstSelection={false}
+                  ranges={state}
+                />
+              </div>
+            </div>
+          </div>
+          <div onClick={(e) => e.stopPropagation()} className={`${style.whereTo} ${style.tripSearchNone} ${openGuests ? style.mobileGuests : style.tripSearchNone}`}>
+            <div className={style.tripSearchTop}>
+              <p className={style.tripSearchTitle}>Guests</p>
+              <div className={style.searchCloseBtn} onClick={() => setOpenGuests(false)}>
+                <img src={xMark} alt="Close" />
+              </div>
+            </div>
+            <div className={style.searchElementContainer}>
+              <div
+                className={style.guestsInput}
+                onClick={(e) => { e.stopPropagation() }}
+              >
+                <div className={style.elementLeft}>
+                  <div className={style.elementIcon}>
+                    <img src={guestsIcon} alt="search" />
+                  </div>
+                  <div className={style.tripElement}>
+                    {guests.adults + guests.children > 0
+                      ? `${guests.adults + guests.children} guests ${guests.pets > 0 ? `, ${guests.pets} pets` : ""
+                      }`
+                      : "Add Guests"}
+                  </div>
+                </div>
+                <img
+                  className={style.arrowDown}
+                  src={arrowDownIcon}
+                  alt="open"
+                />
+              </div>
+              <div
+                className={`${style.guestsContainer} ${openGuests ? style.openElement : ""
+                  }`}
+                onClick={(e) => { e.stopPropagation(); console.log("clickedd") }}
+              >
+                <div className={style.guestsItem} >
+                  <div className={style.guestsLeft}>
+                    <p>ADULTS</p>
+                    <p>Ages 13 or above</p>
+                  </div>
+                  <div className={style.guestsRight}>
+                    <div
+                      className={style.countBtn}
+                      onClick={() => decreaseGuest("adults")}
+                    >
+                      -
+                    </div>
+                    <div className={style.guestCount}>
+                      {guests && guests.adults}
+                    </div>
+                    <div
+                      className={style.countBtn}
+                      onClick={() => increaseGuest("adults")}
+                    >
+                      +
+                    </div>
+                  </div>
+                </div>
+                <div className={style.guestsItem}>
+                  <div className={style.guestsLeft}>
+                    <p>CHILDREN</p>
+                    <p>Ages 12 or below</p>
+                  </div>
+                  <div className={style.guestsRight}>
+                    <div
+                      className={style.countBtn}
+                      onClick={() => decreaseGuest("children")}
+                    >
+                      -
+                    </div>
+                    <div className={style.guestCount}>
+                      {guests && guests.children}
+                    </div>
+                    <div
+                      className={style.countBtn}
+                      onClick={() => increaseGuest("children")}
+                    >
+                      +
+                    </div>
+                  </div>
+                </div>
+                <div className={style.guestsItem}>
+                  <div className={style.guestsLeft}>
+                    <p>Any Pets?</p>
+                  </div>
+                  <div className={style.guestsRight}>
+                    <div
+                      className={style.countBtn}
+                      onClick={() => decreaseGuest("pets")}
+                    >
+                      -
+                    </div>
+                    <div className={style.guestCount}>
+                      {guests && guests.pets}
+                    </div>
+                    <div
+                      className={style.countBtn}
+                      onClick={() => increaseGuest("pets")}
+                    >
+                      +
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className={style.headerSearchContent}>
             <form className={style.tripSearch}>
               <div className={style.whereTo}>
@@ -251,7 +473,7 @@ function Home({ setPageNav }) {
                       } ${input.startDate.getDate()}
                     - ${months[input.endDate.getMonth()]
                       } ${input.endDate.getDate()}`
-                      : "choose smth else"}
+                      : "Choose Date"}
                   </div>
                   <div
                     className={`${style.popUpInput} ${openDateRange ? style.openElement : ""
@@ -382,6 +604,9 @@ function Home({ setPageNav }) {
               <div className={style.searchBtn}>
                 <img src={searchIcon} alt="search" />
               </div>
+              <div className={style.searchBtn2}>
+                Search
+              </div>
             </form>
             <div className={style.headerHero}>
               <Swiper
@@ -419,6 +644,7 @@ function Home({ setPageNav }) {
         </div>
       </header>
       <main className={style.homeMain}>
+
         <section className={`section-x padding-x ${style.whyUs}`}>
           <h1 className="section-title">Why Campspot?</h1>
           <div className={style.whyUsContent}>

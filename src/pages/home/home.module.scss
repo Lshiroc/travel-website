@@ -303,6 +303,23 @@
     }
 }
 
+.searchBtn2 {
+    background: var(--primary);
+    border-radius: 50%;
+    border: 3px solid transparent;
+    padding: 6px 5px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+        background-color: white;
+        border: 3px solid var(--primary);
+    }
+}
+
 .headerHero {
     width: 100%;
     height: 480px;
@@ -334,8 +351,12 @@
     background: url('./../../assets/images/header-hero.jpg');
 }
 
+.headerContent {
+    width: 100%;
+}
+
 .heroSlider {
-    width: 1250px;
+    width: 100%;
     height: 100%;
     background-position: center;
     background-size: cover;
@@ -368,9 +389,9 @@
 .whyUsItem0:hover {
     & {
         transform: scale(1.05);
-        box-shadow: 0px 4px 19px 0px rgba(196,196,196,0.75);
--webkit-box-shadow: 0px 4px 19px 0px rgba(196,196,196,0.75);
--moz-box-shadow: 0px 4px 19px 0px rgba(196,196,196,0.75);
+        box-shadow: 0px 4px 19px 0px rgba(196, 196, 196, 0.75);
+        -webkit-box-shadow: 0px 4px 19px 0px rgba(196, 196, 196, 0.75);
+        -moz-box-shadow: 0px 4px 19px 0px rgba(196, 196, 196, 0.75);
         background: rgb(242, 242, 242);
     }
 
@@ -387,34 +408,34 @@
 .whyUsItem1:hover {
     & {
         transform: scale(1.05);
-        box-shadow: 0px 4px 19px 0px rgba(196,196,196,0.75);
--webkit-box-shadow: 0px 4px 19px 0px rgba(196,196,196,0.75);
--moz-box-shadow: 0px 4px 19px 0px rgba(196,196,196,0.75);
+        box-shadow: 0px 4px 19px 0px rgba(196, 196, 196, 0.75);
+        -webkit-box-shadow: 0px 4px 19px 0px rgba(196, 196, 196, 0.75);
+        -moz-box-shadow: 0px 4px 19px 0px rgba(196, 196, 196, 0.75);
         background: rgb(242, 242, 242);
     }
 
     & .whyUsImg::before {
         background: rgb(219, 219, 219);
-        border-radius: 63% 37% 50% 50% / 31% 61% 39% 69% ;
+        border-radius: 63% 37% 50% 50% / 31% 61% 39% 69%;
     }
 
     .blobBg {
-        border-radius: 30% 70% 39% 61% / 46% 34% 66% 54% ;
+        border-radius: 30% 70% 39% 61% / 46% 34% 66% 54%;
     }
 }
 
 .whyUsItem2:hover {
     & {
         transform: scale(1.05);
-        box-shadow: 0px 4px 19px 0px rgba(196,196,196,0.75);
--webkit-box-shadow: 0px 4px 19px 0px rgba(196,196,196,0.75);
--moz-box-shadow: 0px 4px 19px 0px rgba(196,196,196,0.75);
+        box-shadow: 0px 4px 19px 0px rgba(196, 196, 196, 0.75);
+        -webkit-box-shadow: 0px 4px 19px 0px rgba(196, 196, 196, 0.75);
+        -moz-box-shadow: 0px 4px 19px 0px rgba(196, 196, 196, 0.75);
         background: rgb(242, 242, 242);
     }
 
     & .whyUsImg::before {
         background: rgb(219, 219, 219);
-        border-radius: 36% 64% 72% 28% / 45% 61% 39% 55% ;
+        border-radius: 36% 64% 72% 28% / 45% 61% 39% 55%;
     }
 
     .blobBg {
@@ -434,7 +455,7 @@
 
 .whyUsImg2 {
     background: url('./../../assets/images/blob2.jpg');
-    border-radius: 72% 28% 45% 55% / 40% 71% 29% 60% ;
+    border-radius: 72% 28% 45% 55% / 40% 71% 29% 60%;
 }
 
 .blobBg {
@@ -692,6 +713,7 @@
                 transition: 0.3s ease-in-out;
                 left: 0px;
             }
+
             .clickedWatch {
                 position: relative;
                 left: 50px;
@@ -708,8 +730,8 @@
             transition: 0.3s;
 
             img {
-                width:100%;
-                height:100%;
+                width: 100%;
+                height: 100%;
                 object-fit: cover;
                 user-select: none;
                 display: block;
@@ -777,6 +799,7 @@
     .fbgElement:hover {
         .fbgImg {
             width: 110%;
+
             img {
                 width: 110%;
             }
@@ -786,6 +809,7 @@
 
             .fbgText {
                 bottom: 0;
+
                 p {
                     visibility: visible;
                     opacity: 1;
@@ -796,3 +820,172 @@
 
 }
 
+.tripSearchTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+    .searchCloseBtn {
+        width: 35px;
+        height: 35px;
+
+        img {
+            width: 100%;
+        }
+    }
+}
+
+.tripSearchNone {
+    display: none;
+}
+
+.datePick {
+    width: 100%;
+}
+
+
+
+// Responsive Design Codes
+
+
+@media screen and (max-width: 960px) {
+    .headerHero {
+        height: 340px;
+    }
+
+    .tripSearch {
+        width: 95%;
+        margin: 0 auto;
+        padding: 14px 25px;
+        border: 1px solid rgb(229, 234, 223);
+        box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px 0px;
+        border-radius: 50px;
+        background: rgb(243, 242, 239);
+        display: grid;
+        grid-template-columns: 45% 45%;
+        justify-content: space-between;
+        align-items: end;
+        column-gap: 15px;
+        row-gap: 20px;
+        position: absolute;
+        top: -50px;
+        left: 2.5%;
+        z-index: 9;
+    }
+
+    .whereTo:nth-child(1) {
+        grid-column: 1 / 3;
+    }
+
+    .searchBtn {
+        display: none;
+    }
+
+    .searchBtn2 {
+        display: flex;
+        grid-column: 1 / 3;
+        width: 100%;
+        border-radius: 50px;
+        color: white;
+        font-weight: 600;
+        font-size: 18px;
+    }
+
+    .searchBtn2:hover {
+        color: black;
+    }
+
+    .headerText {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 60%;
+    }
+
+    .mobileWhereTo {
+        display: block;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: white;
+        z-index: 19;
+        padding: 25px;
+    }
+
+    .mobilePickDate {
+        display: block;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: white;
+        z-index: 19;
+        padding: 25px;
+    }
+
+    .mobileGuests {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: white;
+        z-index: 19;
+        padding: 25px;
+
+
+        .guestsContainer {
+            width: 100% !important;
+        }
+    }
+}
+
+
+@media screen and (max-width: 556px) {
+    .headerSearchContent {
+        margin-top: 220px;
+    }
+
+    .tripSearch {
+        width: 100%;
+        left: 0;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, auto);
+        top: -170px;
+        border-radius: 20px;
+    }
+
+    .whereTo:nth-child(2) {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+    }
+
+    .whereTo:nth-child(3) {
+        grid-column: 1 / 2;
+        grid-row: 3 / 4;
+    }
+
+    .searchBtn2 {
+        grid-column: 1 / 2;
+        grid-row: 4 / 5;
+    }
+
+    .headerText {
+        max-width: 80%;
+        margin-top: 140px;
+
+        h1 {
+            font-size: 48px;
+        }
+
+        p {
+            font-size: 20px;
+        }
+    }
+}
