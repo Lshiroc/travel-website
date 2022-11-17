@@ -384,8 +384,10 @@ export default function Events({ setPageNav }) {
                             <input
                                 className={style.tripElement}
                                 type="text"
+                                ref={cityInputElement}
                                 placeholder="Try California Park..."
                                 onClick={(e) => { e.stopPropagation() }}
+                                onChange={(e) => searchCity(e)}
                             />
                         </div>
                         <div
@@ -393,42 +395,16 @@ export default function Events({ setPageNav }) {
                                 }`}
                             onClick={(e) => e.stopPropagation()}
                         >
-                            <div className={style.searchRecommendation}>
-                                <div className={style.searchIcon}>
-                                    <img src={forestIcon} alt="icon" />
-                                </div>
-                                <p>Forests</p>
-                            </div>
-                            <div className={style.searchRecommendation}>
-                                <div className={style.searchIcon}>
-                                    <img src={forestIcon} alt="icon" />
-                                </div>
-                                <p>Forests</p>
-                            </div>
-                            <div className={style.searchRecommendation}>
-                                <div className={style.searchIcon}>
-                                    <img src={forestIcon} alt="icon" />
-                                </div>
-                                <p>Forests</p>
-                            </div>
-                            <div className={style.searchRecommendation}>
-                                <div className={style.searchIcon}>
-                                    <img src={forestIcon} alt="icon" />
-                                </div>
-                                <p>Forests</p>
-                            </div>
-                            <div className={style.searchRecommendation}>
-                                <div className={style.searchIcon}>
-                                    <img src={forestIcon} alt="icon" />
-                                </div>
-                                <p>Forests</p>
-                            </div>
-                            <div className={style.searchRecommendation}>
-                                <div className={style.searchIcon}>
-                                    <img src={forestIcon} alt="icon" />
-                                </div>
-                                <p>Forests</p>
-                            </div>
+                            {
+                                cities.map((city, key) => (
+                                    <div className={style.searchRecommendation} key={key} onClick={() => {chooseCity(city.city); setOpenSearch(false)}}>
+                                        <div className={style.searchIcon}>
+                                            <img src={forestIcon} alt="icon" />
+                                        </div>
+                                        <p>{city.city}</p>
+                                    </div>
+                                ))
+                            }
                         </div>
                     </div>
                 </div>
@@ -604,6 +580,7 @@ export default function Events({ setPageNav }) {
                                             className={style.tripElement}
                                             type="text"
                                             ref={cityInputElement}
+                                            value={cityInputElement?.current?.value}
                                             placeholder="Try California Park..."
                                             onClick={(e) => { setOpenSearch(!openSearch); e.stopPropagation() }}
                                             onChange={(e) => searchCity(e)}
@@ -846,10 +823,10 @@ export default function Events({ setPageNav }) {
                                 </div>
                                 <div className={style.filterDivider}></div>
                                 <div className={style.filterElement}>
-                                    <button onClick={() => {filterAll(); setOpenMobileFilter(false)}} className={style.showResultBtn}>Show Results</button>
+                                    <button onClick={() => { filterAll(); setOpenMobileFilter(false) }} className={style.showResultBtn}>Show Results</button>
                                 </div>
                                 <div className={style.filterElement}>
-                                    <button onClick={() => {cancelAll(); setOpenMobileFilter(false)}} className={style.cancelBtn}>Cancel All Filters</button>
+                                    <button onClick={() => { cancelAll(); setOpenMobileFilter(false) }} className={style.cancelBtn}>Cancel All Filters</button>
                                 </div>
                             </div>
                         </div>
