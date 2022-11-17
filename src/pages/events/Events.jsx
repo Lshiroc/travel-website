@@ -846,10 +846,10 @@ export default function Events({ setPageNav }) {
                                 </div>
                                 <div className={style.filterDivider}></div>
                                 <div className={style.filterElement}>
-                                    <button onClick={() => filterAll()} className={style.showResultBtn}>Show Results</button>
+                                    <button onClick={() => {filterAll(); setOpenMobileFilter(false)}} className={style.showResultBtn}>Show Results</button>
                                 </div>
                                 <div className={style.filterElement}>
-                                    <button onClick={() => cancelAll()} className={style.cancelBtn}>Cancel All Filters</button>
+                                    <button onClick={() => {cancelAll(); setOpenMobileFilter(false)}} className={style.cancelBtn}>Cancel All Filters</button>
                                 </div>
                             </div>
                         </div>
