@@ -771,7 +771,7 @@ function Home({ setPageNav }) {
             </SwiperSlide>
           </Swiper>
         </section> */}
-        <section className={style.quote}>
+        {/* <section className={style.quote}>
           <div className={`section-x padding-x ${style.quoteContainer}`}>
             <div className={style.quoteText}>
               “Made booking my trip super easy …<br /> A much needed addition to
@@ -782,11 +782,11 @@ function Home({ setPageNav }) {
               <div className={style.quoteAuthorName}>Zeke K. (@zkoozer)</div>
             </div>
           </div>
-        </section>
+        </section> */}
         <section className={`section-x padding-x ${style.blog}`}>
           <div className={style.sectionMore}>
             <h1 className="section-title">Memories from our clients</h1>
-            <p>See More</p>
+            <Link to="/blog">See More</Link>
           </div>
           {/* <div className={style.blogContainer}>
             <motion.div
@@ -840,6 +840,9 @@ function Home({ setPageNav }) {
                   <h2>Just a simple title Lmao :d</h2>
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, repudiandae animi? Est nulla fugit nam, nemo cum odio! Alias, vero.</p>
                   <p className={style.date}>September 25, 2022</p>
+                  <span className={style.watchBtn}>
+                    Watch Video
+                  </span>
                 </div>
               </div>
               {/* </Link > */}
