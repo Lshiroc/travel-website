@@ -30,10 +30,6 @@ export default function Events({ setPageNav }) {
         console.log("cdf", data);
     }, [data]);
 
-    function valuetext(value) {
-        return `${value}`;
-    }
-
     const [value, setValue] = React.useState([0, 120]);
 
     const handleChange = (event, newValue) => {

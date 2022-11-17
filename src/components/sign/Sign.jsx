@@ -29,7 +29,7 @@ export default function Sign() {
         e.preventDefault();
 
         if (passwordInput.current.value.length > 7) {
-            if (passwordInput.current.value === passwordAgainInput.current.value) {
+            if (passwordInput.current.value === passwordAgainInput.current.value && mailInput.current.value.trim() !== "") {
                 console.log("mhm");
                 let tester = 0;
                 let tester2 = 0;
@@ -40,7 +40,7 @@ export default function Sign() {
                     users.map(user => {
                         if (user.mail === mailInput.current.value) {
                             tester = 1;
-                            setErr("Email already exists")
+                            setErr("Email already exists!")
                         }
                     })
 
@@ -55,9 +55,10 @@ export default function Sign() {
                 }
             } else {
                 console.log("not same");
+                setErr("Incorrect information!");
             }
         } else {
-            console.log("pass limit")
+            setErr("Password should contain at least 8 character!")
         }
     }
 
@@ -69,35 +70,41 @@ export default function Sign() {
     const logIn = (e) => {
         e.preventDefault();
 
-        if (localStorage.getItem("users") !== null) {
-            const users = JSON.parse(localStorage.getItem("users"));
-            console.log("userss", users);
-            let logStatus = 0;
-            users.map(user => {
-                console.log("aha user", user.mail.replace(' ', ''), mailInput2.current.value.replace(' ', ''), passwordInput2.current.value);
-                console.log(user.mail.replace(mailInput2.current.value));
-                if (user.mail.replace(/\s+/g, "") === mailInput2.current.value.replace(/\s+/g, "")) {
-                    console.log("yeppppp");
-                } else {
-                    console.log("wtff");
+        if (mailInput2.current.value.trim() !== "" && passwordInput2.current.value.trim() !== "") {
+            if (localStorage.getItem("users") !== null) {
+                const users = JSON.parse(localStorage.getItem("users"));
+                console.log("userss", users);
+                let logStatus = 0;
+                users.map(user => {
+                    console.log("aha user", user.mail.replace(' ', ''), mailInput2.current.value.replace(' ', ''), passwordInput2.current.value);
+                    console.log(user.mail.replace(mailInput2.current.value));
+                    if (user.mail.replace(/\s+/g, "") === mailInput2.current.value.replace(/\s+/g, "")) {
+                        console.log("yeppppp");
+                    } else {
+                        console.log("wtff");
+                    }
+                    if (user.password === passwordInput2.current.value) {
+                        console.log("yepppp2");
+                    } else {
+                        console.log("wtff2");
+                    }
+                    if ((user.mail.replace(/\s+/g, "") === mailInput2.current.value.replace(/\s+/g, "") && user.mail.length === mailInput2.current.value.length) && user.password === passwordInput2.current.value) {
+                        console.log("loginned!");
+                        logStatus = 200;
+                        localStorage.setItem("loginInfo", JSON.stringify(mailInput2.current.value));
+                        window.location.reload(false);
+                    }
+                })
+                if (logStatus === 0) {
+                    console.log("check the info, not loginned!!");
+                    setErr2("Incorrect email or password");
                 }
-                if (user.password === passwordInput2.current.value) {
-                    console.log("yepppp2");
-                } else {
-                    console.log("wtff2");
-                }
-                if ((user.mail.replace(/\s+/g, "") === mailInput2.current.value.replace(/\s+/g, "") && user.mail.length === mailInput2.current.value.length) && user.password === passwordInput2.current.value) {
-                    console.log("loginned!");
-                    logStatus = 200;
-                    localStorage.setItem("loginInfo", JSON.stringify(mailInput2.current.value));
-                }
-            })
-            if (logStatus === 0) {
-                console.log("check the info, not loginned!!");
             }
-        }
 
-        console.log("login...");
+            console.log("login...");
+        } else {
+            setErr2("Please fill the required places.");
+        }
     }
 
 

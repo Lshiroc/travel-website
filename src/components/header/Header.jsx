@@ -37,6 +37,11 @@ export default function Header({ pageNav, setPageNav }) {
 
     const [userPopup, setUserPopup] = useState(false);
 
+    const logOut = () => {
+        localStorage.removeItem("loginInfo");
+        window.location.reload(false);
+    }
+
     return (
         <>
             {
@@ -93,7 +98,7 @@ export default function Header({ pageNav, setPageNav }) {
                                     loginned ? (
                                         <div className={style.userProfile} onClick={() => setUserPopup(!userPopup)}>
                                             <img src={userIcon} alt="User" />
-                                            <div className={`${style.popUp} ${userPopup ? style.show : ''}`}>Log out</div>
+                                            <div className={`${style.popUp} ${userPopup ? style.show : ''}`} onClick={() => logOut()}>Log out</div>
                                         </div>
                                     ) : (
                                         <div className={style.btn} onClick={() => dispatch(signWindowChange())}>
@@ -103,7 +108,7 @@ export default function Header({ pageNav, setPageNav }) {
                                 }
                             </li>
                         </ul>
-                        {
+                        {/* {
                             loginned ? (
                                 <div className={style.userProfile} onClick={() => setUserPopup(!userPopup)}>
                                     <img src={userIcon} alt="User" />
@@ -114,7 +119,7 @@ export default function Header({ pageNav, setPageNav }) {
                                     Sign Up
                                 </div>
                             )
-                        }
+                        } */}
                         <div className={style.cartMenu} onClick={() => dispatch(basketWindowChange())}>
                             <div className={style.cartImg}>
                                 <img src={cartIcon} alt="Cart" />

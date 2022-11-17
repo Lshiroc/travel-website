@@ -294,6 +294,14 @@
         font-size: 14px;
     }
 
+    .menuItem {
+        .btn {            
+            margin: 10px 25px;
+            width: calc(100% - 50px);
+            font-size: 19px;
+            text-align: center;
+        }
+    }
 
     // .menu {
     //     display: none;
@@ -400,13 +408,5 @@
         display: none;
     }
 
-    .menuItem {
-        .btn {            
-            margin: 10px 25px;
-            width: calc(100% - 50px);
-            font-size: 19px;
-            text-align: center;
-        }
-    }
 } 
 
