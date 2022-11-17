@@ -7,6 +7,7 @@ export const basketReducer = createSlice({
         badge: 0,
         isOpen: false,
         isOpenSign: false,
+        isOpenPay: false,
     },
     reducers: {
         addToCart: (state, action) => {
@@ -72,10 +73,16 @@ export const basketReducer = createSlice({
         },
         signWindowChange: (state, action) => {
             state.isOpenSign = !state.isOpenSign;
-
         },
+        payWindowChange: (state, action) => {
+            state.isOpenPay = !state.isOpenPay;
+        },
+        paid: (state, action) => {
+            state.basket = [];
+            state.badge = 0;
+        }
     }
 })
 
 export default basketReducer.reducer;
-export const { addToCart, removeFromCart, fill, edit, basketWindowChange, signWindowChange } = basketReducer.actions;
+export const { addToCart, removeFromCart, fill, edit, basketWindowChange, signWindowChange, payWindowChange, paid } = basketReducer.actions;

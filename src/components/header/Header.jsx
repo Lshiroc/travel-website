@@ -33,6 +33,7 @@ export default function Header({ pageNav, setPageNav }) {
         }
     }, [])
     console.log("login info", loginned);
+    const {basket} = useSelector(state => state.basketReducer);
 
 
     const [userPopup, setUserPopup] = useState(false);
@@ -120,7 +121,7 @@ export default function Header({ pageNav, setPageNav }) {
                                 </div>
                             )
                         } */}
-                        <div className={style.cartMenu} onClick={() => dispatch(basketWindowChange())}>
+                        <div className={style.cartMenu} onClick={() => {basket.length !== 0 && dispatch(basketWindowChange())}}>
                             <div className={style.cartImg}>
                                 <img src={cartIcon} alt="Cart" />
                             </div>
