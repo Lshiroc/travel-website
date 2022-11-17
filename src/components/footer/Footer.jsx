@@ -4,20 +4,20 @@ import instagramLogo from './../../assets/icons/instagram-logo.svg';
 import pinterestLogo from './../../assets/icons/pinterest-logo.svg';
 import githubLogo from './../../assets/icons/github-logo.svg';
 
-function Footer() {
+export default function Footer() {
   return (
     <>
       <footer className={style.footer}>
         <div className={`section-x padding-x ${style.footerSub}`}>
           <h3>Sign up to receive exclusive Campspot deals and updates!</h3>
-          {/* <form className={style.footerSubForm}> */}
-          <input
-            type="text"
-            className={style.footerSubInput}
-            placeholder="Enter your email address"
-          />
-          <button className={style.footerSubBtn}>Subscribe</button>
-          {/* </form> */}
+          <div className={style.footerSubForm}>
+            <input
+              type="text"
+              className={style.footerSubInput}
+              placeholder="Enter your email address"
+            />
+            <button className={style.footerSubBtn}>Subscribe</button>
+          </div>
         </div>
         <div className={style.footerContainer}>
           <div className={`section-x padding-x ${style.footerMain}`}>
@@ -87,4 +87,3 @@ function Footer() {
   );
 }
 
-export default Footer;
