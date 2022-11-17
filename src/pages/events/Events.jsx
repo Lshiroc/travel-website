@@ -766,7 +766,7 @@ export default function Events({ setPageNav }) {
                             <div className={style.searchBtn} onClick={() => searchBy()}>
                                 <img src={searchIcon} alt="search" />
                             </div>
-                            <div className={style.searchBtn2}>
+                            <div className={style.searchBtn2} onClick={() => searchBy()}>
                                 Search
                             </div>
                         </form>
