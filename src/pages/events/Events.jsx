@@ -10,6 +10,7 @@ import guestsIcon from "./../../assets/icons/guests-icon.svg";
 import arrowDownIcon from "./../../assets/icons/arrow-down.svg";
 import forestIcon from "./../../assets/icons/forest-icon.svg";
 import closeIcon from './../../assets/icons/x-mark.svg';
+import xMark from './../../assets/icons/x-mark.svg';
 
 // External Components
 import Slider from '@mui/material/Slider';
@@ -28,7 +29,6 @@ export default function Events({ setPageNav }) {
         console.log("abc", result)
         console.log("cdf", data);
     }, [data]);
-    // console.log(data);
 
     function valuetext(value) {
         return `${value}`;
@@ -64,7 +64,6 @@ export default function Events({ setPageNav }) {
     const takeInput = (e) => {
         setInput(e.selection);
         console.log("Lmaooooooo its mt timeee", e.selection);
-        // console.log(e.selection.startDate.getDate());
     };
 
     const [state, setState] = useState([
@@ -93,10 +92,8 @@ export default function Events({ setPageNav }) {
             guests[guestType]++;
         }
         setGuests({ ...guests, guestType: guests[guestType] });
-
-        // console.log("increased");
-        // console.log(guests);
     };
+
     const decreaseGuest = (guestType) => {
         if (guests[guestType] > 0) {
             guests[guestType]--;
@@ -118,20 +115,6 @@ export default function Events({ setPageNav }) {
 
     // Here we go.. right into the hell
     // God bless me and give luck to me
-
-    // const sortFilter = (sort) => {
-    //     switch (sort) {
-    //         case "popular":
-    //             setResult([...result].filter(event => event[sort] === true));
-    //             break;
-    //         case "lowToHigh":
-    //             setResult([...result].sort((a, b) => a.price - b.price));
-    //             break;
-    //         case "highToLow":
-    //             setResult([...result].sort((a, b) => b.price - a.price));
-    //             break;
-    //     }
-    // };
 
     const sortFilter = (sort) => {
         console.log(sort);
@@ -320,7 +303,7 @@ export default function Events({ setPageNav }) {
     // }, [filterSettings]);
 
     // Search by Search Bar
-
+    const [openMobileFilter, setOpenMobileFilter] = useState(false);
     const [primaryResult, setPrimaryResult] = useState([]);
     const [primaryFilter, setPrimaryFilter] = useState(false);
     const searchBy = () => {
@@ -334,7 +317,7 @@ export default function Events({ setPageNav }) {
             // setResult((cities !== "" ? backupData.filter(a => a.city === cityInput) : backupData).filter((tour) => ((tour.reservable.start.month - 1) <= input.startDate.getMonth()) && ((tour.reservable.end.month - 1) >= input.endDate.getMonth()) && (tour.reservable.start.day <= input.startDate.getDate()) && (tour.reservable.end.day >= input.endDate.getDate())).filter((tour) => tour.guests.adults >= guests.adults && tour.guests.children >= guests.children && tour.guests.pets >= guests.pets));
             setResult((cityInput !== "" ? backupData.filter(a => a.city === cityInput) : [...backupData]).filter((tour) => ((tour.reservable.start.month - 1) <= input.startDate.getMonth()) && ((tour.reservable.end.month - 1) >= input.endDate.getMonth()) && (tour.reservable.start.day <= input.startDate.getDate()) && (tour.reservable.end.day >= input.endDate.getDate())).filter((tour) => tour.guests.adults >= guests.adults && tour.guests.children >= guests.children && tour.guests.pets >= guests.pets));
             setPrimaryResult((cityInput !== "" ? backupData.filter(a => a.city === cityInput) : backupData).filter((tour) => ((tour.reservable.start.month - 1) <= input.startDate.getMonth()) && ((tour.reservable.end.month - 1) >= input.endDate.getMonth()) && (tour.reservable.start.day <= input.startDate.getDate()) && (tour.reservable.end.day >= input.endDate.getDate())).filter((tour) => tour.guests.adults >= guests.adults && tour.guests.children >= guests.children && tour.guests.pets >= guests.pets));
-            console.log("cities" , cities)
+            console.log("cities", cities)
             console.log("data filtered", data);
             console.log("****", result);
             setErrMsg(false);
@@ -367,7 +350,7 @@ export default function Events({ setPageNav }) {
         setInput([]);
         setCityInput("");
         cityInputElement.current.value = "";
-        setGuests({adults: 0, children: 0, pets: 0});
+        setGuests({ adults: 0, children: 0, pets: 0 });
         console.log(featuresTotal);
         for (let i = 0; i < featuresTotal.current.children.length; i++) {
             featuresTotal.current.children[i].children[0].checked = false;
@@ -382,6 +365,228 @@ export default function Events({ setPageNav }) {
     return (
         <>
             <main className={style.events}>
+
+                <div onClick={(e) => e.stopPropagation()} className={`${style.whereTo} ${style.tripSearchNone} ${openSearch ? style.mobileWhereTo : style.tripSearchNone}`}>
+                    <div className={style.tripSearchTop}>
+                        <p className={style.tripSearchTitle}>Where To?</p>
+                        <div className={style.searchCloseBtn} onClick={() => setOpenSearch(false)}>
+                            <img src={xMark} alt="Close" />
+                        </div>
+                    </div>
+                    <div className={style.searchElementContainer} onClick={(e) => e.preventDefault()}>
+                        <div
+                            className={style.searchInput}
+                            onClick={() => setOpenSearch(!openSearch)}
+                        >
+                            <div className={style.elementIcon}>
+                                <img src={searchIcon} alt="search" />
+                            </div>
+                            <input
+                                className={style.tripElement}
+                                type="text"
+                                placeholder="Try California Park..."
+                                onClick={(e) => { e.stopPropagation() }}
+                            />
+                        </div>
+                        <div
+                            className={`${style.searchResults} ${openSearch ? style.openElement : ""
+                                }`}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <div className={style.searchRecommendation}>
+                                <div className={style.searchIcon}>
+                                    <img src={forestIcon} alt="icon" />
+                                </div>
+                                <p>Forests</p>
+                            </div>
+                            <div className={style.searchRecommendation}>
+                                <div className={style.searchIcon}>
+                                    <img src={forestIcon} alt="icon" />
+                                </div>
+                                <p>Forests</p>
+                            </div>
+                            <div className={style.searchRecommendation}>
+                                <div className={style.searchIcon}>
+                                    <img src={forestIcon} alt="icon" />
+                                </div>
+                                <p>Forests</p>
+                            </div>
+                            <div className={style.searchRecommendation}>
+                                <div className={style.searchIcon}>
+                                    <img src={forestIcon} alt="icon" />
+                                </div>
+                                <p>Forests</p>
+                            </div>
+                            <div className={style.searchRecommendation}>
+                                <div className={style.searchIcon}>
+                                    <img src={forestIcon} alt="icon" />
+                                </div>
+                                <p>Forests</p>
+                            </div>
+                            <div className={style.searchRecommendation}>
+                                <div className={style.searchIcon}>
+                                    <img src={forestIcon} alt="icon" />
+                                </div>
+                                <p>Forests</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className={`${style.datePick} ${style.tripSearchNone} ${openDateRange ? style.mobileWhereTo : style.tripSearchNone}`} onClick={(e) => e.stopPropagation()}>
+                    <div className={style.tripSearchTop}>
+                        <p className={style.tripSearchTitle}>Dates</p>
+                        <div className={style.searchCloseBtn} onClick={() => setOpenDateRange(false)}>
+                            <img src={xMark} alt="Close" />
+                        </div>
+                    </div>
+                    <div className={style.searchElementContainer}>
+                        <div className={style.elementIcon}>
+                            <img src={calendarIcon} alt="date" />
+                        </div>
+                        <div
+                            className={style.tripElement}
+                            type="text"
+                        // onClick={(e) => { setOpenDateRange(!openDateRange); e.stopPropagation() }}
+                        >
+                            {input.startDate
+                                ? `${months[input.startDate.getMonth()]
+                                } ${input.startDate.getDate()}
+                    - ${months[input.endDate.getMonth()]
+                                } ${input.endDate.getDate()}`
+                                : "Choose Date"}
+                        </div>
+                        <div
+                            className={`${style.popUpInput} ${openDateRange ? style.openElement : ""
+                                } `}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {/* <div className={style.popUpClose}>
+                      <p>Date</p>
+                      <div
+                        className={style.closeBtn}
+                        onClick={() => setOpenDateRange(!openDateRange)}
+                      >
+                        <img src={xMark} alt="close" />
+                      </div>
+                    </div> */}
+                            <DateRange
+                                editableDateInputs={true}
+                                onChange={(item) => {
+                                    setState([item.selection]);
+                                    takeInput(item);
+                                }}
+                                className={style.datePickerStyle}
+                                moveRangeOnFirstSelection={false}
+                                ranges={state}
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div onClick={(e) => e.stopPropagation()} className={`${style.whereTo} ${style.tripSearchNone} ${openGuests ? style.mobileGuests : style.tripSearchNone}`}>
+                    <div className={style.tripSearchTop}>
+                        <p className={style.tripSearchTitle}>Guests</p>
+                        <div className={style.searchCloseBtn} onClick={() => setOpenGuests(false)}>
+                            <img src={xMark} alt="Close" />
+                        </div>
+                    </div>
+                    <div className={style.searchElementContainer}>
+                        <div
+                            className={style.guestsInput}
+                            onClick={(e) => { e.stopPropagation() }}
+                        >
+                            <div className={style.elementLeft}>
+                                <div className={style.elementIcon}>
+                                    <img src={guestsIcon} alt="search" />
+                                </div>
+                                <div className={style.tripElement}>
+                                    {guests.adults + guests.children > 0
+                                        ? `${guests.adults + guests.children} guests ${guests.pets > 0 ? `, ${guests.pets} pets` : ""
+                                        }`
+                                        : "Add Guests"}
+                                </div>
+                            </div>
+                            <img
+                                className={style.arrowDown}
+                                src={arrowDownIcon}
+                                alt="open"
+                            />
+                        </div>
+                        <div
+                            className={`${style.guestsContainer} ${openGuests ? style.openElement : ""
+                                }`}
+                            onClick={(e) => { e.stopPropagation(); console.log("clickedd") }}
+                        >
+                            <div className={style.guestsItem} >
+                                <div className={style.guestsLeft}>
+                                    <p>ADULTS</p>
+                                    <p>Ages 13 or above</p>
+                                </div>
+                                <div className={style.guestsRight}>
+                                    <div
+                                        className={style.countBtn}
+                                        onClick={() => decreaseGuest("adults")}
+                                    >
+                                        -
+                                    </div>
+                                    <div className={style.guestCount}>
+                                        {guests && guests.adults}
+                                    </div>
+                                    <div
+                                        className={style.countBtn}
+                                        onClick={() => increaseGuest("adults")}
+                                    >
+                                        +
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={style.guestsItem}>
+                                <div className={style.guestsLeft}>
+                                    <p>CHILDREN</p>
+                                    <p>Ages 12 or below</p>
+                                </div>
+                                <div className={style.guestsRight}>
+                                    <div
+                                        className={style.countBtn}
+                                        onClick={() => decreaseGuest("children")}
+                                    >
+                                        -
+                                    </div>
+                                    <div className={style.guestCount}>
+                                        {guests && guests.children}
+                                    </div>
+                                    <div
+                                        className={style.countBtn}
+                                        onClick={() => increaseGuest("children")}
+                                    >
+                                        +
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={style.guestsItem}>
+                                <div className={style.guestsLeft}>
+                                    <p>Any Pets?</p>
+                                </div>
+                                <div className={style.guestsRight}>
+                                    <div
+                                        className={style.countBtn}
+                                        onClick={() => decreaseGuest("pets")}
+                                    >
+                                        -
+                                    </div>
+                                    <div className={style.guestCount}>
+                                        {guests && guests.pets}
+                                    </div>
+                                    <div
+                                        className={style.countBtn}
+                                        onClick={() => increaseGuest("pets")}
+                                    >
+                                        +
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div className={`section-x padding-x ${style.eventsTop}`}>
                     <div className={`section-x ${style.eventMainFilter}`}>
                         <form className={style.tripSearch}>
@@ -561,15 +766,23 @@ export default function Events({ setPageNav }) {
                             <div className={style.searchBtn} onClick={() => searchBy()}>
                                 <img src={searchIcon} alt="search" />
                             </div>
+                            <div className={style.searchBtn2}>
+                                Search
+                            </div>
                         </form>
                         {errmsg && (<p className={style.fillMsg}>*Please fill the required spaces</p>)}
                     </div>
                 </div>
                 <div className={style.eventsContent}>
                     <div className={`section-x padding-x ${style.eventsContentWrapper}`}>
-                        <div className={style.eventsFilter}>
+                        <div className={`${style.eventsFilter} ${openMobileFilter && style.showFilter}`}>
                             <div className={style.filterContent}>
-                                <h1 className={style.filterGeneralTitle}>Filter By</h1>
+                                <div className={style.filterTop}>
+                                    <h1 className={style.filterGeneralTitle}>Filter By</h1>
+                                    <div className={style.closeBtn} onClick={() => setOpenMobileFilter(false)}>
+                                        <img src={xMark} alt="Close Filter" />
+                                    </div>
+                                </div>
                                 <div className={style.filterElement}>
                                     <h2 className={style.filterTitle}>Site types</h2>
                                     <div className={style.filterTypes}>
@@ -645,6 +858,7 @@ export default function Events({ setPageNav }) {
                                 <p className={style.found}>{result.length} Campgrounds found</p>
                                 <div className={style.resultExtraFilter}>
                                     <div className={style.tags}>
+                                        <div className={style.filterBtn} onClick={() => setOpenMobileFilter(true)}>Filter</div>
                                         {tourType ?
                                             (
                                                 <div className={style.tag}>
