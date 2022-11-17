@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import CardType1 from './../../components/card1/CardType1';
+import { addToCart, removeFromCart } from './../../Store/basketReducer.js';
 
 // Styles & Images
 import style from './detail.module.scss';
@@ -21,7 +22,7 @@ export default function Detail({ setPageNav }) {
     const { id } = useParams();
     console.log("Got it", id);
 
-
+    const { basket } = useSelector(state => state.basketReducer);
     const [tour, setTour] = useState({});
     const [allTours, setAllTours] = useState([]);
     const data = useSelector(state => state.eventsReducer.products);
@@ -42,6 +43,21 @@ export default function Detail({ setPageNav }) {
     useEffect(() => {
         setPageNav('events');
     }, []);
+
+    const dispatch = useDispatch();
+    const [inBasket, setInBasket] = useState(false);
+    console.log(allTours);
+
+    useEffect(() => {
+        let check = basket.filter(e => e.id === tour[0]?.id);
+        if (check.length === 0) {
+            console.log("not found", check);
+            setInBasket(false);
+        } else {
+            console.log("found", check);
+            setInBasket(true);
+        }
+    }, [tour, id])
 
     const months = [
         "January",
@@ -112,6 +128,10 @@ export default function Detail({ setPageNav }) {
         setOpenSearch(false);
     })
 
+    // Adding
+
+
+
     return (
         <>
             <main className={`section-x padding-x ${style.detail}`}>
@@ -121,7 +141,7 @@ export default function Detail({ setPageNav }) {
                             <p>{tour[0]?.city} - {tour[0]?.title}</p>
                         </div>
                         <div className={style.tourInfo}>
-                            <div className={style.tourImg} style={{backgroundImage: `url(${tour[0]?.banner})`}}></div>
+                            <div className={style.tourImg} style={{ backgroundImage: `url(${tour[0]?.banner})` }}></div>
                             <div className={style.tourIntro}>
                                 <h1 className={style.tourTitle}>{tour[0]?.title}</h1>
                                 <p className={style.tourShortDescription}>Hike and camp among otherworldly rock formations at this Utah park.</p>
@@ -315,14 +335,29 @@ export default function Detail({ setPageNav }) {
                                 </div>
                             </form>
                         </div> */}
+                        <div className={style.add}>
+                            <div className={style.addBottom}>
+                                <div className={style.price}>{tour[0]?.price}$ / day</div>
+
+                                {
+                                    inBasket ? (
+                                        <div className={style.removeBtn} onClick={() => { dispatch(removeFromCart(tour[0])); setInBasket(!inBasket) }}>Remove</div>
+                                    ) : (
+                                        <div className={style.addBtn} onClick={() => { dispatch(addToCart(tour[0])); setInBasket(!inBasket) }}>Add to List</div>
+                                    )
+                                }
+                            </div>
+                        </div>
                     </div>
                     <div className={style.tourRecommendations}>
                         <p className={style.recTitle}>Other Recommendations</p>
-                        {
-                            data ? data.map((event, key) => (
-                                <CardType1 event={event} key={key} />
-                            )) : console.log("Events didn't load. L bozo hahaha")
-                        }
+                        <div className={style.tourContent}>
+                            {
+                                data ? data.map((event, key) => (
+                                    event.id !== tour[0]?.id && <CardType1 event={event} key={key} />
+                                )) : console.log("Events didn't load. L bozo hahaha")
+                            }
+                        </div>
                     </div>
                 </div>
             </main>

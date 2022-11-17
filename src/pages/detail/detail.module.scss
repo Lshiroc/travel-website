@@ -5,7 +5,7 @@
 
 .detail2Column {
     display: grid;
-    grid-template-columns: 63% 30%;
+    grid-template-columns: 63% 32%;
     column-gap: 40px;
     justify-content: space-between;
 }
@@ -119,7 +119,6 @@
                 }
             }
         }
-
     }
 
     .tourInternetInfos {
@@ -170,259 +169,36 @@
     }
 
     .add {
-        form {
-            // Filter section
+        .addBottom {
+            display: flex;
+            align-items: center;
+            column-gap: 20px;
+        }
+        padding: 20px;
 
-            .eventMainFilter {
-                margin-bottom: 60px !important;
-            }
+        .price {
+            font-weight: 600;
+            font-size: 18px;
+        }
 
+        .addBtn {
+            background: #14d033;
+            color: white;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 18px;
+            cursor: pointer;
+        }
 
-            .searchElementContainer {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                column-gap: 10px;
-                border-radius: 10px;
-                border: 1px solid rgb(192, 193, 191);
-                padding-left: 10px;
-                padding-right: 15px;
-                background: rgb(255, 255, 255);
-                position: relative;
-
-                .elementLeft {
-                    display: flex;
-                    align-items: center;
-                }
-
-                .arrowDown {
-                    width: 15px;
-                }
-
-                .guestsInput {
-                    width: 100%;
-                    display: flex;
-                    justify-content: space-between;
-                }
-
-                .searchInput {
-                    width: 100%;
-                    display: flex;
-                    align-items: center;
-                }
-
-                .searchInput:focus {
-                    display: block;
-                }
-
-                .searchResults {
-                    position: absolute;
-                    background: #fff;
-                    border-radius: 10px;
-                    box-shadow: rgb(0 0 0 / 16%) 0px 2px 4px 0px;
-                    padding: 15px;
-                    left: 0;
-                    right: 0;
-                    top: 60px;
-                    z-index: 1;
-                }
-
-
-            }
-
-            .elementIcon {
-                width: 17px;
-                height: 17px;
-
-                & img {
-                    width: 100%;
-                }
-            }
-
-            .tripElement {
-                flex-grow: 1;
-                font-size: 17px;
-                font-weight: 400;
-                border: none;
-                outline: none;
-                padding: 10px 15px;
-                background: rgb(255, 255, 255);
-                border-radius: 50px;
-            }
-
-            .searchResults {
-                display: none;
-                row-gap: 5px;
-
-                .searchRecommendation {
-                    padding: 15px 5px;
-                    display: flex;
-                    align-items: center;
-                    column-gap: 15px;
-                    transition: 0.3s;
-                    border-radius: 10px;
-                    cursor: pointer;
-
-                    .searchIcon {
-                        width: 40px;
-                        height: 40px;
-                        background-color: rgb(236, 236, 236);
-                        border-radius: 50%;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-
-                        img {
-                            filter: invert(81%) sepia(0%) saturate(274%) hue-rotate(204deg) brightness(97%) contrast(74%);
-                        }
-
-                        p {
-                            font-size: 17px;
-                        }
-                    }
-                }
-
-                .searchRecommendation:hover {
-                    background-color: rgb(233, 233, 233);
-                }
-            }
-
-            .popUpInput {
-                position: absolute;
-                width: 100%;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                top: 60px;
-                display: none;
-            }
-
-            .popUpClose {
-                width: 100%;
-                background: white;
-                padding: 8px 10px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                border-top-left-radius: 20px;
-                border-top-right-radius: 20px;
-
-                .closeBtn {
-                    border-radius: 5px;
-                    ;
-                    cursor: pointer;
-                    width: 22px;
-                    height: 22px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                }
-
-                .closeBtn:hover {
-                    background: rgb(229, 234, 223);
-                }
-            }
-
-            .popUpClose img {
-                width: 20px;
-            }
-
-            .openElement {
-                display: block !important;
-                z-index: 1;
-            }
-
-            .guestsContainer {
-                width: 320px;
-                position: absolute;
-                left: 0;
-                right: 0;
-                top: 60px;
-                background: white;
-                border-radius: 10px;
-                box-shadow: rgb(0 0 0 / 16%) 0px 2px 4px 0px;
-                color: rgb(40, 64, 12);
-                display: none;
-
-                .guestsItem {
-                    display: flex;
-                    justify-content: space-between;
-                    padding: 20px 15px;
-                    cursor: context-menu
-                }
-
-                .guestsItem:nth-child(2) {
-                    border-top: 1px solid rgb(229, 234, 223);
-                    border-bottom: 1px solid rgb(229, 234, 223);
-                }
-
-                .guestsLeft {
-                    display: grid;
-                    align-items: center;
-                }
-
-                .guestsLeft p:nth-child(2) {
-                    margin-top: 5px;
-                }
-
-                .guestsRight {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr 1fr;
-                    justify-content: center;
-                    align-items: center;
-                    column-gap: 10px;
-                    font-size: 18px;
-                    text-align: center;
-                }
-
-                .countBtn {
-                    border: 2px solid rgb(40, 64, 12);
-                    border-radius: 50%;
-                    width: 30px;
-                    height: 30px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    font-weight: 600;
-                    color: rgb(40, 64, 12);
-                    cursor: pointer;
-                    transition: 0.3s;
-                }
-
-                .countBtn:hover {
-                    background-color: rgb(228, 228, 228);
-                    ;
-                }
-            }
-
-            .searchBtn {
-                background: var(--primary);
-                border-radius: 10px;
-                border: 3px solid transparent;
-                width: 45px;
-                height: 45px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-                transition: 0.3s;
-
-                &:hover {
-                    background-color: white;
-                    border: 3px solid var(--primary);
-                }
-
-                &:hover img {
-                    filter: invert(0%) sepia(89%) saturate(7500%) hue-rotate(198deg) brightness(87%) contrast(111%);
-                }
-
-                img {
-                    width: 20px;
-                    filter: invert(100%) sepia(0%) saturate(11%) hue-rotate(221deg) brightness(105%) contrast(101%);
-                    transition: 0.3s;
-                }
-            }
-
+        .removeBtn {
+            background: #d2390a;
+            color: white;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 18px;
+            cursor: pointer;
         }
     }
 }
@@ -431,5 +207,37 @@
     .recTitle {
         font-size: 18px;
         margin-bottom: 5px;
+    }
+
+    .tourContent {
+        display: grid;
+    }
+}
+
+
+@media screen and (max-width: 960px) {
+    .detail2Column {
+        grid-template-columns: 100%;
+
+
+        .detailContainer {
+            // grid-column: 1 / 3;
+        }
+
+        .tourContent {
+            display: grid;
+            grid-template-columns: 48% 48%;
+            column-gap: 20px;
+            justify-content: space-between;
+        }
+    }
+}
+
+
+@media screen and (max-width: 656px) {
+    .detail2Column {
+        .tourContent {
+            grid-template-columns: 100%;
+        }
     }
 }

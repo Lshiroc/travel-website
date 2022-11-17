@@ -212,7 +212,7 @@ export default function Basket() {
   // Go to payment
 
   const goPayment = () => {
-    console.log("goinf to pay....");
+    console.log("going to pay....");
   }
 
   return (
