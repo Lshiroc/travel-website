@@ -205,3 +205,19 @@
         opacity: 1;
     }
 }
+
+@media screen and (max-width: 960px) {
+    
+    .cardType1 {
+        cursor: context-menu;
+    }
+
+    .cardType1:hover {
+        animation-name: none;
+    }
+
+    .addBtn, .removeBtn {
+        opacity: 1;
+    }
+}
+

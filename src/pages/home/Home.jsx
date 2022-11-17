@@ -687,7 +687,7 @@ function Home({ setPageNav }) {
         <section className={`section-x padding-x ${style.tours}`}>
           <div className={style.sectionMore}>
             <h1 className="section-title">Recommended Tours</h1>
-            <p>See More</p>
+            <Link to="/events">See More</Link>
           </div>
           <div className={style.toursContent}>
             {
