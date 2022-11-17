@@ -668,7 +668,7 @@
 
     .eventsFilter {
         position: fixed;
-        bottom: 0;
+        top: 80px;
         left: 0;
         max-height: calc(100vh - 80px);
         overflow-y: auto;
@@ -685,7 +685,7 @@
             .resultExtraFilter {
                 display: flex;
                 column-gap: 10px;
-                
+
                 .tags {
                     flex-grow: 1;
                     .filterBtn {
