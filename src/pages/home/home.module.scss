@@ -1012,7 +1012,12 @@
         row-gap: 10px;
         align-items: flex-start;
     }
+
     // Why Us
+
+    .whyUs {
+        margin-bottom: 90px !important;
+    }
 
     .whyUsContent {
         grid-template-columns: auto;
@@ -1036,12 +1041,40 @@
 
     // Tours Section
 
+    .tours {
+        margin-bottom: 90px !important;
+    }
+
     .toursContent {
-        // display: grid;
         grid-template-columns: repeat(1, 100%);
-        // justify-content: space-between;
-        // column-gap: 30px;
-        // row-gap: 35px;
+    }
+
+    // Contact Us Section
+
+    .contactUs {
+        height: 450px;
+    }
+
+    .contactContent {
+        display: grid;
+        grid-template-columns: 100%;
+        justify-items: center;
+    }
+
+    .contactText {
+        width: 90%;
+
+        h1 {
+            font-size: 26px;
+        }
+
+        p {
+            font-size: 16px;
+        }
+    }
+
+    .contactBrand {
+        display: none;
     }
 }
 
@@ -1087,4 +1120,5 @@
             font-size: 20px;
         }
     }
+
 }
