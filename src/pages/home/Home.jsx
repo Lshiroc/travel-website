@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeStateBool } from './../../Store/statesReducer';
@@ -53,8 +53,11 @@ function Home({ setPageNav }) {
 
   const [result, setResult] = useState([]);
   const data = useSelector(state => state.eventsReducer.products);
+  const [backupData, setData] = useState([]);
+
   useEffect(() => {
     setResult(data);
+    setData(data);
     console.log("Data successfully copied to the state!");
     console.log("abc", result)
     console.log("cdf", data);
@@ -160,6 +163,29 @@ function Home({ setPageNav }) {
     window.location.href = "https://google.com";
   }
 
+  const goSearch = () => {
+    console.log("began searching");
+  }
+
+
+  // Searching for places (manual)
+  const [cities, setCities] = useState([]);
+  const searchCity = (e) => {
+    console.log("Intitial Value: ", cities);
+    console.log("typed", e.target.value);
+    setCities(backupData.filter((a) => a.city.toLowerCase().includes(e.target.value.toLowerCase())));
+
+    console.log("Exp Value: ", cities);
+  }
+
+  const [cityInput, setCityInput] = useState("");
+  const cityInputElement = useRef();
+  const chooseCity = (city) => {
+    cityInputElement.current.value = city;
+    setCityInput(city);
+    console.log("City has chosed");
+  }
+
   return (
     <main className={toggleMenu ? style.overflowHidden : ''}>
 
@@ -192,7 +218,9 @@ function Home({ setPageNav }) {
                   className={style.tripElement}
                   type="text"
                   placeholder="Try California Park..."
+                  ref={cityInputElement}
                   onClick={(e) => { e.stopPropagation() }}
+                  onChange={(e) => searchCity(e)}
                 />
               </div>
               <div
@@ -200,42 +228,16 @@ function Home({ setPageNav }) {
                   }`}
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className={style.searchRecommendation}>
-                  <div className={style.searchIcon}>
-                    <img src={forestIcon} alt="icon" />
-                  </div>
-                  <p>Forests</p>
-                </div>
-                <div className={style.searchRecommendation}>
-                  <div className={style.searchIcon}>
-                    <img src={forestIcon} alt="icon" />
-                  </div>
-                  <p>Forests</p>
-                </div>
-                <div className={style.searchRecommendation}>
-                  <div className={style.searchIcon}>
-                    <img src={forestIcon} alt="icon" />
-                  </div>
-                  <p>Forests</p>
-                </div>
-                <div className={style.searchRecommendation}>
-                  <div className={style.searchIcon}>
-                    <img src={forestIcon} alt="icon" />
-                  </div>
-                  <p>Forests</p>
-                </div>
-                <div className={style.searchRecommendation}>
-                  <div className={style.searchIcon}>
-                    <img src={forestIcon} alt="icon" />
-                  </div>
-                  <p>Forests</p>
-                </div>
-                <div className={style.searchRecommendation}>
-                  <div className={style.searchIcon}>
-                    <img src={forestIcon} alt="icon" />
-                  </div>
-                  <p>Forests</p>
-                </div>
+                {
+                  cities.map((city, key) => (
+                    <div className={style.searchRecommendation} key={key} onClick={() => { chooseCity(city.city); setOpenSearch(false) }}>
+                      <div className={style.searchIcon}>
+                        <img src={forestIcon} alt="icon" />
+                      </div>
+                      <p>{city.city}</p>
+                    </div>
+                  ))
+                }
               </div>
             </div>
           </div>
@@ -409,8 +411,10 @@ function Home({ setPageNav }) {
                     <input
                       className={style.tripElement}
                       type="text"
+                      ref={cityInputElement}
                       placeholder="Try California Park..."
                       onClick={(e) => { setOpenSearch(!openSearch); e.stopPropagation() }}
+                      onChange={(e) => searchCity(e)}
                     />
                   </div>
                   <div
@@ -418,42 +422,16 @@ function Home({ setPageNav }) {
                       }`}
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <div className={style.searchRecommendation}>
-                      <div className={style.searchIcon}>
-                        <img src={forestIcon} alt="icon" />
-                      </div>
-                      <p>Forests</p>
-                    </div>
-                    <div className={style.searchRecommendation}>
-                      <div className={style.searchIcon}>
-                        <img src={forestIcon} alt="icon" />
-                      </div>
-                      <p>Forests</p>
-                    </div>
-                    <div className={style.searchRecommendation}>
-                      <div className={style.searchIcon}>
-                        <img src={forestIcon} alt="icon" />
-                      </div>
-                      <p>Forests</p>
-                    </div>
-                    <div className={style.searchRecommendation}>
-                      <div className={style.searchIcon}>
-                        <img src={forestIcon} alt="icon" />
-                      </div>
-                      <p>Forests</p>
-                    </div>
-                    <div className={style.searchRecommendation}>
-                      <div className={style.searchIcon}>
-                        <img src={forestIcon} alt="icon" />
-                      </div>
-                      <p>Forests</p>
-                    </div>
-                    <div className={style.searchRecommendation}>
-                      <div className={style.searchIcon}>
-                        <img src={forestIcon} alt="icon" />
-                      </div>
-                      <p>Forests</p>
-                    </div>
+                    {
+                      cities.map((city, key) => (
+                        <div className={style.searchRecommendation} key={key} onClick={() => { chooseCity(city.city); setOpenSearch(false) }}>
+                          <div className={style.searchIcon}>
+                            <img src={forestIcon} alt="icon" />
+                          </div>
+                          <p>{city.city}</p>
+                        </div>
+                      ))
+                    }
                   </div>
                 </div>
               </div>
@@ -601,9 +579,9 @@ function Home({ setPageNav }) {
                   </div>
                 </div>
               </div>
-              <div className={style.searchBtn}>
+              <Link to="/events" state={{ stater: [cityInput, input, guests] }} className={style.searchBtn}>
                 <img src={searchIcon} alt="search" />
-              </div>
+              </Link>
               <div className={style.searchBtn2}>
                 Search
               </div>
@@ -692,12 +670,7 @@ function Home({ setPageNav }) {
           <div className={style.toursContent}>
             {
               data ? result.map((event, key) => (
-                <CardType1 event={event} key={key} />
-              )) : console.log("Events didn't load. L bozo hahaha")
-            }
-            {
-              data ? result.map((event, key) => (
-                <CardType1 event={event} key={key} />
+                event.id < 7 && <CardType1 event={event} key={key} />
               )) : console.log("Events didn't load. L bozo hahaha")
             }
 

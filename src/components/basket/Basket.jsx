@@ -346,7 +346,7 @@ export default function Basket() {
                         <div className={style.tourImg} style={{ backgroundImage: `url(${tour.image})` }}></div>
                         <div className={style.tourInfo}>
                           <h3 className={style.tourTitle}>{tour.title}</h3>
-                          <p className={style.tourDate}>Date: {months[tempTour?.reserved?.start.month - 1]} {tempTour.reserved?.start.day} - {months[tempTour.reserved?.end.month - 1]} {tempTour.reserved?.end.day}</p>
+                          <p className={style.tourDate}>Date: {months[tempTour?.reserved?.start.month - 1]} {tempTour?.reserved?.start.day} - {months[tempTour?.reserved?.end.month - 1]} {tempTour?.reserved?.end.day}</p>
                         </div>
                       </div>
                       <div className={style.tourRight}>
@@ -359,7 +359,7 @@ export default function Basket() {
                 }
               </div>
               <div className={style.basketBottom}>
-                <p>{warn}</p>
+                <p className={style.warnMe}>{warn}</p>
                 <div className={style.payBtn} onClick={() => openPayWindow()}>Pay</div>
               </div>
             </div>

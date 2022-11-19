@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import CardType1 from "../../components/card1/CardType1";
 import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom'
 
 // Images & Styles
 import style from './events.module.scss';
@@ -19,6 +20,20 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
 export default function Events({ setPageNav }) {
+
+    const location = useLocation()
+
+    const { stater } = location.state;
+    useEffect(() => {
+        if(stater.length !== 0) {
+            console.log(stater[1], input);
+            setCityInput(stater[0]);
+            setInput(stater[1]);
+            setGuests(stater[2]);
+
+            console.log("automatic search event")
+        }
+    }, [])
 
     const data = useSelector(state => state.eventsReducer.products);
     const [backupData, setData] = useState([]);

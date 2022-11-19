@@ -154,7 +154,7 @@ export default function Detail({ setPageNav }) {
                         <div className={style.tourAbout}>
                             <h3>About</h3>
                             <p>
-                                Set in the southwestern corner of Utah, Bryce Canyon National Park is famous for its shale and sandstone rock formations, known as hoodoos or fairy chimneys, which dominate the landscape. Hiking and photography, unsurprisingly, are particularly popular activities, and the park offers a variety of trails that range from easy walks along the rim to more challenging backcountry hikes. The visitor center also offers a variety of educational programs, from ranger-led horseback rides to an interpretive film about the park’s geological history. You can even camp among the hoodoos, either at one of two campgrounds or at one of 10 backcountry campsites.
+                                {tour[0]?.about}
                             </p>
                         </div>
                         <div className={style.tourActivities}>
@@ -354,7 +354,7 @@ export default function Detail({ setPageNav }) {
                         <div className={style.tourContent}>
                             {
                                 data ? data.map((event, key) => (
-                                    event.id !== tour[0]?.id && <CardType1 event={event} key={key} />
+                                    event.id !== tour[0]?.id && event.id < 6 && <CardType1 event={event} key={key} />
                                 )) : console.log("Events didn't load. L bozo hahaha")
                             }
                         </div>
