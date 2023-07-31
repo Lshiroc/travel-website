@@ -13,16 +13,17 @@ function CardType1({ event }) {
     const { basket } = useSelector(state => state.basketReducer);
     const dispatch = useDispatch();
     const [inBasket, setInBasket] = useState(false);
-    console.log(basket);
 
     useEffect(() => {
-        let check = basket.filter(e => e.id === event.id);
-        if (check.length === 0) {
-            setInBasket(false);
-        } else {
-            setInBasket(true);
-        }
-    }, [basket])
+        setInBasket(false);
+
+        // let check = basket.filter(e => e.id === event.id);
+        // if (check.length === 0) {
+        //     setInBasket(false);
+        // } else {
+        //     setInBasket(true);
+        // }
+    }, [event])
 
     return (
         <div className={style.cardType1}>

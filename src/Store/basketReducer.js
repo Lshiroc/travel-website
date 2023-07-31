@@ -46,7 +46,7 @@ export const basketReducer = createSlice({
                     // tour.guestsWill = action.payload[2];
 
                     // console.log("doneee for GOD's sakeeee", current(tour));
-                    
+
                     console.log("for gods sake wrokkk!!!", current(tour).title);
                     tour.reserved = action.payload[1];
                     tour.reserved.start.month = action.payload[1].start.month + 1;
@@ -56,7 +56,7 @@ export const basketReducer = createSlice({
                     tour.totalPrice = action.payload[3];
                     console.log("totalPriceeee", action.payload[3]);
                     console.log(current(tour));
-                    
+
                     // Saving to localStorage
                     // localStorage.setItem("basket", [...JSON.parse(localStorage.getItem("basket").filter(e => e.id !== action.payload[0]), current(tour)]);
                     // console.log("saved to local storage");

@@ -23,26 +23,24 @@ export default function Events({ setPageNav }) {
 
     const location = useLocation()
 
-    const { stater } = location.state;
-    useEffect(() => {
-        if(stater.length !== 0) {
-            console.log(stater[1], input);
-            setCityInput(stater[0]);
-            setInput(stater[1]);
-            setGuests(stater[2]);
+    // const { stater } = location.state;
+    // useEffect(() => {
+    //     if(stater.length !== 0) {
+    //         console.log(stater[1], input);
+    //         setCityInput(stater[0]);
+    //         setInput(stater[1]);
+    //         setGuests(stater[2]);
 
-            console.log("automatic search event")
-        }
-    }, [])
+    //         console.log("automatic search event")
+    //     }
+    // }, [])
 
     const data = useSelector(state => state.eventsReducer.products);
+    const basketData = useS
     const [backupData, setData] = useState([]);
     useEffect(() => {
         setResult(data);
         setData(data);
-        console.log("Data successfully copied to the state!");
-        console.log("abc", result)
-        console.log("cdf", data);
     }, [data]);
 
     const [value, setValue] = React.useState([0, 120]);
@@ -74,7 +72,6 @@ export default function Events({ setPageNav }) {
 
     const takeInput = (e) => {
         setInput(e.selection);
-        console.log("Lmaooooooo its mt timeee", e.selection);
     };
 
     const [state, setState] = useState([
@@ -122,13 +119,12 @@ export default function Events({ setPageNav }) {
         setOpenSearch(false);
     })
 
-    // Function for Filtering 
+    // Function for Filtering
 
     // Here we go.. right into the hell
     // God bless me and give luck to me
 
     const sortFilter = (sort) => {
-        console.log(sort);
         switch (sort) {
             case "highToLow":
                 console.log("hmm");
@@ -139,11 +135,6 @@ export default function Events({ setPageNav }) {
                 break;
         }
     }
-
-    const typeFilter = (type) => {
-
-    }
-
 
     const [errmsg, setErrMsg] = useState(false);
     const [result, setResult] = useState([]);
@@ -205,7 +196,7 @@ export default function Events({ setPageNav }) {
 
     const filterAll = () => {
         // setResult([]);
-        // Getting Tour Types: 
+        // Getting Tour Types:
 
         // Getting Features:
 
@@ -591,7 +582,6 @@ export default function Events({ setPageNav }) {
                                             className={style.tripElement}
                                             type="text"
                                             ref={cityInputElement}
-                                            value={cityInputElement?.current?.value}
                                             placeholder="Try California Park..."
                                             onClick={(e) => { setOpenSearch(!openSearch); e.stopPropagation() }}
                                             onChange={(e) => searchCity(e)}
@@ -805,7 +795,7 @@ export default function Events({ setPageNav }) {
                                             max={375}
                                             ref={rangeInput}
                                             getAriaValueText={valuetext}
-                                            
+
                                         /> */}
                                         <input className={style.priceRangeInput} onChange={(e) => setPriceRange(e.target.value)} ref={rangeInput} type="range" min="0" max="230" />
                                     </div>

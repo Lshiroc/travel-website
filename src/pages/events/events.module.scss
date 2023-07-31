@@ -338,6 +338,7 @@
             .closeBtn {
                 width: 30px;
                 height: 30px;
+                display: none;
 
                 img {
                     width: 100%;
@@ -679,6 +680,12 @@
         padding: 10px 15px;
         transition: 0.4s;
         transform: translateX(-300px);
+
+        .filterContent .filterTop {
+            .closeBtn {
+                display: block;
+            }
+        }
     }
 
     .eventsResult {
