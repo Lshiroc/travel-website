@@ -4,6 +4,7 @@ export const basketReducer = createSlice({
     name: "basketReducer",
     initialState: {
         basket: [],
+        basketIDs: [],
         badge: 0,
         isOpen: false,
         isOpenSign: false,
@@ -14,7 +15,7 @@ export const basketReducer = createSlice({
             let check = state.basket.filter(e => e.id === action.payload.id);
             if (check.length === 0) {
                 state.basket = [...state.basket, action.payload];
-                console.log("added", state.basket);
+                state.basketIDs = [...state.basketIDs, action.payload.id];
                 localStorage.setItem("basket", JSON.stringify(state.basket));
                 state.badge += 1;
             } else {
@@ -23,6 +24,7 @@ export const basketReducer = createSlice({
         },
         removeFromCart: (state, action) => {
             state.basket = state.basket.filter(e => e.id !== action.payload.id);
+            state.basketIDs = state.basketIDs.filter(e => e.id != action.payload.id);
             console.log("Removed", state.basket);
             localStorage.setItem("basket", JSON.stringify(state.basket));
             state.badge -= 1;

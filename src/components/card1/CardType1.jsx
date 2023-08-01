@@ -9,14 +9,14 @@ import animated1 from './../../assets/icons/location-animated.gif';
 import addIcon from './../../assets/icons/add-icon.svg';
 import removeIcon from './../../assets/icons/remove-icon.svg';
 
-function CardType1({ event }) {
-    const { basket } = useSelector(state => state.basketReducer);
+function CardType1({ event, inBasket }) {
+    // const { basket } = useSelector(state => state.basketReducer);
     const dispatch = useDispatch();
-    const [inBasket, setInBasket] = useState(false);
+    // const [inBasket, setInBasket] = useState(false);
 
     useEffect(() => {
-        setInBasket(false);
-
+        // setInBasket(false);
+// console.log(inBasket)
         // let check = basket.filter(e => e.id === event.id);
         // if (check.length === 0) {
         //     setInBasket(false);

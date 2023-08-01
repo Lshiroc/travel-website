@@ -36,13 +36,12 @@ export default function Events({ setPageNav }) {
     // }, [])
 
     const data = useSelector(state => state.eventsReducer.products);
-    const basketData = useS
+    const basketData = useSelector(state => state.basketReducer.basketIDs);
     const [backupData, setData] = useState([]);
     useEffect(() => {
         setResult(data);
         setData(data);
     }, [data]);
-
     const [value, setValue] = React.useState([0, 120]);
 
     const handleChange = (event, newValue) => {
@@ -871,7 +870,7 @@ export default function Events({ setPageNav }) {
                             <div className={style.resultContainer}>
                                 {
                                     data ? result.map((event, key) => (
-                                        <CardType1 event={event} key={key} />
+                                        <CardType1 inBasket={basketData.includes(event.id)} event={event} key={key} />
                                     )) : console.log("Events didn't load. L bozo hahaha")
                                 }
 
