@@ -173,9 +173,13 @@ function Home({ setPageNav }) {
   const searchCity = (e) => {
     console.log("Intitial Value: ", cities);
     console.log("typed", e.target.value);
-    setCities(backupData.filter((a) => a.city.toLowerCase().includes(e.target.value.toLowerCase())));
-
-    console.log("Exp Value: ", cities);
+    let allCities = backupData.map((a) => {
+      return a.city;
+    })
+    let newCities = allCities.filter((a) => a.toLowerCase().includes(e.target.value.toLowerCase()))
+    let resultCities = [...new Set(newCities)];
+    console.log("hmmmmmgg",resultCities);
+    setCities([...resultCities]);
   }
 
   const [cityInput, setCityInput] = useState("");
@@ -188,7 +192,6 @@ function Home({ setPageNav }) {
 
   return (
     <main className={toggleMenu ? style.overflowHidden : ''}>
-
       <header className={style.header}>
         <div className={`section-x padding-x ${style.headerContent}`}>
           <div className={style.headerText}>
@@ -230,11 +233,11 @@ function Home({ setPageNav }) {
               >
                 {
                   cities.map((city, key) => (
-                    <div className={style.searchRecommendation} key={key} onClick={() => { chooseCity(city.city); setOpenSearch(false) }}>
+                    <div className={style.searchRecommendation} key={key} onClick={() => { chooseCity(city); setOpenSearch(false) }}>
                       <div className={style.searchIcon}>
                         <img src={forestIcon} alt="icon" />
                       </div>
-                      <p>{city.city}</p>
+                      <p>{city}</p>
                     </div>
                   ))
                 }
@@ -424,11 +427,11 @@ function Home({ setPageNav }) {
                   >
                     {
                       cities.map((city, key) => (
-                        <div className={style.searchRecommendation} key={key} onClick={() => { chooseCity(city.city); setOpenSearch(false) }}>
+                        <div className={style.searchRecommendation} key={key} onClick={() => { chooseCity(city); setOpenSearch(false) }}>
                           <div className={style.searchIcon}>
                             <img src={forestIcon} alt="icon" />
                           </div>
-                          <p>{city.city}</p>
+                          <p>{city}</p>
                         </div>
                       ))
                     }
@@ -579,7 +582,7 @@ function Home({ setPageNav }) {
                   </div>
                 </div>
               </div>
-              <Link to="/events" state={{ stater: [cityInput, input, guests] }} className={style.searchBtn}>
+              <Link to="/events" state={{ cityInput, input, guests }} className={style.searchBtn}>
                 <img src={searchIcon} alt="search" />
               </Link>
               <div className={style.searchBtn2}>

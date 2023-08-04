@@ -58,7 +58,7 @@ export default function Header({ pageNav, setPageNav }) {
                             <img src={menuIcon} alt="Menu" />
                         </div> */}
                         <div className={style.logo}>
-                            <Link to="/">
+                            <Link to="/" onClick={() => setShowMenu(false)}>
                                 <img src={logo} alt="logo" />
                             </Link>
                         </div>
@@ -67,27 +67,27 @@ export default function Header({ pageNav, setPageNav }) {
                         {/* <ul className={`${style.menu} ${toggleMenu ? style.openToggleMenu : style.closeToggleMenu}`}> */}
                         <ul className={`${style.menu} ${showMenu ? style.showMenu : ''}`}>
                             <li className={style.menuItem}>
-                                <NavLink to="/">
+                                <NavLink to="/" onClick={() => setShowMenu(false)}>
                                     <p className={pageNav === "home" ? style.activatedNav : ''}>Home</p>
                                 </NavLink>
                             </li>
                             <li className={style.menuItem}>
-                                <NavLink to="/events">
+                                <NavLink to="/events" onClick={() => setShowMenu(false)}>
                                     <p className={pageNav === "events" ? style.activatedNav : ''}>Events</p>
                                 </NavLink>
                             </li>
                             <li className={style.menuItem}>
-                                <NavLink to="/blog">
+                                <NavLink to="/blog" onClick={() => setShowMenu(false)}>
                                     <p className={pageNav === "blog" ? style.activatedNav : ''}>Blog</p>
                                 </NavLink>
                             </li>
                             <li className={style.menuItem}>
-                                <NavLink to="/contact">
+                                <NavLink to="/contact" onClick={() => setShowMenu(false)}>
                                     <p className={pageNav === "contact" ? style.activatedNav : ''}>Contact</p>
                                 </NavLink>
                             </li>
                             <li className={style.menuItem}>
-                                <NavLink to="/about">
+                                <NavLink to="/about" onClick={() => setShowMenu(false)}>
                                     <p className={pageNav === "about" ? style.activatedNav : ''}>About</p>
                                 </NavLink>
                             </li>

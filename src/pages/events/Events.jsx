@@ -23,17 +23,16 @@ export default function Events({ setPageNav }) {
 
     const location = useLocation()
 
-    // const { stater } = location.state;
-    // useEffect(() => {
-    //     if(stater.length !== 0) {
-    //         console.log(stater[1], input);
-    //         setCityInput(stater[0]);
-    //         setInput(stater[1]);
-    //         setGuests(stater[2]);
+    useEffect(() => {
+        if(location.state?.cityInput) {
+            const { cityInput, input, guests } = location.state;
+            setCityInput(cityInput);
+            setInput(input);
+            setGuests(guests);
 
-    //         console.log("automatic search event")
-    //     }
-    // }, [])
+            console.log("automatic search event")
+        }
+    }, [])
 
     const data = useSelector(state => state.eventsReducer.products);
     const basketData = useSelector(state => state.basketReducer.basketIDs);
@@ -332,9 +331,13 @@ export default function Events({ setPageNav }) {
     const searchCity = (e) => {
         console.log("Intitial Value: ", cities);
         console.log("typed", e.target.value);
-        setCities(backupData.filter((a) => a.city.toLowerCase().includes(e.target.value.toLowerCase())));
-
-        console.log("Exp Value: ", cities);
+        let allCities = backupData.map((a) => {
+          return a.city;
+        })
+        let newCities = allCities.filter((a) => a.toLowerCase().includes(e.target.value.toLowerCase()))
+        let resultCities = [...new Set(newCities)];
+        console.log("hmmmmmgg",resultCities);
+        setCities([...resultCities]);
     }
 
     const [cityInput, setCityInput] = useState("");
@@ -398,7 +401,7 @@ export default function Events({ setPageNav }) {
                         >
                             {
                                 cities.map((city, key) => (
-                                    <div className={style.searchRecommendation} key={key} onClick={() => {chooseCity(city.city); setOpenSearch(false)}}>
+                                    <div className={style.searchRecommendation} key={key} onClick={() => {chooseCity(city); setOpenSearch(false)}}>
                                         <div className={style.searchIcon}>
                                             <img src={forestIcon} alt="icon" />
                                         </div>
@@ -593,11 +596,11 @@ export default function Events({ setPageNav }) {
                                     >
                                         {
                                             cities.map((city, key) => (
-                                                <div className={style.searchRecommendation} key={key} onClick={() => chooseCity(city.city)}>
+                                                <div className={style.searchRecommendation} key={key} onClick={() => chooseCity(city)}>
                                                     <div className={style.searchIcon}>
                                                         <img src={forestIcon} alt="icon" />
                                                     </div>
-                                                    <p>{city.city}</p>
+                                                    <p>{city}</p>
                                                 </div>
                                             ))
                                         }
